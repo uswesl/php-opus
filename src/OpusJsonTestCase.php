@@ -3,6 +3,7 @@
 namespace capesesp;
 
 use capesesp\Console;
+use capesesp\Arguments;
 use capesesp\JsonSchemaTestCase;
 
 /**
@@ -19,6 +20,8 @@ abstract class OpusJsonTestCase extends JsonSchemaTestCase
      */
     public function assertCodigo($jsonObj, $codigo, $args = NULL)
     {
+        Arguments::notNull($jsonObj, 'jsonObj');
+
         $elemento = implode('.', array_filter(array($this->rootElementName, 'statusExecucao.mensagens.mensagem[0].codigo')));
         $value = $this->traverse($jsonObj, $elemento);
         if(!$value) {

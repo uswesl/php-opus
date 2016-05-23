@@ -46,7 +46,6 @@ abstract class OpusJson
         $post_data = array('funcao' => $programa, 'parametros' => $parametros);
         $response = self::curlHttpPost($url, $post_data);
 
-
         if($decode) {
             $response = json_decode($response);
         }

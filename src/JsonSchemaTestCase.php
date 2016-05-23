@@ -48,6 +48,8 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
      */
     public function assertSchema($jsonObj, $schemaPath = NULL, $args = NULL)
     {
+        Arguments::notNull($jsonObj, 'jsonObj');
+
         if($schemaPath != NULL) {
             $this->schemaPath = $schemaPath;
         }
@@ -66,14 +68,17 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
                 $value = $this->traverse($jsonObj, $error['property']);
                 $msg .= Console::red(($i+1) . "/$totalErrors: " . $error['property']) . "\n";
                 $lineBreak = (is_object($value) || is_array($value)) ? "\n" : "";
-                $msg .= implode(["Retorno:", $lineBreak, json_encode($value, JSON_PRETTY_PRINT), "\n"]);
-                $msg .= ($error['message']). "\n\n";
+                $msg .= implode(['Retorno: ', $lineBreak, json_encode($value, JSON_PRETTY_PRINT), "\n"]);
+                $msg .= ($error['message']) . "\n";
+                if(array_key_exists('default', $error)) {
+                    $msg .= 'Exemplo: ' . json_encode($error['default'], JSON_PRETTY_PRINT) . "\n";
+                }
+                $msg .= "\n";
             }
             if (!$jsonObj) {
                 $msg .= "Parametro JSON de entrada nulo.";
             }
         }
-        $this->assertSchemaFlag = true;
         $this->assertEquals(true, $validator->isValid(), $msg);
     }
 
@@ -87,7 +92,7 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
      * @param $path String com caminho no estilo "jq"
      * @return Valor do elemento
      */
-    private function traverse($jsonObj, $path)
+    protected function traverse($jsonObj, $path)
     {
         $props = explode(".", $path);
         $obj = $jsonObj;

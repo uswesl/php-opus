@@ -66,7 +66,8 @@
                                 "description": "Numero do recibo do arquivo a ser retificado (Opcional)",
                                 "minLength": 15,
                                 "maxLength": 49,
-                                "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}$"
+                                "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}$",
+                                "default": "1-22-333-4444-1"
                               },
                               "tpAmb": {
                                 "id": "tpAmb",

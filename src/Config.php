@@ -15,7 +15,7 @@ namespace capesesp;
  */
 class Config
 {
-    private static $configFile = './config.yml';
+    private static $configFile = './config/config.yml';
 
     /**
      * Sets where to look for the configuration file.
@@ -54,6 +54,10 @@ class Config
     {
         $env = self::getApacheVar('ENVIRONMENT');
         $yml = yaml_parse_file(self::$configFile);
-        return $yml[$key][$env];
+        if(is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
+            return $yml[$key][$env];
+        } else {
+            return $yml[$key];
+        }
     }
 }

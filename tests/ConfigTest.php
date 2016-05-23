@@ -9,7 +9,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         putenv('ENVIRONMENT=development');
-        Config::setconfigFile('config.yml');
     }
 
     public function tearDown()
@@ -31,7 +30,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConfigFileReturnSame()
     {
-        $path = 'config.yml';
+        $path = './config/config.yml';
         $this->assertEquals(Config::setConfigFile($path), $path);
     }
 
