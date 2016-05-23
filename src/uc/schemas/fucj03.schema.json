@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "associados": {
+      "id": "associados",
+      "type": "array",
+      "items": {
+        "id": "1",
+        "type": "object",
+        "properties": {
+          "matricula": {
+            "id": "matricula",
+            "type": "string"
+          },
+          "sequencial": {
+            "id": "sequencial",
+            "type": "string"
+          }
+        },
+        "required": [
+          "matricula",
+          "sequencial"
+        ]
+      }
+    },
+    "statusExecucao": {
+      "id": "statusExecucao",
+      "type": "object",
+      "properties": {
+        "executadoCorretamente": {
+          "id": "executadoCorretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "id": "mensagens",
+          "type": "object",
+          "properties": {
+            "mensagem": {
+              "id": "mensagem",
+              "type": "array",
+              "items": {
+                "id": "0",
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "id": "codigo",
+                    "type": "integer",
+                    "enum": [0, 1, 2]
+                  },
+                  "severidade": {
+                    "id": "severidade",
+                    "type": "string",
+                    "enum": ["INFO", "ERROR", "WARN", "FATAL", "SUCCESS"]
+                  },
+                  "mensagem": {
+                    "id": "mensagem",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "associados",
+    "statusExecucao"
+  ]
+}

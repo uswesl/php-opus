@@ -1,0 +1,9 @@
+{
+  "name": "jsf-cli",
+  "description": "JSON-Schema-faker command line",
+  "main": "jsfcli.js",
+  "dependencies": {
+    "json-schema-faker": "^0.2.6",
+    "chalk": "^1.1.3"
+  }
+}

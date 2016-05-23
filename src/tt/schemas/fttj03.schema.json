@@ -1,0 +1,281 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "saidaFttj03": {
+      "id": "saidaFttj03",
+      "type": "object",
+      "properties": {
+        "loteEventos": {
+          "id": "loteEventos",
+          "type": "object",
+          "properties": {
+            "evento": {
+              "id": "evento",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "id": "0",
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "id": "@id",
+                    "type": "string",
+                    "description": "Identificador do evento (xs:ID)",
+                    "minLength": 3,
+                    "maxLength": 5,
+                    "pattern": "^ID[0-9]{1,3}$"
+                  },
+                  "eFinanceira": {
+                    "id": "eFinanceira",
+                    "type": "object",
+                    "properties": {
+                      "@xmlns": {
+                        "id": "@xmlns",
+                        "type": "string",
+                        "enum": ["http://www.eFinanceira.gov.br/schemas/evtFechamentoeFinanceira/v1_0_1"]
+                      },
+                      "evtFechamentoeFinanceira": {
+                        "id": "evtFechamentoeFinanceira",
+                        "type": "object",
+                        "description": "Evento de Fechamento da eFinanceira",
+                        "properties": {
+                          "@id": {
+                            "id": "@id",
+                            "type": "string",
+                            "description": "Identificador do evento (xs:ID) com 13 a 20 caracteres",
+                            "pattern": "^ID[0-9]{11,18}$",
+                            "minLength": 13,
+                            "maxLength": 20
+                          },
+                          "ideEvento": {
+                            "id": "ideEvento",
+                            "type": "object",
+                            "description": "Identificação de Evento",
+                            "properties": {
+                              "indRetificacao": {
+                                "id": "indRetificacao",
+                                "type": "integer",
+                                "description": "Indicativo de Retificação: 1 - Original 2 - Retificador",
+                                "enum": [1, 2]
+                              },
+                              "nrRecibo": {
+                                "id": "nrRecibo",
+                                "type": "string",
+                                "description": "Numero do recibo do arquivo a ser retificado",
+                                "minLength": 15,
+                                "maxLength": 49,
+                                "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}$"
+                              },
+                              "tpAmb": {
+                                "id": "tpAmb",
+                                "type": "integer",
+                                "enum": [1, 2],
+                                "description": "Ambiente. 1-producao, 2-homologacao"
+                              },
+                              "aplicEmi": {
+                                "id": "aplicEmi",
+                                "type": "integer",
+                                "enum": [1, 2],
+                                "description": "Processo de emissão do evento. 1-Aplicativo da empresa, 2-Outros"
+                              },
+                              "verAplic": {
+                                "id": "verAplic",
+                                "type": "string",
+                                "description": "Versão do aplicativo de emissão do evento.",
+                                "minLength": 1,
+                                "maxLength": 20
+                              }
+                            },
+                            "required": ["indRetificacao", "tpAmb", "aplicEmi", "verAplic"]
+                          },
+                          "ideDeclarante": {
+                            "id": "ideDeclarante",
+                            "type": "object",
+                            "description": "Informacoes de identificacao da empresa declarante",
+                            "properties": {
+                              "cnpjDeclarante": {
+                                "id": "cnpjDeclarante",
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 14
+                              }
+                            },
+                            "required": ["cnpjDeclarante"]
+                          },
+                          "infoFechamento": {
+                            "id": "infoFechamento",
+                            "type": "object",
+                            "description": "Informações de fechamento",
+                            "properties": {
+                              "dtInicio": {
+                                "id": "dtInicio",
+                                "type": "string",
+                                "enum": [
+                                  null,
+                                  "2014-01-01"
+                                ]
+                              },
+                              "dtFim": {
+                                "id": "dtFim",
+                                "type": "string",
+                                "enum": [
+                                  null,
+                                  "2014-06-30"
+                                ]
+                              },
+                              "sitEspecial": {
+                                "id": "sitEspecial",
+                                "type": "integer",
+                                "enum": [0, 1, 2, 3, 5]
+                              }
+                            },
+                            "required": ["dtInicio", "dtFim", "sitEspecial"]
+                          },
+                          "FechamentoPP": {
+                            "id": "FechamentoPP",
+                            "type": "object",
+                            "description": "Informações do Fechamento referentes a Previdência Privada",
+                            "properties": {
+                              "fechamentoMes": {
+                                "id": "fechamentoMes",
+                                "type": "array",
+                                "minItems": 1,
+                                "description": "Fechamento do mês",
+                                "items": {
+                                  "id": "0",
+                                  "type": "object",
+                                  "properties": {
+                                    "anoMesCaixa": {
+                                      "id": "anoMesCaixa",
+                                      "type": "string",
+                                      "description": "Ano e mês caixa",
+                                      "pattern": "^20([0-9][0-9])(0[1-9]|1[0-3])$"
+                                    },
+                                    "quantArqTrans": {
+                                      "id": "quantArqTrans",
+                                      "type": "integer",
+                                      "description": "Quantidade de Arquivos Transmitidos no Mês",
+                                      "minimum": 0,
+                                      "maximum": 999999999
+                                    }
+                                  },
+                                  "required": ["anoMesCaixa", "quantArqTrans"]
+                                }
+                              }
+                            }
+                          },
+                          "FechamentoMovOpFin": {
+                            "id": "FechamentoMovOpFin",
+                            "type": "object",
+                            "properties": {
+                              "ReportavelExterior": {
+                                "id": "ReportavelExterior",
+                                "type": "array",
+                                "description": "Indicativo de existência de informações a serem reportadas para outros países",
+                                "items": {
+                                  "id": "0",
+                                  "type": "object",
+                                  "properties": {
+                                    "pais": {
+                                      "id": "pais",
+                                      "type": "string",
+                                      "minLength": 1,
+                                      "maxLength": 2
+                                    },
+                                    "reportavel": {
+                                      "id": "reportavel",
+                                      "type": "integer",
+                                      "description": "0-Não 1-Sim",
+                                      "enum": [0, 1]
+                                    }
+                                  },
+                                  "required": ["pais", "reportavel"]
+                                }
+                              },
+                              "FechamentoMes": {
+                                "id": "FechamentoMes",
+                                "type": "array",
+                                "minItems": 1,
+                                "items": {
+                                  "id": "5",
+                                  "type": "object",
+                                  "properties": {
+                                    "anoMesCaixa": {
+                                      "id": "anoMesCaixa",
+                                      "type": "string",
+                                      "description": "Ano e mês caixa. Permite ano 13 por conta do 13.o salario",
+                                      "pattern": "^20([0-9][0-9])(0[1-9]|1[0-3])$"
+                                    },
+                                    "quantArqTrans": {
+                                      "id": "quantArqTrans",
+                                      "type": "integer",
+                                      "description": "Quantidade de Arquivos Transmitidos no Mês"
+                                    }
+                                  },
+                                  "required": ["anoMesCaixa", "quantArqTrans"]
+                                }
+                              },
+                              "required": ["FechamentoMes"]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "statusExecucao": {
+          "id": "statusExecucao",
+          "type": "object",
+          "properties": {
+            "executadoCorretamente": {
+              "id": "executadoCorretamente",
+              "type": "boolean"
+            },
+            "mensagens": {
+              "id": "mensagens",
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "id": "mensagem",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "id": "0",
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "id": "codigo",
+                        "type": "integer",
+                        "enum": [0, 1, 2, 3, 4]
+                      },
+                      "severidade": {
+                        "id": "severidade",
+                        "type": "string",
+                        "enum": ["ERROR", "INFO", "FATAL", "WARN", "SUCCESS"]
+                      },
+                      "mensagem": {
+                        "id": "mensagem",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["codigo", "severidade", "mensagem"]
+                  }
+                }
+              },
+              "required": ["mensagem"]
+            }
+          },
+          "required": ["executadoCorretamente", "mensagens"]
+        }
+      },
+      "required": ["loteEventos", "statusExecucao"]
+    }
+  },
+  "required": ["saidaFttj03"]
+}

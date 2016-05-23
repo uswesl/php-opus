@@ -1,0 +1,14 @@
+PHPUnit 4.8.24 by Sebastian Bergmann and contributors.
+
+Runtime:	PHP 5.5.9-1ubuntu4.16 with Xdebug 2.2.3
+Configuration:	/home/usmaem/svn/site/lib/php-opus/phpunit.xml
+
+..
+
+Time: 6.27 seconds, Memory: 9.50Mb
+
+OK (2 tests, 2 assertions)
+
+Generating code coverage report in Clover XML format ... done
+
+Generating code coverage report in HTML format ... done

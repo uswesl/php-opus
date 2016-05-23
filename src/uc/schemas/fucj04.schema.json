@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "capesesp": {
+      "id": "capesesp",
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "id": "codigo",
+          "type": "integer"
+        },
+        "acao": {
+          "id": "acao",
+          "type": "string",
+          "enum": ["A", "E", "I"]
+        },
+        "codCliDestino": {
+          "id": "codCliDestino",
+          "type": "string"
+        }
+      },
+      "required": [
+        "codigo",
+        "acao",
+        "codCliDestino"
+      ]
+    },
+    "titular": {
+      "id": "titular",
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "id": "cpf",
+          "type": "string",
+          "maxLength": 14
+        },
+        "matricula": {
+          "id": "matricula",
+          "type": "string"
+        },
+        "filial": {
+          "id": "filial",
+          "type": "string"
+        },
+        "setor": {
+          "id": "setor",
+          "type": "string"
+        },
+        "codCartao": {
+          "id": "codCartao",
+          "type": "string"
+        },
+        "limite": {
+          "id": "limite",
+          "type": "integer"
+        },
+        "amuc": {
+          "id": "amuc",
+          "type": "string"
+        },
+        "debitoFolha": {
+          "id": "debitoFolha",
+          "type": "string",
+          "enum": ["S", "N"]
+        }
+      }
+    },
+    "associado": {
+      "id": "associado",
+      "type": "object",
+      "properties": {
+        "sequencial": {
+          "id": "sequencial",
+          "type": "string",
+          "pattern": "^[0-9]{1,2}$"
+        },
+        "nome": {
+          "id": "nome",
+          "type": "string"
+        },
+        "sexo": {
+          "id": "sexo",
+          "type": "string",
+          "enum": ["M", "F"]
+        },
+        "cpfDependente": {
+          "id": "cpfDependente",
+          "type": "string",
+          "maxLength": 14
+        },
+        "dataNascimento": {
+          "id": "dataNascimento",
+          "type": "string",
+          "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{2}$"
+        },
+        "email": {
+          "id": "email",
+          "type": "string"
+        },
+        "autorizaContato": {
+          "id": "autorizaContato",
+          "type": "string",
+          "enum": ["S", "N"]
+        },
+        "telefone": {
+          "id": "telefone",
+          "type": "object",
+          "properties": {
+            "fixo": {
+              "id": "fixo",
+              "type": "string",
+              "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+            },
+            "celular": {
+              "id": "celular",
+              "type": "string",
+              "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+            }
+          }
+        },
+        "endereco": {
+          "id": "endereco",
+          "type": "object",
+          "properties": {
+            "tipoLogradouro": {
+              "id": "tipoLogradouro",
+              "type": "string"
+            },
+            "logradouro": {
+              "id": "logradouro",
+              "type": "string"
+            },
+            "numero": {
+              "id": "numero",
+              "type": "string"
+            },
+            "complemento": {
+              "id": "complemento",
+              "type": "string"
+            },
+            "bairro": {
+              "id": "bairro",
+              "type": "string"
+            },
+            "cidade": {
+              "id": "cidade",
+              "type": "string"
+            },
+            "uf": {
+              "id": "uf",
+              "type": "string"
+            },
+            "cep": {
+              "id": "cep",
+              "type": "string"
+            }
+          }
+        },
+        "enderecoEntrega": {
+          "id": "enderecoEntrega",
+          "type": "object",
+          "properties": {
+            "tipoLogradouro": {
+              "id": "tipoLogradouro",
+              "type": "string"
+            },
+            "logradouro": {
+              "id": "logradouro",
+              "type": "string"
+            },
+            "numero": {
+              "id": "numero",
+              "type": "string"
+            },
+            "complemento": {
+              "id": "complemento",
+              "type": "string"
+            },
+            "bairro": {
+              "id": "bairro",
+              "type": "string"
+            },
+            "cidade": {
+              "id": "cidade",
+              "type": "string"
+            },
+            "uf": {
+              "id": "uf",
+              "type": "string"
+            },
+            "cep": {
+              "id": "cep",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "statusExecucao": {
+      "id": "statusExecucao",
+      "type": "object",
+      "properties": {
+        "executadoCorretamente": {
+          "id": "executadoCorretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "id": "mensagens",
+          "type": "object",
+          "properties": {
+            "mensagem": {
+              "id": "mensagem",
+              "type": "array",
+              "items": {
+                "id": "0",
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "id": "codigo",
+                    "type": "integer",
+                    "enum": [0, 1, 2, 3, 4, 5]
+                  },
+                  "severidade": {
+                    "id": "severidade",
+                    "type": "string",
+                    "enum": ["INFO", "ERROR", "WARN", "SUCCESS", "FATAL"]
+                  },
+                  "mensagem": {
+                    "id": "mensagem",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "statusExecucao"
+  ]
+}

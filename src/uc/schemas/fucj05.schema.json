@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "statusExecucao": {
+      "id": "statusExecucao",
+      "type": "object",
+      "properties": {
+        "executadoCorretamente": {
+          "id": "executadoCorretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "id": "mensagens",
+          "type": "object",
+          "properties": {
+            "mensagem": {
+              "id": "mensagem",
+              "type": "array",
+              "items": {
+                "id": "0",
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "id": "codigo",
+                    "type": "integer",
+                    "enum": [0, 1, 2, 3, 4, 5, 6, 7]
+                  },
+                  "severidade": {
+                    "id": "severidade",
+                    "type": "string",
+                    "enum": ["INFO", "ERROR", "WARN", "SUCCESS", "FATAL"]
+                  },
+                  "mensagem": {
+                    "id": "mensagem",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "executadoCorretamente",
+        "mensagens"
+      ]
+    }
+  },
+  "required": [
+    "statusExecucao"
+  ]
+}
