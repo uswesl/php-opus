@@ -31,9 +31,15 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
         $this->assertAnsiEnclosing(Console::bold('text'), Console::BOLD);
     }
 
+    public function testIndent()
+    {
+        $this->assertEquals(strlen(Console::indent("")), 4);
+    }
+
     public function assertAnsiEnclosing($string, $code)
     {
         $this->assertTrue(strpos($string, "$code") > 0, "Codigo da cor nao corresponde ao esperado");
         $this->assertTrue(strpos($string, '0m') >= 0, "Não encontrado codigo para encerrar a formatacao.");
     }
+
 }

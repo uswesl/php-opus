@@ -23,7 +23,7 @@ class Fucj03Test extends OpusJsonTestCase
     public function testSchema()
     {
         $jsonObj = Fucj03::executa();
-        $this->assertSchema($jsonObj, $this->schemaPath, $args);
+        $this->assertSchema($jsonObj, $this->schemaPath);
     }
 }
 ?>
