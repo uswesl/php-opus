@@ -1,44 +1,20 @@
 <?php
 
-namespace capesesp;
+namespace capesesp\json;
 
 use capesesp\Console;
+use capesesp\Arguments;
 
 use JsonSchema\RefResolver;
 use JsonSchema\Validator;
 use JsonSchema\Uri\UriRetriever;
 use JsonSchema\Uri\UriResolver;
 
-use ReverseRegex\Lexer;
-use ReverseRegex\Random\SimpleRandom;
-use ReverseRegex\Parser;
-use ReverseRegex\Generator\Scope;
-
 /**
- * Extende phpunit para validar objetos JSON
+ * Validador de objetos JSON
  */
-abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
+abstract class JsonValidator
 {
-    /**
-     * Armazena caminho para o JSON schema
-     */
-    protected $schemaPath;
-
-    /**
-     * Armazena elemento raiz para JSONs que podem ser convertidos para XML
-     */
-    protected $rootElementName;
-
-    /**
-     * Configura o ambiente para testes
-     * Certifique-se de invoar o setup caso necessite sobrescrever o metodo em uma subclasse
-     */
-    public function setUp()
-    {
-        ini_set('xdebug.max_nesting_level', 200);
-        putenv('ENVIRONMENT=test');
-    }
-
     /**
      * Testa um objeto JSON resultante de json_decode conta um schema JSON
      * @see http://json-schema.org/
@@ -46,15 +22,13 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
      * @param $schemaPath Caminho para o schema json
      * @return phpunit assertion
      */
-    public function assertSchema($jsonObj, $schemaPath = NULL, $args = NULL)
+    public static function validate($jsonObj, $schemaPath, &$msg)
     {
         Arguments::notNull($jsonObj, 'jsonObj');
+        Arguments::notNull($schemaPath, 'schemaPath');
 
-        if($schemaPath != NULL) {
-            $this->schemaPath = $schemaPath;
-        }
         $refResolver = new RefResolver(new UriRetriever(), new UriResolver());
-        $schema = $refResolver->resolve('file://' . realpath($this->schemaPath));
+        $schema = $refResolver->resolve('file://' . realpath($schemaPath));
         $validator = new Validator();
         $validator->check($jsonObj, $schema);
 
@@ -65,7 +39,7 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
             $msg = Console::bold(Console::red("JSON não corresponde ao esquema. $totalErrors ocorrências encontradas:")) . "\n";
             for($i = 0; $i < $totalErrors; $i++) {
                 $error = $errors[$i];
-                $value = $this->traverse($jsonObj, $error['property']);
+                $value = self::traverse($jsonObj, $error['property']);
                 $msg .= Console::red(($i+1) . "/$totalErrors: " . $error['property']) . "\n";
                 $lineBreak = (is_object($value) || is_array($value)) ? "\n" : "";
                 $msg .= implode(['Retorno: ', $lineBreak, json_encode($value, JSON_PRETTY_PRINT), "\n"]);
@@ -79,7 +53,7 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
                 $msg .= "Parametro JSON de entrada nulo.";
             }
         }
-        $this->assertEquals(true, $validator->isValid(), $msg);
+        return $validator->isValid();
     }
 
     /**
@@ -92,7 +66,7 @@ abstract class JsonSchemaTestCase extends \PHPUnit_Framework_TestCase
      * @param $path String com caminho no estilo "jq"
      * @return Valor do elemento
      */
-    protected function traverse($jsonObj, $path)
+    public static function traverse($jsonObj, $path)
     {
         $props = explode(".", $path);
         $obj = $jsonObj;

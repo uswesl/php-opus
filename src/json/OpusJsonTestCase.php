@@ -1,10 +1,11 @@
 <?php
 
-namespace capesesp;
+namespace capesesp\json;
 
 use capesesp\Console;
 use capesesp\Arguments;
-use capesesp\JsonSchemaTestCase;
+use capesesp\json\JsonValidator;
+use capesesp\json\JsonSchemaTestCase;
 
 /**
  * Extende phpunit para validar objetos JSON
@@ -23,7 +24,7 @@ abstract class OpusJsonTestCase extends JsonSchemaTestCase
         Arguments::notNull($jsonObj, 'jsonObj');
 
         $elemento = implode('.', array_filter(array($this->rootElementName, 'statusExecucao.mensagens.mensagem[0].codigo')));
-        $value = $this->traverse($jsonObj, $elemento);
+        $value = JsonValidator::traverse($jsonObj, $elemento);
         if(!$value) {
             $msg = $this->wrongStructureMsg($jsonObj, $elemento, $value, $args);
         } else {

@@ -3,7 +3,7 @@
 namespace capesesp;
 
 use capesesp\tt\Fttj02;
-use capesesp\OpusJsonTestCase;
+use capesesp\json\OpusJsonTestCase;
 
 /**
  * Testa programas Opus/JSON do Modulo TT do Sistema Central
@@ -25,20 +25,6 @@ class Fttj02Test extends OpusJsonTestCase
         $args = array(201605, 0);
         $jsonObj = Fttj02::executa($args);
         $this->assertSchema($jsonObj, $this->schemaPath);
-    }
-
-    public function testEventosEncontrados()
-    {
-        $args = array(201605, 0);
-        $jsonObj = Fttj02::executa($args);
-        $this->assertCodigo($jsonObj, Fttj02::EVENTOS_ENCONTRADOS, $args);
-    }
-
-    public function testNenhumEventoEncontrado()
-    {
-        $args = array(201609, 0);
-        $jsonObj = Fttj02::executa($args);
-        $this->assertCodigo($jsonObj, Fttj02::NENHUM_EVENTO_ENCONTRADO, $args);
     }
 }
 ?>

@@ -3,7 +3,7 @@
 namespace capesesp;
 
 use capesesp\tt\Fttj01;
-use capesesp\OpusJsonTestCase;
+use capesesp\json\OpusJsonTestCase;
 
 /**
  * Testa programas Opus/JSON do Modulo TT do Sistema Central

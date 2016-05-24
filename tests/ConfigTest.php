@@ -35,12 +35,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Must throw exception if apache var does not exists
+     * Must throw exception if var does not exists
      * @expectedException InvalidArgumentException
      */
     public function testGetEnvMustThrowException()
     {
-        $bob = Config::getApacheVar('BOB');
+        $bob = Config::getEnvVar('BOB');
     }
 
     /**
@@ -49,7 +49,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetEnvMustReturnValue()
     {
         putenv("BOB=BOB");
-        $this->assertEquals(Config::getApacheVar('BOB'), "BOB");
+        $this->assertEquals(Config::getEnvVar('BOB'), "BOB");
     }
 
     /**

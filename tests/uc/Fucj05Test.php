@@ -3,7 +3,7 @@
 namespace capesesp;
 
 use capesesp\uc\Fucj05;
-use capesesp\OpusJsonTestCase;
+use capesesp\json\OpusJsonTestCase;
 
 
 /**

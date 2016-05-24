@@ -2,7 +2,7 @@
 
 namespace capesesp\uc;
 
-use capesesp\OpusJson;
+use capesesp\json\OpusJson;
 
 /**
  * Armazena codigos de execucao do programa Opus fucj01

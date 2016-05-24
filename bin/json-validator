@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+require 'cli-autoload.php';
+putenv('ENVIRONMENT=test');
+
+// test if piped
+//$is_piped  =  !posix_isatty(STDOUT);
+//$in = file_get_contents("php://stdin");
+
+use capesesp\I18n;
+use capesesp\json\OpusJson;
+
+
+$shortOpts  = "";
+$shortOpts .= "p:"; // nome do programa opus
+$shortOpts .= "s:"; // caminho para o esquema
+$shortOpts .= "a:"; // args do programa opus
+$shortOpts .= "h"; // args do programa opus
+$longOpts  = ["programa:", "argumentos:", "esquema:", "help"];
+
+$options = getopt($shortOpts, $longOpts);
+$requiredArgs = ["p", "a", "s"];
+
+$showHelpAndExit = false;
+foreach($requiredArgs as $arg){
+    if(!array_key_exists($arg, $options){
+        $showHelpAndExit = true;
+        break;
+    }
+}
+
+if($showHelpAndExit){
+    $help = <<<HLP
+JSON-Validator
+Valida um programa Opus/JSON de acordo com esquema
+Usage: json-validator -p programa -a 'args' -s esquema
+
+Options:
+      -p nome do programa Opus
+      -a argumentos do programa Opus
+      -s esquema json
+      -h esta tela de ajuda
+HLP;
+    fwrite(STDOUT, $help);
+    exit;
+}
+
+
+$jsonObj = OpusJson::executa($options['p'], $options['a'], false);
+
+fwrite(STDOUT, $jsonObj);
+?>

@@ -2,7 +2,7 @@
 
 namespace capesesp\tt;
 
-use capesesp\OpusJson;
+use capesesp\json\OpusJson;
 
 /**
  * Classe que representa o programa Opus/JSON fttj05

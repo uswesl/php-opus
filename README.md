@@ -6,24 +6,24 @@ PHP-Opus is an abstraction layer for Opus(tm) applications that adhere to Opus/J
 
 In order to use all features you need to install node.js and composer. After that:
 
-  $ composer install
-  $ npm install
+`$ composer install`
+`$ npm install`
 
 ## Running tests
 
-  $ ./bin/phpunit --filter Fttj01Test
+`$ ./bin/phpunit --filter Fttj01Test`
 
 ## Utilities
 
 ### JSON Schema Faker with colored pretty printed output
 
-  $ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json
-  $ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json > example.json
+`$ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json`
+`$ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json > example.json`
 
 ### Ansi to HTML conversor
 
-  $ ./bin/phpunit --filter Fttj01Test | ./bin/ansi2html > json.html
-  $ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json | ./bin/ansi2html > json.html
+`$ ./bin/phpunit --filter Fttj01Test | ./bin/ansi2html > json.html`
+`$ ./node jsf.js ./tests/tt/schemas/fttj01.schema.json | ./bin/ansi2html > json.html`
 
 
 # References

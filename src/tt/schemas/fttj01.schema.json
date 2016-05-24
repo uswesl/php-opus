@@ -89,7 +89,8 @@
                                 "maxLength": 20
                               }
                             },
-                            "required": ["indRetificacao", "tpAmb", "aplicEmi", "verAplic"]
+                            "required": ["indRetificacao", "tpAmb", "aplicEmi", "verAplic"],
+                            "additionalProperties": false
                           },
                           "ideDeclarante": {
                             "id": "ideDeclarante",
@@ -103,7 +104,8 @@
                                 "maxLength": 14
                               }
                             },
-                            "required": ["cnpjDeclarante"]
+                            "required": ["cnpjDeclarante"],
+                            "additionalProperties": false
                           },
                           "ideDeclarado": {
                             "id": "ideDeclarado",
@@ -159,7 +161,8 @@
                                       "enum": ["BR", "US"]
                                     }
                                   },
-                                  "required": ["NumeroNIF", "PaisEmissaoNIF"]
+                                  "required": ["NumeroNIF", "PaisEmissaoNIF"],
+                                  "additionalProperties": false
                                 }
                               },
                               "NomeDeclarado": {
@@ -195,7 +198,8 @@
                                     "enum": ["BR", "US"]
                                   }
                                 },
-                                "required": ["Pais"]
+                                "required": ["Pais"],
+                                "additionalProperties": false
                               },
                               "PaisResid": {
                                 "id": "PaisResid",
@@ -214,7 +218,8 @@
                                       "enum": ["BR", "US"]
                                     }
                                   },
-                                  "required": ["Pais"]
+                                  "required": ["Pais"],
+                                  "additionalProperties": false
                                 }
                               },
                               "PaisNacionalidade": {
@@ -235,7 +240,8 @@
                                       "enum": ["BR", "US"]
                                     }
                                   },
-                                  "required": ["Pais"]
+                                  "required": ["Pais"],
+                                  "additionalProperties": false
                                 }
                               },
                               "Proprietarios": {
@@ -282,7 +288,8 @@
                                             "enum": ["BR", "US"]
                                           }
                                         },
-                                        "required": ["NumeroNIF", "PaisEmissaoNIF"]
+                                        "required": ["NumeroNIF", "PaisEmissaoNIF"],
+                                        "additionalProperties": false
                                       }
                                     },
                                     "Nome": {
@@ -312,7 +319,8 @@
                                           "enum": ["BR", "US"]
                                         }
                                       },
-                                      "required": ["Pais"]
+                                      "required": ["Pais"],
+                                      "additionalProperties": false
                                     },
                                     "PaisResid": {
                                       "id": "PaisResid",
@@ -330,7 +338,8 @@
                                             "enum": ["BR", "US"]
                                           }
                                         },
-                                        "required": ["Pais"]
+                                        "required": ["Pais"],
+                                        "additionalProperties": false
                                       }
                                     },
                                     "PaisNacionalidade": {
@@ -349,7 +358,8 @@
                                             "enum": ["BR", "US"]
                                           }
                                         },
-                                        "required": ["Pais"]
+                                        "required": ["Pais"],
+                                        "additionalProperties": false
                                       }
                                     },
                                     "dataNasc": {
@@ -376,15 +386,18 @@
                                             "enum": ["BR", "US"]
                                           }
                                         },
-                                        "required": ["Pais"]
+                                        "required": ["Pais"],
+                                        "additionalProperties": false
                                       }
                                     }
                                   },
-                                  "required": ["tpNI", "NIProprietario", "Nome", "EnderecoLivre", "PaisEndereco", "Reportavel"]
+                                  "required": ["tpNI", "NIProprietario", "Nome", "EnderecoLivre", "PaisEndereco", "Reportavel"],
+                                  "additionalProperties": false
                                 }
                               }
                             },
-                            "required": ["tpNI", "NIDeclarado", "NomeDeclarado", "PaisEndereco"]
+                            "required": ["tpNI", "NIDeclarado", "NomeDeclarado", "PaisEndereco"],
+                            "additionalProperties": false
                           },
                           "mesCaixa": {
                             "id": "mesCaixa",
@@ -405,7 +418,7 @@
                                   "Conta": {
                                     "id": "Conta",
                                     "type": "array",
-                                    "description": "Identificacao da Conta",
+                                    "description": "Identificacao da Conta (Opcional)",
                                     "items": {
                                       "id": "0",
                                       "type": "object",
@@ -459,7 +472,8 @@
                                                 "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
                                               }
                                             },
-                                            "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"]
+                                            "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"],
+                                            "additionalProperties": false
                                           }
                                         },
                                         "infoConta": {
@@ -485,7 +499,8 @@
                                                     "enum": ["BR", "US"]
                                                   }
                                                 },
-                                                "required": ["Pais"]
+                                                "required": ["Pais"],
+                                                "additionalProperties": false
                                               }
                                             },
                                             "tpConta": {
@@ -547,7 +562,8 @@
                                                   "minLength": 1,
                                                   "maxLength": 25
                                                 }
-                                              }
+                                              },
+                                              "additionalProperties": false
                                             },
                                             "NoTitulares": {
                                               "id": "NoTitulares",
@@ -582,7 +598,8 @@
                                                   "maxLength": 14
                                                 }
                                               },
-                                              "required": ["CNPJ"]
+                                              "required": ["CNPJ"],
+                                              "additionalProperties": false
                                             },
                                             "BalancoConta": {
                                               "id": "BalancoConta",
@@ -630,7 +647,8 @@
                                                   "pattern": "^[-]{0,1}[0-9]{1,19}[,][0-9]{2}$"
                                                 }
                                               },
-                                              "required": ["totCreditos", "totDebitos", "totCreditosMesmaTitularidade", "totDebitosMesmaTitularidade"]
+                                              "required": ["totCreditos", "totDebitos", "totCreditosMesmaTitularidade", "totDebitosMesmaTitularidade"],
+                                              "additionalProperties": false
                                             },
                                             "PgtosAcum": {
                                               "id": "PgtosAcum",
@@ -662,11 +680,13 @@
                                                     "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
                                                   }
                                                 },
-                                                "required": ["tpPgto", "totPgtosAcum"]
+                                                "required": ["tpPgto", "totPgtosAcum"],
+                                                "additionalProperties": false
                                               }
                                             }
                                           },
-                                          "required": ["Reportavel", "tpConta", "subTpConta", "tpNumConta", "numConta", "tpRelacaoDeclarado", "BalancoConta", "PgtosAcum"]
+                                          "required": ["Reportavel", "tpConta", "subTpConta", "tpNumConta", "numConta", "tpRelacaoDeclarado", "BalancoConta", "PgtosAcum"],
+                                          "additionalProperties": false
                                         }
                                       }
                                     }
@@ -725,7 +745,8 @@
                                               "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
                                             }
                                           },
-                                          "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"]
+                                          "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"],
+                                          "additionalProperties": false
                                         }
                                       },
                                       "totCompras": {
@@ -753,25 +774,32 @@
                                         "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
                                       }
                                     },
-                                    "required": ["totCompras", "totVendas", "totTransferencias"]
+                                    "required": ["totCompras", "totVendas", "totTransferencias"],
+                                    "additionalProperties": false
                                   }
-                                }
+                                },
+                                "additionalProperties": false
                               }
                             },
-                            "required": ["anoMesCaixa", "movOpFin"]
+                            "required": ["anoMesCaixa", "movOpFin"],
+                            "additionalProperties": false
                           }
                         },
-                        "required": ["@id", "ideEvento", "ideDeclarante", "ideDeclarado", "mesCaixa"]
+                        "required": ["@id", "ideEvento", "ideDeclarante", "ideDeclarado", "mesCaixa"],
+                        "additionalProperties": false
                       }
                     },
-                    "required": ["@xmlns", "evtMovOpFin"]
+                    "required": ["@xmlns", "evtMovOpFin"],
+                    "additionalProperties": false
                   }
                 },
-                "required": ["@id", "eFinanceira"]
+                "required": ["@id", "eFinanceira"],
+                "additionalProperties": false
               }
             }
           },
-          "required": ["evento"]
+          "required": ["evento"],
+          "additionalProperties": false
         },
         "statusExecucao": {
           "id": "statusExecucao",
@@ -809,18 +837,23 @@
                         "minLength": 20
                       }
                     },
-                    "required": ["codigo", "severidade", "mensagem"]
+                    "required": ["codigo", "severidade", "mensagem"],
+                    "additionalProperties": false
                   }
                 }
               },
-              "required": ["mensagem"]
+              "required": ["mensagem"],
+              "additionalProperties": false
             }
           },
-          "required": ["executadoCorretamente", "mensagens"]
+          "required": ["executadoCorretamente", "mensagens"],
+          "additionalProperties": false
         }
       },
-      "required": ["statusExecucao"]
+      "required": ["statusExecucao"],
+      "additionalProperties": false
     }
   },
-  "required": ["saidaFttj01"]
+  "required": ["saidaFttj01"],
+  "additionalProperties": false
 }

@@ -2,7 +2,7 @@
 
 namespace capesesp\uc;
 
-use capesesp\OpusJson;
+use capesesp\json\OpusJson;
 
 /**
  * @see http://wiki.capesesp.net/doku.php?id=dsi:erp:sistema_central:uc:fucj03

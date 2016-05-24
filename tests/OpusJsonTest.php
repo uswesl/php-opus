@@ -2,10 +2,10 @@
 
 namespace capesesp;
 
-use capesesp\OpusJson;
-use capesesp\OpusJsonTestCase;
+use capesesp\json\OpusJson;
+use capesesp\json\OpusJsonTestCase;
 
-class OpusTest extends OpusJsonTestCase
+class OpusJsonTest extends OpusJsonTestCase
 {
     public function testJsonObject()
     {

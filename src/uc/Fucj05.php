@@ -2,7 +2,7 @@
 
 namespace capesesp\uc;
 
-use capesesp\OpusJson;
+use capesesp\json\OpusJson;
 
 /**
  * Classe para acesso ao programa Opus FUCJ05

@@ -36,11 +36,11 @@ class Config
      * @param  $key
      * @return String Value
      */
-    public static function getApacheVar($key)
+    public static function getEnvVar($key)
     {
         $value = getenv($key);
         if ($value == false) {
-            throw new \InvalidArgumentException("Environment variable '$key' not found. Check Apache settings.");
+            throw new \InvalidArgumentException("Environment variable '$key' not found.");
         }
         return $value;
     }
@@ -52,7 +52,7 @@ class Config
      */
     public static function get($key)
     {
-        $env = self::getApacheVar('ENVIRONMENT');
+        $env = self::getEnvVar('ENVIRONMENT');
         $yml = yaml_parse_file(self::$configFile);
         if(is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];

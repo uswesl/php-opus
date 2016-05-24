@@ -1,0 +1,21 @@
+{
+  "saidaFttj01": {
+    "statusExecucao": {
+      "executadoCorretamente": true,
+      "mensagens": {
+        "mensagem": [
+          {
+            "codigo": 0,
+            "severidade": "FATAL",
+            "mensagem": "consectetur dolor occaecat"
+          },
+          {
+            "codigo": 5,
+            "severidade": "WARN",
+            "mensagem": "sunt commodoexindolor irure ea nostrud"
+          }
+        ]
+      }
+    }
+  }
+}

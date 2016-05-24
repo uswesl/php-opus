@@ -3,7 +3,7 @@
 namespace capesesp;
 
 use capesesp\uc\Fucj01;
-use capesesp\OpusJsonTestCase;
+use capesesp\json\OpusJsonTestCase;
 
 /**
  * Testa programas Opus/JSON do Modulo UC do Sistema Central

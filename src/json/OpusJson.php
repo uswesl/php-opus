@@ -1,6 +1,6 @@
 <?php
 
-namespace capesesp;
+namespace capesesp\json;
 
 use capesesp\Config;
 use capesesp\Arguments;
@@ -31,10 +31,9 @@ abstract class OpusJson
      * @param $program String nome do programa que sera executada no Opus
      * @param $parametros Array com parametros da linha de comando, ou string com parametros separados por espaço
      * @param $decode Boolean se falso retorna somente String. Se verdadeiro, retorna json_decode(String)
-     * @param $assoc Boolean se verdadeiro converte para array associativo ao inves de objeto PHP, ignorado se $decode falso
      * @return String JSON
      */
-    public static function executa($programa, $parametros = [], $decode = true, $assoc = false)
+    public static function executa($programa, $parametros = [], $decode = true)
     {
         Arguments::validate($programa, true, ['string']);
         Arguments::validate($parametros, true, ['string', 'array']);
