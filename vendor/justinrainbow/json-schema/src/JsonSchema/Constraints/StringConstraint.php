@@ -38,9 +38,10 @@ class StringConstraint extends Constraint
 
         // Verify a regex pattern
         if (isset($schema->pattern) && !preg_match('#' . str_replace('#', '\\#', $schema->pattern) . '#', $element)) {
+
             $this->addError($path,
                             "Nao corresponde ao padrao da expressao regular " . $schema->pattern,
-                            'pattern', ['pattern' => $schema->pattern, 'default' => $schema->default]
+                            'pattern', ['pattern' => $schema->pattern]
                            );
         }
 
