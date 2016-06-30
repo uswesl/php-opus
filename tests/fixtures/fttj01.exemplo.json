@@ -1,0 +1,111 @@
+{
+"saidaFttj01":
+  {
+  "loteEventos":
+    {
+    "evento":
+      {
+      "@id": "ID0", 
+      "eFinanceira":
+        {
+        "@xmlns": "http://www.eFinanceira.gov.br/schemas/evtMovOpFin/v1_0_1",
+        "evtMovOpFin":
+          {
+          "@id": "ID233390170000000000",
+          "ideEvento":
+            {
+            "indRetificacao": 1,
+            "nrRecibo": 1,
+            "tpAmb": 1,
+            "aplicEmi": 2,
+            "verAplic": "00000000000000000001"
+            },
+          "ideDeclarante":
+            {
+            "cnpjDeclarante": 1234567890
+            },
+          "ideDeclarado":
+            {
+            "tpNI": 2,
+            "tpDeclarado": "FATCA101",
+            "NIDeclarado": "01234567891234",
+            "NIF":
+              {
+              "NumeroNIF": 1234567890123456789012345,
+              "PaisEmissaoNIF": "US"
+              },
+            "NomeDeclarado": "Nome do Declarado com 100 caracteres",
+            "EnderecoLivre": "EnderecoLivre com 200 caracteres",
+            "PaisEndereco": { "Pais": "BR" },
+            "Proprietarios":
+              {
+              "tpNI": 1,
+              "NIProprietario": "0123456789",
+              "NIF":
+                {
+                "NumeroNIF": 1234567890123456789012345,
+                "PaisEmissaoNIF": "US"
+                },
+              "Nome": "Nome com 100 caracteres",
+              "EnderecoLivre": "Endereço com 200 caracteres",
+              "PaisEndereco": { "Pais": "BR" },
+              "PaisResid": { "Pais": "BR" },
+              "PaisNacionalidade": { "Pais": "BR" },
+              "Reportavel": [{ "Pais": "BR" }]
+              }
+            },
+          "mesCaixa":
+            {
+            "anoMesCaixa": "201401",
+            "movOpFin":
+              {
+              "Conta":
+                [{
+                "infoConta":
+                  {
+                  "Reportavel":
+                    {
+                    "Pais": "BR"
+                    },
+                  "tpConta": "1",
+                  "subTpConta": "101",
+                  "tpNumConta": "OECD605",
+                  "numConta": "1234|123|1234567890123",
+                  "tpRelacaoDeclarado": 3,
+                  "NoTitulares": "4",
+                  "BalancoConta": {
+                    "totCreditos": "15000,23",
+                    "totDebitos": "20000,23",
+                    "totCreditosMesmaTitularidade": "1000000,00",
+                    "totDebitosMesmaTitularidade": "20000,00",
+                    "vlrUltDia": "-0.50"
+                    },
+                  "PgtosAcum": [{
+                    "tpPgto": ["FATCA503"],
+                    "totPgtosAcum": "0,00"
+                    }]
+                  }
+                }]
+              }
+            }
+          }
+        }
+      }
+    },
+  "statusExecucao":
+    {
+    "executadoCorretamente": true,
+    "mensagens":
+      {
+      "mensagem":
+        [
+          {
+          "codigo":3,
+          "severidade":"INFO",
+          "mensagem":"10 eventos retornados"
+          }
+        ]
+      }
+    }
+  }
+}

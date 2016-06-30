@@ -2,6 +2,7 @@
 
 namespace capesesp;
 
+use robotdance\Config;
 use capesesp\json\OpusJson;
 use capesesp\json\OpusJsonTestCase;
 

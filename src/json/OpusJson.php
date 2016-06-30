@@ -2,8 +2,8 @@
 
 namespace capesesp\json;
 
-use capesesp\Config;
-use capesesp\Arguments;
+use robotdance\Config;
+use robotdance\Arguments;
 
 abstract class OpusJson
 {
@@ -35,8 +35,8 @@ abstract class OpusJson
      */
     public static function executa($programa, $parametros = [], $decode = true)
     {
-        Arguments::validate($programa, true, ['string']);
-        Arguments::validate($parametros, true, ['string', 'array']);
+        Arguments::validate($programa, ['string']);
+        Arguments::validate($parametros, ['string', 'array']);
 
         if(is_array($parametros)) {
             $parametros = implode(" ", $parametros);

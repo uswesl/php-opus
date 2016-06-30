@@ -13,184 +13,200 @@
           "properties": {
             "evento": {
               "id": "evento",
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "id": "0",
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "id": "@id",
-                    "type": "string",
-                    "description": "Identificador do evento (xs:ID)",
-                    "minLength": 3,
-                    "maxLength": 5,
-                    "pattern": "^ID[0-9]{1,3}$"
-                  },
-                  "eFinanceira": {
-                    "id": "eFinanceira",
-                    "type": "object",
-                    "properties": {
-                      "@xmlns": {
-                        "id": "@xmlns",
-                        "type": "string",
-                        "enum": ["http://www.eFinanceira.gov.br/schemas/evtMovOpFin/v1_0_1"]
-                      },
-                      "evtMovOpFin": {
-                        "id": "evtMovOpFin",
-                        "type": "object",
-                        "description": "Evento de Informacoes de Movimento de Operacoes Financeiras",
-                        "properties": {
-                          "@id": {
-                            "id": "@id",
-                            "type": "string",
-                            "description": "Identificador do evento (xs:ID) com 13 a 20 caracteres",
-                            "pattern": "^ID[0-9]{11,18}$",
-                            "minLength": 13,
-                            "maxLength": 20
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "id": "@id",
+                  "type": "string",
+                  "description": "Identificador do evento (xs:ID)",
+                  "minLength": 3,
+                  "maxLength": 5,
+                  "pattern": "^ID[0-9]{1,3}$"
+                },
+                "eFinanceira": {
+                  "id": "eFinanceira",
+                  "type": "object",
+                  "properties": {
+                    "@xmlns": {
+                      "id": "@xmlns",
+                      "type": "string",
+                      "enum": ["http://www.eFinanceira.gov.br/schemas/evtMovOpFin/v1_0_1"]
+                    },
+                    "evtMovOpFin": {
+                      "id": "evtMovOpFin",
+                      "type": "object",
+                      "description": "Evento de Informacoes de Movimento de Operacoes Financeiras",
+                      "properties": {
+                        "@id": {
+                          "id": "@id",
+                          "type": "string",
+                          "description": "Identificador do evento (xs:ID) com 13 a 20 caracteres",
+                          "pattern": "^ID[0-9]{11,18}$",
+                          "minLength": 13,
+                          "maxLength": 20
+                        },
+                        "ideEvento": {
+                          "id": "ideEvento",
+                          "type": "object",
+                          "description": "Identificação de Evento",
+                          "properties": {
+                            "indRetificacao": {
+                              "id": "indRetificacao",
+                              "type": "integer",
+                              "enum": [1, 2, 3],
+                              "description": "1-arquivo original 2-retificacao espontanea, 3-retificacao a pedido"
+                            },
+                            "nrRecibo": {
+                              "id": "nrRecibo",
+                              "type": "string",
+                              "description": "Numero do recibo do arquivo a ser retificado (Opcional)",
+                              "minLength": 15,
+                              "maxLength": 49,
+                              "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}$",
+                              "default": "1-22-333-4444-1"
+                            },
+                            "tpAmb": {
+                              "id": "tpAmb",
+                              "type": "integer",
+                              "enum": [1, 2],
+                              "description": "Ambiente. 1-producao, 2-homologacao"
+                            },
+                            "aplicEmi": {
+                              "id": "aplicEmi",
+                              "type": "integer",
+                              "enum": [1, 2],
+                              "description": "Processo de emissão do evento. 1-Aplicativo da empresa, 2-Outros"
+                            },
+                            "verAplic": {
+                              "id": "verAplic",
+                              "type": "string",
+                              "description": "Versão do aplicativo de emissão do evento.",
+                              "minLength": 1,
+                              "maxLength": 20
+                            }
                           },
-                          "ideEvento": {
-                            "id": "ideEvento",
-                            "type": "object",
-                            "description": "Identificação de Evento",
-                            "properties": {
-                              "indRetificacao": {
-                                "id": "indRetificacao",
-                                "type": "integer",
-                                "enum": [1, 2, 3],
-                                "description": "1-arquivo original 2-retificacao espontanea, 3-retificacao a pedido"
-                              },
-                              "nrRecibo": {
-                                "id": "nrRecibo",
+                          "required": ["indRetificacao", "tpAmb", "aplicEmi", "verAplic"],
+                          "additionalProperties": false
+                        },
+                        "ideDeclarante": {
+                          "id": "ideDeclarante",
+                          "type": "object",
+                          "description": "Informacoes de identificacao da empresa declarante",
+                          "properties": {
+                            "cnpjDeclarante": {
+                              "id": "cnpjDeclarante",
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 14
+                            }
+                          },
+                          "required": ["cnpjDeclarante"],
+                          "additionalProperties": false
+                        },
+                        "ideDeclarado": {
+                          "id": "ideDeclarado",
+                          "type": "object",
+                          "description": "Identificacao do Declarado",
+                          "properties": {
+                            "tpNI": {
+                              "id": "tpNI",
+                              "type": "integer",
+                              "enum": [1, 2, 3, 4, 5],
+                              "description": "Tipo de NI (Numero de Identificacao). Valores validos: 1;2;3;4;5"
+                            },
+                            "tpDeclarado": {
+                              "id": "tpDeclarado",
+                              "type": "array",
+                              "description": "Opcional. Tipo para fins de intercambio de informacoes",
+                              "items": {
+                                "id": "0",
                                 "type": "string",
-                                "description": "Numero do recibo do arquivo a ser retificado (Opcional)",
-                                "minLength": 15,
-                                "maxLength": 49,
-                                "pattern": "^[0-9]{1,18}[-][0-9]{2}[-][0-9]{3}[-][0-9]{4}[-][0-9]{1,18}$",
-                                "default": "1-22-333-4444-1"
-                              },
-                              "tpAmb": {
-                                "id": "tpAmb",
-                                "type": "integer",
-                                "enum": [1, 2],
-                                "description": "Ambiente. 1-producao, 2-homologacao"
-                              },
-                              "aplicEmi": {
-                                "id": "aplicEmi",
-                                "type": "integer",
-                                "enum": [1, 2],
-                                "description": "Processo de emissão do evento. 1-Aplicativo da empresa, 2-Outros"
-                              },
-                              "verAplic": {
-                                "id": "verAplic",
-                                "type": "string",
-                                "description": "Versão do aplicativo de emissão do evento.",
                                 "minLength": 1,
-                                "maxLength": 20
+                                "maxLength": 8,
+                                "default": "FATCA101"
                               }
                             },
-                            "required": ["indRetificacao", "tpAmb", "aplicEmi", "verAplic"],
-                            "additionalProperties": false
-                          },
-                          "ideDeclarante": {
-                            "id": "ideDeclarante",
-                            "type": "object",
-                            "description": "Informacoes de identificacao da empresa declarante",
-                            "properties": {
-                              "cnpjDeclarante": {
-                                "id": "cnpjDeclarante",
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 14
-                              }
+                            "NIDeclarado": {
+                              "id": "NIDeclarado",
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 25,
+                              "description": "NI. String de 1 a 25 caracteres"
                             },
-                            "required": ["cnpjDeclarante"],
-                            "additionalProperties": false
-                          },
-                          "ideDeclarado": {
-                            "id": "ideDeclarado",
-                            "type": "object",
-                            "description": "Identificacao do Declarado",
-                            "properties": {
-                              "tpNI": {
-                                "id": "tpNI",
-                                "type": "integer",
-                                "enum": [1, 2, 3, 4, 5],
-                                "description": "Tipo de NI (Numero de Identificacao). Valores validos: 1;2;3;4;5"
-                              },
-                              "tpDeclarado": {
-                                "id": "tpDeclarado",
-                                "type": "array",
-                                "description": "Opcional. Tipo para fins de intercambio de informacoes",
-                                "items": {
-                                  "id": "0",
-                                  "type": "string",
-                                  "minLength": 1,
-                                  "maxLength": 8,
-                                  "default": "FATCA101"
-                                }
-                              },
-                              "NIDeclarado": {
-                                "id": "NIDeclarado",
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 25,
-                                "description": "NI. String de 1 a 25 caracteres"
-                              },
-                              "NIF": {
-                                "id": "NIF",
-                                "type": "array",
-                                "description": "Numero de Identificacao Fiscal",
-                                "items": {
-                                  "id": "0",
-                                  "type": "object",
-                                  "properties": {
-                                    "NumeroNIF": {
-                                      "id": "NumeroNIF",
-                                      "type":"string",
-                                      "description": "Numero de Identificacao Fiscal",
-                                      "minLength": 1,
-                                      "maxLength": 2
-                                    },
-                                    "PaisEmissaoNIF": {
-                                      "id": "PaisEmissaoNIF",
-                                      "type": "string",
-                                      "description": "País de Emissão do Numero de Identificacao Fiscal",
-                                      "minLength": 2,
-                                      "maxLength": 2,
-                                      "enum": ["BR", "US"]
-                                    }
+                            "NIF": {
+                              "id": "NIF",
+                              "type": "array",
+                              "description": "Numero de Identificacao Fiscal",
+                              "items": {
+                                "id": "0",
+                                "type": "object",
+                                "properties": {
+                                  "NumeroNIF": {
+                                    "id": "NumeroNIF",
+                                    "type":"string",
+                                    "description": "Numero de Identificacao Fiscal",
+                                    "minLength": 1,
+                                    "maxLength": 2
                                   },
-                                  "required": ["NumeroNIF", "PaisEmissaoNIF"],
-                                  "additionalProperties": false
+                                  "PaisEmissaoNIF": {
+                                    "id": "PaisEmissaoNIF",
+                                    "type": "string",
+                                    "description": "País de Emissão do Numero de Identificacao Fiscal",
+                                    "minLength": 2,
+                                    "maxLength": 2,
+                                    "enum": ["BR", "US"]
+                                  }
+                                },
+                                "required": ["NumeroNIF", "PaisEmissaoNIF"],
+                                "additionalProperties": false
+                              }
+                            },
+                            "NomeDeclarado": {
+                              "id": "NomeDeclarado",
+                              "type": "string",
+                              "description": "Nome do declarado",
+                              "minLength": 1,
+                              "maxLength": 100
+                            },
+                            "dataNasc": {
+                              "id": "dataNasc",
+                              "type": "string",
+                              "description": "Data de nascimento",
+                              "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                            },
+                            "EnderecoLivre": {
+                              "id": "EnderecoLivre",
+                              "type": "string",
+                              "description": "Endereco com 200 caracteres",
+                              "minLength": 0,
+                              "maxLength": 200
+                            },
+                            "PaisEndereco": {
+                              "id": "PaisEndereco",
+                              "type": "object",
+                              "properties": {
+                                "Pais": {
+                                  "id": "PaisEndereco/Pais",
+                                  "type": "string",
+                                  "description": "Pais",
+                                  "minLength": 2,
+                                  "maxLength": 2,
+                                  "enum": ["BR", "US"]
                                 }
                               },
-                              "NomeDeclarado": {
-                                "id": "NomeDeclarado",
-                                "type": "string",
-                                "description": "Nome do declarado",
-                                "minLength": 1,
-                                "maxLength": 100
-                              },
-                              "dataNasc": {
-                                "id": "dataNasc",
-                                "type": "string",
-                                "description": "Data de nascimento",
-                                "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
-                              },
-                              "EnderecoLivre": {
-                                "id": "EnderecoLivre",
-                                "type": "string",
-                                "description": "Endereco com 200 caracteres",
-                                "minLength": 0,
-                                "maxLength": 200
-                              },
-                              "PaisEndereco": {
-                                "id": "PaisEndereco",
+                              "required": ["Pais"],
+                              "additionalProperties": false
+                            },
+                            "PaisResid": {
+                              "id": "PaisResid",
+                              "type": "array",
+                              "uniqueItems": true,
+                              "items":{
+                                "id": "0",
                                 "type": "object",
                                 "properties": {
                                   "Pais": {
-                                    "id": "PaisEndereco/Pais",
+                                    "id": "PaisResid/Pais",
                                     "type": "string",
                                     "description": "Pais",
                                     "minLength": 2,
@@ -200,118 +216,117 @@
                                 },
                                 "required": ["Pais"],
                                 "additionalProperties": false
-                              },
-                              "PaisResid": {
-                                "id": "PaisResid",
-                                "type": "array",
-                                "uniqueItems": true,
-                                "items":{
-                                  "id": "0",
-                                  "type": "object",
-                                  "properties": {
-                                    "Pais": {
-                                      "id": "PaisResid/Pais",
-                                      "type": "string",
-                                      "description": "Pais",
-                                      "minLength": 2,
-                                      "maxLength": 2,
-                                      "enum": ["BR", "US"]
-                                    }
+                              }
+                            },
+                            "PaisNacionalidade": {
+                              "id": "PaisNacionalidade",
+                              "type": "array",
+                              "minItems": 1,
+                              "uniqueItems": true,
+                              "items":{
+                                "id": "0",
+                                "type": "object",
+                                "properties": {
+                                  "Pais": {
+                                    "id": "PaisNacionalidade/Pais",
+                                    "type": "string",
+                                    "description": "País",
+                                    "minLength": 2,
+                                    "maxLength": 2,
+                                    "enum": ["BR", "US"]
+                                  }
+                                },
+                                "required": ["Pais"],
+                                "additionalProperties": false
+                              }
+                            },
+                            "Proprietarios": {
+                              "id": "Proprietarios",
+                              "type": "array",
+                              "description": "Informacoes dos Proprietarios",
+                              "items": {
+                                "id": "0",
+                                "type": "object",
+                                "properties": {
+                                  "tpNI": {
+                                    "id": "tpNI",
+                                    "type": "integer",
+                                    "description": "Tipo de NI",
+                                    "enum": [1, 3, 5]
                                   },
-                                  "required": ["Pais"],
-                                  "additionalProperties": false
-                                }
-                              },
-                              "PaisNacionalidade": {
-                                "id": "PaisNacionalidade",
-                                "type": "array",
-                                "minItems": 1,
-                                "uniqueItems": true,
-                                "items":{
-                                  "id": "0",
-                                  "type": "object",
-                                  "properties": {
-                                    "Pais": {
-                                      "id": "PaisNacionalidade/Pais",
-                                      "type": "string",
-                                      "description": "País",
-                                      "minLength": 2,
-                                      "maxLength": 2,
-                                      "enum": ["BR", "US"]
-                                    }
+                                  "NIProprietario": {
+                                    "id": "NIProprietario",
+                                    "type": "string",
+                                    "description": "NI do Proprietario",
+                                    "minLength": 1,
+                                    "maxLength": 25
                                   },
-                                  "required": ["Pais"],
-                                  "additionalProperties": false
-                                }
-                              },
-                              "Proprietarios": {
-                                "id": "Proprietarios",
-                                "type": "array",
-                                "description": "Informacoes dos Proprietarios",
-                                "items": {
-                                  "id": "0",
-                                  "type": "object",
-                                  "properties": {
-                                    "tpNI": {
-                                      "id": "tpNI",
-                                      "type": "integer",
-                                      "description": "Tipo de NI",
-                                      "enum": [1, 3, 5]
-                                    },
-                                    "NIProprietario": {
-                                      "id": "NIProprietario",
-                                      "type": "string",
-                                      "description": "NI do Proprietario",
-                                      "minLength": 1,
-                                      "maxLength": 25
-                                    },
-                                    "NIF": {
-                                      "id": "NIF",
-                                      "type": "array",
-                                      "description": "Numero de Identificacao Fiscal",
-                                      "items": {
-                                        "id": "0",
-                                        "type": "object",
-                                        "properties": {
-                                          "NumeroNIF": {
-                                            "id": "NumeroNIF",
-                                            "type": "string",
-                                            "minLength": 1,
-                                            "maxLength": 25
-                                          },
-                                          "PaisEmissaoNIF": {
-                                            "id": "PaisEmissaoNIF2",
-                                            "type": "string",
-                                            "description": "País de Emissão do Numero de Identificacao Fiscal",
-                                            "minLength": 2,
-                                            "maxLength": 2,
-                                            "enum": ["BR", "US"]
-                                          }
+                                  "NIF": {
+                                    "id": "NIF",
+                                    "type": "array",
+                                    "description": "Numero de Identificacao Fiscal",
+                                    "items": {
+                                      "id": "0",
+                                      "type": "object",
+                                      "properties": {
+                                        "NumeroNIF": {
+                                          "id": "NumeroNIF",
+                                          "type": "string",
+                                          "minLength": 1,
+                                          "maxLength": 25
                                         },
-                                        "required": ["NumeroNIF", "PaisEmissaoNIF"],
-                                        "additionalProperties": false
+                                        "PaisEmissaoNIF": {
+                                          "id": "PaisEmissaoNIF2",
+                                          "type": "string",
+                                          "description": "País de Emissão do Numero de Identificacao Fiscal",
+                                          "minLength": 2,
+                                          "maxLength": 2,
+                                          "enum": ["BR", "US"]
+                                        }
+                                      },
+                                      "required": ["NumeroNIF", "PaisEmissaoNIF"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "Nome": {
+                                    "id": "Nome",
+                                    "type": "string",
+                                    "description": "Nome",
+                                    "minLength": 1,
+                                    "maxLength": 100
+                                  },
+                                  "EnderecoLivre": {
+                                    "id": "EnderecoLivre",
+                                    "type": "string",
+                                    "description": "Endereco com 200 caracteres",
+                                    "minLength": 1,
+                                    "maxLength": 200
+                                  },
+                                  "PaisEndereco": {
+                                    "id": "PaisEndereco",
+                                    "type": "object",
+                                    "properties": {
+                                      "Pais": {
+                                        "id": "PaisEndereco/Pais2",
+                                        "type": "string",
+                                        "description": "Pais",
+                                        "minLength": 2,
+                                        "maxLength": 2,
+                                        "enum": ["BR", "US"]
                                       }
                                     },
-                                    "Nome": {
-                                      "id": "Nome",
-                                      "type": "string",
-                                      "description": "Nome",
-                                      "minLength": 1,
-                                      "maxLength": 100
-                                    },
-                                    "EnderecoLivre": {
-                                      "id": "EnderecoLivre",
-                                      "type": "string",
-                                      "description": "Endereco com 200 caracteres",
-                                      "minLength": 1,
-                                      "maxLength": 200
-                                    },
-                                    "PaisEndereco": {
-                                      "id": "PaisEndereco",
+                                    "required": ["Pais"],
+                                    "additionalProperties": false
+                                  },
+                                  "PaisResid": {
+                                    "id": "PaisResid",
+                                    "type": "array",
+                                    "items":{
+                                      "id": "0",
                                       "type": "object",
                                       "properties": {
                                         "Pais": {
-                                          "id": "PaisEndereco/Pais2",
+                                          "id": "PaisResid/Pais2",
                                           "type": "string",
                                           "description": "Pais",
                                           "minLength": 2,
@@ -321,385 +336,93 @@
                                       },
                                       "required": ["Pais"],
                                       "additionalProperties": false
-                                    },
-                                    "PaisResid": {
-                                      "id": "PaisResid",
-                                      "type": "array",
-                                      "items":{
-                                        "id": "0",
-                                        "type": "object",
-                                        "properties": {
-                                          "Pais": {
-                                            "id": "PaisResid/Pais2",
-                                            "type": "string",
-                                            "description": "Pais",
-                                            "minLength": 2,
-                                            "maxLength": 2,
-                                            "enum": ["BR", "US"]
-                                          }
-                                        },
-                                        "required": ["Pais"],
-                                        "additionalProperties": false
-                                      }
-                                    },
-                                    "PaisNacionalidade": {
-                                      "id": "PaisNacionalidade",
-                                      "type": "array",
-                                      "items":{
-                                        "id": "0",
-                                        "type": "object",
-                                        "properties": {
-                                          "Pais": {
-                                            "id": "PaisNacionalidade/Pais2",
-                                            "type": "string",
-                                            "description": "Pais",
-                                            "minLength": 2,
-                                            "maxLength": 2,
-                                            "enum": ["BR", "US"]
-                                          }
-                                        },
-                                        "required": ["Pais"],
-                                        "additionalProperties": false
-                                      }
-                                    },
-                                    "dataNasc": {
-                                      "id": "dataNasc",
-                                      "type": "string",
-                                      "description": "Data de nascimento",
-                                      "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
-                                    },
-                                    "Reportavel": {
-                                      "id": "Proprietarios/Reportavel",
-                                      "type": "array",
-                                      "minItems": 1,
-                                      "description": "Identificacao do pais para o qual a conta deve ser reportada",
-                                      "items": {
-                                        "id": "0",
-                                        "type": "object",
-                                        "properties": {
-                                          "Pais": {
-                                            "id": "Reportavel/Pais",
-                                            "type": "string",
-                                            "description": "Pais",
-                                            "minLength": 2,
-                                            "maxLength": 2,
-                                            "enum": ["BR", "US"]
-                                          }
-                                        },
-                                        "required": ["Pais"],
-                                        "additionalProperties": false
-                                      }
                                     }
                                   },
-                                  "required": ["tpNI", "NIProprietario", "Nome", "EnderecoLivre", "PaisEndereco", "Reportavel"],
-                                  "additionalProperties": false
-                                }
-                              }
-                            },
-                            "required": ["tpNI", "NIDeclarado", "NomeDeclarado", "PaisEndereco"],
-                            "additionalProperties": false
-                          },
-                          "mesCaixa": {
-                            "id": "mesCaixa",
-                            "type": "object",
-                            "description": "Operacoes Financeiras",
-                            "properties": {
-                              "anoMesCaixa": {
-                                "id": "anoMesCaixa",
-                                "type": "string",
-                                "description": "Mês caixa que esta sendo reportado",
-                                "pattern": "^20([0-9][0-9])(0[1-9]|1[0-3])$"
-                              },
-                              "movOpFin": {
-                                "id": "movOpFin",
-                                "type": "object",
-                                "description": "Operacoes Financeiras",
-                                "properties": {
-                                  "Conta": {
-                                    "id": "Conta",
+                                  "PaisNacionalidade": {
+                                    "id": "PaisNacionalidade",
                                     "type": "array",
-                                    "description": "Identificacao da Conta (Opcional)",
+                                    "items":{
+                                      "id": "0",
+                                      "type": "object",
+                                      "properties": {
+                                        "Pais": {
+                                          "id": "PaisNacionalidade/Pais2",
+                                          "type": "string",
+                                          "description": "Pais",
+                                          "minLength": 2,
+                                          "maxLength": 2,
+                                          "enum": ["BR", "US"]
+                                        }
+                                      },
+                                      "required": ["Pais"],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "dataNasc": {
+                                    "id": "dataNasc",
+                                    "type": "string",
+                                    "description": "Data de nascimento",
+                                    "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                                  },
+                                  "Reportavel": {
+                                    "id": "Proprietarios/Reportavel",
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "description": "Identificacao do pais para o qual a conta deve ser reportada",
                                     "items": {
                                       "id": "0",
                                       "type": "object",
                                       "properties": {
-                                        "MedJudic": {
-                                          "id": "MedJudic",
-                                          "type": "array",
-                                          "description": "Identificacao de Medidas Judiciais (Opcional)",
-                                          "items": {
-                                            "id": "0",
-                                            "properties": {
-                                              "NumProcJud": {
-                                                "id": "NumProcJud",
-                                                "type": "string",
-                                                "description": "Numero do processo Judicial",
-                                                "minLength": 1,
-                                                "maxLength": 21,
-                                                "pattern": "^[0-9]{1,21}$"
-                                              },
-                                              "Vara": {
-                                                "id": "Vara",
-                                                "type": "integer",
-                                                "description": "Vara de tramitacao",
-                                                "minimum": 0,
-                                                "maximum": 99
-                                              },
-                                              "SecJud": {
-                                                "id": "SecJud",
-                                                "type": "integer",
-                                                "description": "Secao judiciaria",
-                                                "minimum": 0,
-                                                "maximum": 99
-                                              },
-                                              "SubSecJud": {
-                                                "id": "SubSecJud",
-                                                "type": "string",
-                                                "description": "Subsecao judiciaria",
-                                                "minLength": 1,
-                                                "maxLength": 40
-                                              },
-                                              "dtConcessao": {
-                                                "id": "dtConcessao",
-                                                "type": "string",
-                                                "description": "Data de concessao",
-                                                "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
-                                              },
-                                              "dtCassacao": {
-                                                "id": "dtCassacao",
-                                                "type": "string",
-                                                "description": "Data de concessao",
-                                                "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
-                                              }
-                                            },
-                                            "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"],
-                                            "additionalProperties": false
-                                          }
-                                        },
-                                        "infoConta": {
-                                          "id": "infoConta",
-                                          "type": "object",
-                                          "description": "Informacoes da Conta",
-                                          "properties": {
-                                            "Reportavel": {
-                                              "id": "Reportavel",
-                                              "type": "array",
-                                              "minItems": 1,
-                                              "description": "Identificacao do pais para o qual a conta deve ser reportada",
-                                              "items": {
-                                                "id": "0",
-                                                "type": "object",
-                                                "properties": {
-                                                  "Pais": {
-                                                    "id": "infoConta/Reportavel/Pais",
-                                                    "type": "string",
-                                                    "description": "Pais",
-                                                    "minLength": 2,
-                                                    "maxLength": 2,
-                                                    "enum": ["BR", "US"]
-                                                  }
-                                                },
-                                                "required": ["Pais"],
-                                                "additionalProperties": false
-                                              }
-                                            },
-                                            "tpConta": {
-                                              "id": "tpConta",
-                                              "type": "string",
-                                              "minLength": 1,
-                                              "maxLength": 1
-                                            },
-                                            "subTpConta": {
-                                              "id": "subTpConta",
-                                              "type": "string",
-                                              "description": "Subtipo de Conta",
-                                              "minLength": 1,
-                                              "maxLength": 3
-                                            },
-                                            "tpNumConta": {
-                                              "id": "tpNumConta",
-                                              "type": "string",
-                                              "description": "Tipo do Numero da Conta",
-                                              "minLength": 1,
-                                              "maxLength": 10
-                                            },
-                                            "numConta": {
-                                              "id": "numConta",
-                                              "type": "string",
-                                              "description": "Numero da Conta",
-                                              "minLength": 1,
-                                              "maxLength": 50
-                                            },
-                                            "tpRelacaoDeclarado": {
-                                              "id": "tpRelacaoDeclarado",
-                                              "type": "integer",
-                                              "description": "Tipo de relacao do declarado",
-                                              "minimum": 0,
-                                              "maximum": 99
-                                            },
-                                            "Intermediario": {
-                                              "id": "Intermediario",
-                                              "type": "object",
-                                              "description": "Identificacao do Intermediario",
-                                              "properties": {
-                                                "GIIN": {
-                                                  "id": "GIIN",
-                                                  "type": "string",
-                                                  "description": "Global Intermediary Identification Number (Opcional)",
-                                                  "minLength": 1,
-                                                  "maxLength": 19
-                                                },
-                                                "tpNI": {
-                                                  "id": "tpNI",
-                                                  "type": "integer",
-                                                  "enum": [1, 2, 3, 4, 5],
-                                                  "description": "Tipo de Numero de Identificacao. (Opcional)"
-                                                },
-                                                "NIIntermediario": {
-                                                  "id": "NIIntermediario",
-                                                  "type": "string",
-                                                  "description": "Numero de Identificacao (Opcional)",
-                                                  "minLength": 1,
-                                                  "maxLength": 25
-                                                }
-                                              },
-                                              "additionalProperties": false
-                                            },
-                                            "NoTitulares": {
-                                              "id": "NoTitulares",
-                                              "type": "string",
-                                              "description": "Numero de Titulares da Conta",
-                                              "minLength": 1,
-                                              "maxLength": 2,
-                                              "pattern": "[0-9]{1,2}"
-                                            },
-                                            "dtEncerramentoConta": {
-                                              "id": "dtEncerramentoConta",
-                                              "type": "string",
-                                              "description": "Data de encerramento da conta",
-                                              "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
-                                            },
-                                            "Fundo": {
-                                              "id": "Fundo",
-                                              "type": "object",
-                                              "properties": {
-                                                "GIIN": {
-                                                  "id": "GIIN",
-                                                  "type": "string",
-                                                  "description": "GIIN referente ao Fundo de Investimentos (Opcional)",
-                                                  "minLength": 1,
-                                                  "maxLength": 19
-                                                },
-                                                "CNPJ": {
-                                                  "id": "CNPJ",
-                                                  "type": "string",
-                                                  "description": "CNPJ referente ao Fundo de Investimentos",
-                                                  "minLength": 1,
-                                                  "maxLength": 14
-                                                }
-                                              },
-                                              "required": ["CNPJ"],
-                                              "additionalProperties": false
-                                            },
-                                            "BalancoConta": {
-                                              "id": "BalancoConta",
-                                              "type": "object",
-                                              "description": "Informacoes de balanço da conta",
-                                              "properties": {
-                                                "totCreditos": {
-                                                  "id": "totCreditos",
-                                                  "type": "string",
-                                                  "description": "Total de créditos",
-                                                  "minLength": 4,
-                                                  "maxLength": 22,
-                                                  "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                                },
-                                                "totDebitos": {
-                                                  "id": "totDebitos",
-                                                  "type": "string",
-                                                  "description": "Total de débitos",
-                                                  "minLength": 4,
-                                                  "maxLength": 22,
-                                                  "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                                },
-                                                "totCreditosMesmaTitularidade": {
-                                                  "id": "totCreditosMesmaTitularidade",
-                                                  "type": "string",
-                                                  "description": "Total de Créditos do mesmo Titular",
-                                                  "minLength": 4,
-                                                  "maxLength": 22,
-                                                  "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                                },
-                                                "totDebitosMesmaTitularidade": {
-                                                  "id": "totDebitosMesmaTitularidade",
-                                                  "type": "string",
-                                                  "description": "Total de débitos do mesmo titular",
-                                                  "minLength": 4,
-                                                  "maxLength": 22,
-                                                  "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                                },
-                                                "vlrUltDia": {
-                                                  "id": "vlrUltDia",
-                                                  "type": "string",
-                                                  "minLength": 4,
-                                                  "maxLength": 23,
-                                                  "description": "Saldo no ultimo dia do mês",
-                                                  "pattern": "^[-]{0,1}[0-9]{1,19}[,][0-9]{2}$"
-                                                }
-                                              },
-                                              "required": ["totCreditos", "totDebitos", "totCreditosMesmaTitularidade", "totDebitosMesmaTitularidade"],
-                                              "additionalProperties": false
-                                            },
-                                            "PgtosAcum": {
-                                              "id": "PgtosAcum",
-                                              "type": "array",
-                                              "minItems": 1,
-                                              "description": "Informacoes de Pagamento referentes à Conta",
-                                              "items": {
-                                                "id": "0",
-                                                "type": "object",
-                                                "properties": {
-                                                  "tpPgto": {
-                                                    "id": "tpPgto",
-                                                    "type": "array",
-                                                    "minItems": 1,
-                                                    "description": "Tipo de Pagamento",
-                                                    "items": {
-                                                      "id": "0",
-                                                      "type": "string",
-                                                      "minLength": 1,
-                                                      "maxLegth": 10
-                                                    }
-                                                  },
-                                                  "totPgtosAcum": {
-                                                    "id": "totPgtosAcum",
-                                                    "type": "string",
-                                                    "description": "Total Acumulado de Pagamentos realizados no Ano",
-                                                    "minLength": 4,
-                                                    "maxLength": 22,
-                                                    "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                                  }
-                                                },
-                                                "required": ["tpPgto", "totPgtosAcum"],
-                                                "additionalProperties": false
-                                              }
-                                            }
-                                          },
-                                          "required": ["Reportavel", "tpConta", "subTpConta", "tpNumConta", "numConta", "tpRelacaoDeclarado", "BalancoConta", "PgtosAcum"],
-                                          "additionalProperties": false
+                                        "Pais": {
+                                          "id": "Reportavel/Pais",
+                                          "type": "string",
+                                          "description": "Pais",
+                                          "minLength": 2,
+                                          "maxLength": 2,
+                                          "enum": ["BR", "US"]
                                         }
-                                      }
+                                      },
+                                      "required": ["Pais"],
+                                      "additionalProperties": false
                                     }
-                                  },
-                                  "Cambio": {
-                                    "id": "Cambio",
+                                  }
+                                },
+                                "required": ["tpNI", "NIProprietario", "Nome", "EnderecoLivre", "PaisEndereco", "Reportavel"],
+                                "additionalProperties": false
+                              }
+                            }
+                          },
+                          "required": ["tpNI", "NIDeclarado", "NomeDeclarado", "PaisEndereco"],
+                          "additionalProperties": false
+                        },
+                        "mesCaixa": {
+                          "id": "mesCaixa",
+                          "type": "object",
+                          "description": "Operacoes Financeiras",
+                          "properties": {
+                            "anoMesCaixa": {
+                              "id": "anoMesCaixa",
+                              "type": "string",
+                              "description": "Mês caixa que esta sendo reportado",
+                              "pattern": "^20([0-9][0-9])(0[1-9]|1[0-3])$"
+                            },
+                            "movOpFin": {
+                              "id": "movOpFin",
+                              "type": "object",
+                              "description": "Operacoes Financeiras",
+                              "properties": {
+                                "Conta": {
+                                  "id": "Conta",
+                                  "type": "array",
+                                  "description": "Identificacao da Conta (Opcional)",
+                                  "items": {
+                                    "id": "0",
                                     "type": "object",
-                                    "description": "Informacoes sobre Operacoes de Cambio",
                                     "properties": {
                                       "MedJudic": {
                                         "id": "MedJudic",
                                         "type": "array",
-                                        "description": "Identificacao de Medidas Judiciais",
+                                        "description": "Identificacao de Medidas Judiciais (Opcional)",
                                         "items": {
                                           "id": "0",
                                           "properties": {
@@ -749,53 +472,325 @@
                                           "additionalProperties": false
                                         }
                                       },
-                                      "totCompras": {
-                                        "id": "totCompras",
-                                        "type": "string",
-                                        "description": "Valor total de compras",
-                                        "minLength": 4,
-                                        "maxLength": 22,
-                                        "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                      },
-                                      "totVendas": {
-                                        "id": "totVendas",
-                                        "type": "string",
-                                        "description": "Valor total de vendas",
-                                        "minLength": 4,
-                                        "maxLength": 22,
-                                        "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
-                                      },
-                                      "totTransferencias": {
-                                        "id": "totCompras",
-                                        "type": "string",
-                                        "description": "Valor total de transferencias",
-                                        "minLength": 4,
-                                        "maxLength": 22,
-                                        "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                      "infoConta": {
+                                        "id": "infoConta",
+                                        "type": "object",
+                                        "description": "Informacoes da Conta",
+                                        "properties": {
+                                          "Reportavel": {
+                                            "id": "Reportavel",
+                                            "type": "array",
+                                            "minItems": 1,
+                                            "description": "Identificacao do pais para o qual a conta deve ser reportada",
+                                            "items": {
+                                              "id": "0",
+                                              "type": "object",
+                                              "properties": {
+                                                "Pais": {
+                                                  "id": "infoConta/Reportavel/Pais",
+                                                  "type": "string",
+                                                  "description": "Pais",
+                                                  "minLength": 2,
+                                                  "maxLength": 2,
+                                                  "enum": ["BR", "US"]
+                                                }
+                                              },
+                                              "required": ["Pais"],
+                                              "additionalProperties": false
+                                            }
+                                          },
+                                          "tpConta": {
+                                            "id": "tpConta",
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 1
+                                          },
+                                          "subTpConta": {
+                                            "id": "subTpConta",
+                                            "type": "string",
+                                            "description": "Subtipo de Conta",
+                                            "minLength": 1,
+                                            "maxLength": 3
+                                          },
+                                          "tpNumConta": {
+                                            "id": "tpNumConta",
+                                            "type": "string",
+                                            "description": "Tipo do Numero da Conta",
+                                            "minLength": 1,
+                                            "maxLength": 10
+                                          },
+                                          "numConta": {
+                                            "id": "numConta",
+                                            "type": "string",
+                                            "description": "Numero da Conta",
+                                            "minLength": 1,
+                                            "maxLength": 50
+                                          },
+                                          "tpRelacaoDeclarado": {
+                                            "id": "tpRelacaoDeclarado",
+                                            "type": "integer",
+                                            "description": "Tipo de relacao do declarado",
+                                            "minimum": 0,
+                                            "maximum": 99
+                                          },
+                                          "Intermediario": {
+                                            "id": "Intermediario",
+                                            "type": "object",
+                                            "description": "Identificacao do Intermediario",
+                                            "properties": {
+                                              "GIIN": {
+                                                "id": "GIIN",
+                                                "type": "string",
+                                                "description": "Global Intermediary Identification Number (Opcional)",
+                                                "minLength": 1,
+                                                "maxLength": 19
+                                              },
+                                              "tpNI": {
+                                                "id": "tpNI",
+                                                "type": "integer",
+                                                "enum": [1, 2, 3, 4, 5],
+                                                "description": "Tipo de Numero de Identificacao. (Opcional)"
+                                              },
+                                              "NIIntermediario": {
+                                                "id": "NIIntermediario",
+                                                "type": "string",
+                                                "description": "Numero de Identificacao (Opcional)",
+                                                "minLength": 1,
+                                                "maxLength": 25
+                                              }
+                                            },
+                                            "additionalProperties": false
+                                          },
+                                          "NoTitulares": {
+                                            "id": "NoTitulares",
+                                            "type": "string",
+                                            "description": "Numero de Titulares da Conta",
+                                            "minLength": 1,
+                                            "maxLength": 2,
+                                            "pattern": "[0-9]{1,2}"
+                                          },
+                                          "dtEncerramentoConta": {
+                                            "id": "dtEncerramentoConta",
+                                            "type": "string",
+                                            "description": "Data de encerramento da conta",
+                                            "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                                          },
+                                          "Fundo": {
+                                            "id": "Fundo",
+                                            "type": "object",
+                                            "properties": {
+                                              "GIIN": {
+                                                "id": "GIIN",
+                                                "type": "string",
+                                                "description": "GIIN referente ao Fundo de Investimentos (Opcional)",
+                                                "minLength": 1,
+                                                "maxLength": 19
+                                              },
+                                              "CNPJ": {
+                                                "id": "CNPJ",
+                                                "type": "string",
+                                                "description": "CNPJ referente ao Fundo de Investimentos",
+                                                "minLength": 1,
+                                                "maxLength": 14
+                                              }
+                                            },
+                                            "required": ["CNPJ"],
+                                            "additionalProperties": false
+                                          },
+                                          "BalancoConta": {
+                                            "id": "BalancoConta",
+                                            "type": "object",
+                                            "description": "Informacoes de balanço da conta",
+                                            "properties": {
+                                              "totCreditos": {
+                                                "id": "totCreditos",
+                                                "type": "string",
+                                                "description": "Total de créditos",
+                                                "minLength": 4,
+                                                "maxLength": 22,
+                                                "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                              },
+                                              "totDebitos": {
+                                                "id": "totDebitos",
+                                                "type": "string",
+                                                "description": "Total de débitos",
+                                                "minLength": 4,
+                                                "maxLength": 22,
+                                                "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                              },
+                                              "totCreditosMesmaTitularidade": {
+                                                "id": "totCreditosMesmaTitularidade",
+                                                "type": "string",
+                                                "description": "Total de Créditos do mesmo Titular",
+                                                "minLength": 4,
+                                                "maxLength": 22,
+                                                "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                              },
+                                              "totDebitosMesmaTitularidade": {
+                                                "id": "totDebitosMesmaTitularidade",
+                                                "type": "string",
+                                                "description": "Total de débitos do mesmo titular",
+                                                "minLength": 4,
+                                                "maxLength": 22,
+                                                "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                              },
+                                              "vlrUltDia": {
+                                                "id": "vlrUltDia",
+                                                "type": "string",
+                                                "minLength": 4,
+                                                "maxLength": 23,
+                                                "description": "Saldo no ultimo dia do mês",
+                                                "pattern": "^[-]{0,1}[0-9]{1,19}[,][0-9]{2}$"
+                                              }
+                                            },
+                                            "required": ["totCreditos", "totDebitos", "totCreditosMesmaTitularidade", "totDebitosMesmaTitularidade"],
+                                            "additionalProperties": false
+                                          },
+                                          "PgtosAcum": {
+                                            "id": "PgtosAcum",
+                                            "type": "array",
+                                            "minItems": 1,
+                                            "description": "Informacoes de Pagamento referentes à Conta",
+                                            "items": {
+                                              "id": "0",
+                                              "type": "object",
+                                              "properties": {
+                                                "tpPgto": {
+                                                  "id": "tpPgto",
+                                                  "type": "array",
+                                                  "minItems": 1,
+                                                  "description": "Tipo de Pagamento",
+                                                  "items": {
+                                                    "id": "0",
+                                                    "type": "string",
+                                                    "minLength": 1,
+                                                    "maxLegth": 10
+                                                  }
+                                                },
+                                                "totPgtosAcum": {
+                                                  "id": "totPgtosAcum",
+                                                  "type": "string",
+                                                  "description": "Total Acumulado de Pagamentos realizados no Ano",
+                                                  "minLength": 4,
+                                                  "maxLength": 22,
+                                                  "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                                }
+                                              },
+                                              "required": ["tpPgto", "totPgtosAcum"],
+                                              "additionalProperties": false
+                                            }
+                                          }
+                                        },
+                                        "required": ["Reportavel", "tpConta", "subTpConta", "tpNumConta", "numConta", "tpRelacaoDeclarado", "BalancoConta", "PgtosAcum"],
+                                        "additionalProperties": false
                                       }
-                                    },
-                                    "required": ["totCompras", "totVendas", "totTransferencias"],
-                                    "additionalProperties": false
+                                    }
                                   }
                                 },
-                                "additionalProperties": false
-                              }
-                            },
-                            "required": ["anoMesCaixa", "movOpFin"],
-                            "additionalProperties": false
-                          }
-                        },
-                        "required": ["@id", "ideEvento", "ideDeclarante", "ideDeclarado", "mesCaixa"],
-                        "additionalProperties": false
-                      }
-                    },
-                    "required": ["@xmlns", "evtMovOpFin"],
-                    "additionalProperties": false
-                  }
-                },
-                "required": ["@id", "eFinanceira"],
-                "additionalProperties": false
-              }
+                                "Cambio": {
+                                  "id": "Cambio",
+                                  "type": "object",
+                                  "description": "Informacoes sobre Operacoes de Cambio",
+                                  "properties": {
+                                    "MedJudic": {
+                                      "id": "MedJudic",
+                                      "type": "array",
+                                      "description": "Identificacao de Medidas Judiciais",
+                                      "items": {
+                                        "id": "0",
+                                        "properties": {
+                                          "NumProcJud": {
+                                            "id": "NumProcJud",
+                                            "type": "string",
+                                            "description": "Numero do processo Judicial",
+                                            "minLength": 1,
+                                            "maxLength": 21,
+                                            "pattern": "^[0-9]{1,21}$"
+                                          },
+                                          "Vara": {
+                                            "id": "Vara",
+                                            "type": "integer",
+                                            "description": "Vara de tramitacao",
+                                            "minimum": 0,
+                                            "maximum": 99
+                                          },
+                                          "SecJud": {
+                                            "id": "SecJud",
+                                            "type": "integer",
+                                            "description": "Secao judiciaria",
+                                            "minimum": 0,
+                                            "maximum": 99
+                                          },
+                                          "SubSecJud": {
+                                            "id": "SubSecJud",
+                                            "type": "string",
+                                            "description": "Subsecao judiciaria",
+                                            "minLength": 1,
+                                            "maxLength": 40
+                                          },
+                                          "dtConcessao": {
+                                            "id": "dtConcessao",
+                                            "type": "string",
+                                            "description": "Data de concessao",
+                                            "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                                          },
+                                          "dtCassacao": {
+                                            "id": "dtCassacao",
+                                            "type": "string",
+                                            "description": "Data de concessao",
+                                            "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                                          }
+                                        },
+                                        "required": ["NumProcJud", "Vara", "SecJud", "SubSecJud", "dtConcessao"],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "totCompras": {
+                                      "id": "totCompras",
+                                      "type": "string",
+                                      "description": "Valor total de compras",
+                                      "minLength": 4,
+                                      "maxLength": 22,
+                                      "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                    },
+                                    "totVendas": {
+                                      "id": "totVendas",
+                                      "type": "string",
+                                      "description": "Valor total de vendas",
+                                      "minLength": 4,
+                                      "maxLength": 22,
+                                      "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                    },
+                                    "totTransferencias": {
+                                      "id": "totCompras",
+                                      "type": "string",
+                                      "description": "Valor total de transferencias",
+                                      "minLength": 4,
+                                      "maxLength": 22,
+                                      "pattern": "^[0-9]{1,19}[,][0-9]{2}$"
+                                    }
+                                  },
+                                  "required": ["totCompras", "totVendas", "totTransferencias"],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": ["anoMesCaixa", "movOpFin"],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": ["@id", "ideEvento", "ideDeclarante", "ideDeclarado", "mesCaixa"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["@xmlns", "evtMovOpFin"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["@id", "eFinanceira"],
+              "additionalProperties": false
             }
           },
           "required": ["evento"],

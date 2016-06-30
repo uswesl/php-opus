@@ -2,8 +2,8 @@
 
 namespace capesesp\json;
 
-use capesesp\Console;
-use capesesp\Arguments;
+use robotdance\Arguments;
+use robotdance\Console;
 use capesesp\json\JsonValidator;
 use capesesp\json\JsonSchemaTestCase;
 
