@@ -6,6 +6,7 @@ use robotdance\Arguments;
 use robotdance\Console;
 use capesesp\json\JsonValidator;
 use capesesp\json\JsonSchemaTestCase;
+use capesesp\util\Walker;
 
 /**
  * Extende phpunit para validar objetos JSON
@@ -24,7 +25,7 @@ abstract class OpusJsonTestCase extends JsonSchemaTestCase
         Arguments::notNull($jsonObj, 'jsonObj');
 
         $elemento = implode('.', array_filter(array($this->rootElementName, 'statusExecucao.mensagens.mensagem[0].codigo')));
-        $value = JsonValidator::traverse($jsonObj, $elemento);
+        $value = Walker::traverse($jsonObj, $elemento);
         if(!$value) {
             $msg = $this->wrongStructureMsg($jsonObj, $elemento, $value, $args);
         } else {
@@ -59,6 +60,7 @@ abstract class OpusJsonTestCase extends JsonSchemaTestCase
         if($args) { $msg .= "Parâmetros Opus: " . implode(" ", $args) . "\n"; }
         $msg .= "Esperado: $codigo" . "\n" ;
         $msg .= "Retorno: " . print_r($value, true) . "\n" ;
+        $msg .= json_encode($jsonObj, JSON_PRETTY_PRINT) . "\n";
         return $msg;
     }
 

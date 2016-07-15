@@ -24,7 +24,7 @@ class Fucj04Test extends OpusJsonTestCase
     {
         $args = [903626, 0];
         $jsonObj = Fucj04::executa($args);
-        $this->assertSchema($jsonObj, './src/uc/schemas/fucj04.schema.json', $args);
+        $this->assertSchema($jsonObj, $this->schemaPath, $args);
     }
 }
 ?>

@@ -1,0 +1,221 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "description": "adaptação das definições do web service da Funcional Card para um programa Opus/JSON",
+  "properties": {
+    "login": {
+      "description": "Enviado pela Funcional para acesso ao webservice",
+      "type": "String",
+      "maxLength": 20
+    },
+    "password": {
+      "description": "Enviado pela Funcional para acesso ao webservice",
+      "type": "String",
+      "maxLength": 20
+    },
+    "cpf": {
+      "description": "Número de cpf do titular. Preencher com zeros à esquerda.",
+      "type": "String",
+      "maxLength": 11,
+      "minLength": 11,
+      "pattern": "^[0-9]{11}$"
+    },
+    "numdep": {
+      "description": "'00' para TITULAR; '01', '02', etc, para DEPENDENTES",
+      "type": "string",
+      "maxLength": 2
+    },
+    "codcli": {
+      "description": "1603 informar sempre esse valor (única unidade CAPESESP cadastrada no sistema)",
+      "type": "integer",
+      "default": 1603
+    },
+    "instrucao": {
+      "description": "'A','I','E' ou 'D' - instrução da movimentação",
+      "type": "string",
+      "maxLength": 1
+    },
+    "codcartao": {
+      "description": "Numero do cartão",
+      "type": "string",
+      "maxLength": 9
+    },
+    "matricula": {
+      "description": "matricula do funcionário, alinhado a direita (completar com zeros a esquerda)",
+      "type": "string",
+      "maxLength": 9
+    },
+    "nomusu": {
+      "description": "nome completo do Usuário",
+      "type": "string",
+      "maxLength": 60
+    },
+    "sexo" : {
+      "description": "Sexo do usuário",
+      "type": "string",
+      "maxLength": 1
+    },
+    "amuc": {
+      "description": "Se usuário possui AMUC (S) ou somente desconto sobre medicamentos (N)",
+      "type": "string",
+      "maxLength": 1,
+      "pattern":"^S|N$"
+    },
+    "datanasc": {
+      "description": "Data de nascimento do usuário",
+      "type": "string",
+      "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+    },
+    "filial": {
+      "description": "Filial da empresa a que pertence o funcionário. Valor fixo 001",
+      "type": "string",
+      "pattern": "^[0-9]{1,4}$"
+    },
+    "setor": {
+      "description": "Setor da empresa a que pertence o funcionário. Valor fixo: CAP",
+      "type": "string",
+      "maxLength": 6,
+      "pattern": "^CAP$"
+    },
+    "limite": {
+      "description": "Limite mensal",
+      "type": "number",
+      "minimum": 0
+    },
+    "tipo_logradouro": {
+      "description": "Tipo do logradouro, ex.: Rua, Avenida, etc.",
+      "type": "string",
+      "maxLength": 15
+    },
+    "endereco": {
+      "description": "Endereço do Usuário",
+      "type": "string",
+      "maxLength": 60
+    },
+    "endereco_numero": {
+      "description": "Número do endereço do usuário",
+      "type": "string",
+      "maxLength": 10
+    },
+    "complemento": {
+      "description": "Complemento do endereço",
+      "type": "string",
+      "maxLength": 20
+    },
+    "bairro": {
+      "description": "Bairro do usuário",
+      "type": "string",
+      "maxLength": 30
+    },
+    "cidade": {
+      "description": "cidade do usuário",
+      "type": "string",
+      "maxLength": 30
+    },
+    "uf": {
+      "description": "UF do usuário",
+      "type": "string",
+      "maxLength": 2
+    },
+    "cep": {
+      "description": "CEP do usuário",
+      "type": "string",
+      "maxLength": 8
+    },
+    "telefone": {
+      "description": "Telefone residencial do usuário",
+      "type": "string",
+      "pattern": "^[0-9]{10,11}$",
+      "default": "0"
+    },
+    "celular": {
+      "description": "Telefone celular do usuário",
+      "type": "string",
+      "pattern": "^[0-9]{10,11}$",
+      "default": "0"
+    },
+    "email": {
+      "description": "e-mail do usuário. Preencher com 0 para inclusão com valor vazio",
+      "type": "string"
+    },
+    "autorizaContato": {
+      "description": "Autoriza contato pela Funcional (S/N)",
+      "type": "string",
+      "maxLength": 1,
+      "pattern": "^S|N$"
+    },
+    "cpf_dependente": {
+      "description": "CPF do dependente, preencher com 0 quando for registro de titular",
+      "type": "string",
+      "maxLength": 11
+    },
+    "debito_folha": {
+      "description": "Preencher  'S'  para usuários com folha ou 'N' para usuários sem folha (Exemplo 'N' para estagiários)",
+      "type": "string",
+      "maxLength": 1,
+      "pattern": "^S|N$"
+    },
+    "tipo_logradouro_entrega": {
+      "description": "Tipo do logradouro de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 10,
+      "default": "0"
+    },
+    "endereco_entrega": {
+      "description": "Endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 60,
+      "default": "0"
+    },
+    "endereco_numero_entrega": {
+      "description": "Número do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 10,
+      "default": "0"
+    },
+    "complemento_entrega": {
+      "description": "Complemento do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 20,
+      "default": "0"
+    },
+    "bairro_entrega": {
+      "description": "Bairro do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+     "type": "string",
+     "maxLength": 30,
+      "default": "0"
+    },
+    "cidade_entrega": {
+      "description": "Cidade do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 30,
+      "default": "0"
+    },
+    "uf_entrega": {
+      "description": "UF do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 2,
+      "default": "0"
+    },
+    "cep_entrega":  {
+      "description": "CEP do endereço de entrega. Preencher com 0 para inclusão com valor vazio",
+      "type": "string",
+      "maxLength": 8,
+      "default": "0"
+    },
+    "codcli_destino": {
+      "description": "Preencher quando houver movimentação de cod_li. Valor fixo: 0",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0
+    },
+    "grc_codigo": {
+      "description": "Código do cliente na Funcional Card. Valor fixo: 115",
+      "type": "integer",
+      "minimum": 115,
+      "maximum": 115
+    }
+  }
+}
+

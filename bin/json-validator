@@ -10,12 +10,11 @@ putenv('ENVIRONMENT=test');
 use capesesp\I18n;
 use capesesp\json\OpusJson;
 
-
 $shortOpts  = "";
-$shortOpts .= "p:"; // nome do programa opus
-$shortOpts .= "s:"; // caminho para o esquema
-$shortOpts .= "a:"; // args do programa opus
-$shortOpts .= "h"; // args do programa opus
+$shortOpts .= "p:";    // nome do programa opus
+$shortOpts .= "s:";   // caminho para o esquema
+$shortOpts .= "a:";  // args do programa opus
+$shortOpts .= "h";  // args do programa opus
 $longOpts  = ["programa:", "argumentos:", "esquema:", "help"];
 
 $options = getopt($shortOpts, $longOpts);

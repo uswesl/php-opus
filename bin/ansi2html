@@ -116,7 +116,10 @@ fi
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
 <style type=\"text/css\">
 "
-[ "$body_only" ] || printf ".ef0,.f0 { color: #$P0; } .eb0,.b0 { background-color: #$P0; }
+[ "$body_only" ] || printf "
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext);
+pre { font-family: 'Inconsolata'; }
+.ef0,.f0 { color: #$P0; } .eb0,.b0 { background-color: #$P0; }
 .ef1,.f1 { color: #$P1; } .eb1,.b1 { background-color: #$P1; }
 .ef2,.f2 { color: #$P2; } .eb2,.b2 { background-color: #$P2; }
 .ef3,.f3 { color: #$P3; } .eb3,.b3 { background-color: #$P3; }
