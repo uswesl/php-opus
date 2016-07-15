@@ -4,14 +4,29 @@ PHP-Opus is an abstraction layer for Opus(tm) applications that adhere to Opus/J
 
 ## Setup
 
-In order to use all features you need to install node.js and composer. After that:
+### Requirements
+
+In order to use all features you need to install [node.js](https://nodejs.org/en/) and [composer](https://getcomposer.org/).
+
+### Installing
+
+After requirements met, clone the project:
+
+`$ git clone https://github.com/capesesp/php-opus.git`
+
+And run:
 
 `$ composer install`
 `$ npm install`
 
 ## Running tests
 
-`$ ./bin/phpunit --filter Fttj01Test`
+`$ ./bin/phpunit --filter FuncionalWs`
+
+### Output test results to HTML
+
+`$ ./bin/phpunit --filter FuncionalWs | ./bin/ansi2html > test_result.html`
+
 
 ## Utilities
 
