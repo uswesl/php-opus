@@ -211,40 +211,47 @@ class FuncionalWsTest extends SoapTestCase
         $this->assertCodigo($request, $response, FuncionalWs::LIMITE_INVALIDO);
     }
 
-    public function testValoresNegativos()
+
+    /**
+     * @dataProvider valoresNegativosProvider
+     */
+    public function testValoresNegativos($field)
     {
 
-	$non_negative_fields = array(
-                        "cpf", 
-                        "numdep",
-                        "codcli",
-                        "codcartao",
-                        "matricula",
-                        "filial",
-                        "limite",
-                        "endereco_numero",
-                        "cpf_dependente",
-                        "endereco_numero_entrega",
-                        "codcli_destino",
-                        "grc_codigo"
-                        );
+    	$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
+        $request->{$field} = -1;
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_MENORES_QUE_ZERO);
 
-        foreach($non_negative_fields as $field){
+    }
 
-                $request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
-                $request->{$field} = -1;
-                $response = $this->soapClient->MovimentacaoUsuario($request);
-                $this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_MENORES_QUE_ZERO);
+    public function valoresNegativosProvider(){
 
-        }
+	return array(
+			array("cpf"), 
+                        array("numdep"),
+                        array("codcli"),
+                        array("codcartao"),
+                        array("matricula"),
+                        array("filial"),
+                        array("limite"),
+                        array("endereco_numero"),
+                        array("cpf_dependente"),
+                        array("endereco_numero_entrega"),
+                        array("codcli_destino"),
+                        array("grc_codigo")
+		);
 
     }
 
 
-    public function testValoresNulos()
+    /**
+     * @dataProvider valoresNulosProvider
+     */
+    public function testValoresNulos($field)
     {
 
-	$non_nullable_fields = array(
+	/*$non_nullable_fields = array(
 			"login",
 			"password",
 			"cpf", 
@@ -286,71 +293,122 @@ class FuncionalWsTest extends SoapTestCase
   			"grc_codigo"
 			);
 
-	foreach($non_nullable_fields as $field){
+	foreach($non_nullable_fields as $field){*/
 
         	$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
         	$request->{$field} = "";
         	$response = $this->soapClient->MovimentacaoUsuario($request);
         	$this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_NULOS);
 
-	}
+	//}
 
     }
 
 
-    public function testLimiteCaracteres()
+    public function valoresNulosProvider(){
+
+        return array(
+			array("login"),
+                        array("password"),
+                        array("cpf"),
+                        array("numdep"),
+                        array("codcli"),
+                        array("instrucao"),
+                        array("codcartao"),
+                        array("matricula"),
+                        array("nomusu"),
+                        array("sexo"),
+                        array("amuc"),
+                        array("datanasc"),
+                        array("filial"),
+                        array("setor"),
+                        array("limite"),
+                        array("tipo_logradouro"),
+                        array("endereco"),
+                        array("endereco_numero"),
+                        array("complemento"),
+                        array("bairro"),
+                        array("cidade"),
+                        array("uf"),
+                        array("cep"),
+                        array("telefone"),
+                        array("celular"),
+                        array("email"),
+                        array("autorizaContato"),
+                        array("cpf_dependente"),
+                        array("debito_folha"),
+                        array("tipo_logradouro_entrega"),
+                        array("endereco_entrega"),
+                        array("endereco_numero_entrega"),
+                        array("complemento_entrega"),
+                        array("bairro_entrega"),
+                        array("cidade_entrega"),
+                        array("uf_entrega"),
+                        array("cep_entrega"),
+                        array("codcli_destino"),
+                        array("grc_codigo")
+                );
+
+    }
+
+
+    /**
+     * @dataProvider limiteCaracteresProvider
+     */
+    public function testLimiteCaracteres($field)
     {
 
-        $limited_fields = array(
-                        "login",
-                        "password",
-                        "cpf", 
-                        "numdep",
-                        "codcli",
-                        "instrucao",
-                        "codcartao",
-                        "matricula",
-                        "nomusu",
-                        "sexo",
-                        "amuc",
-                        "datanasc",
-                        "filial",
-                        "setor",
-                        "limite",
-                        "tipo_logradouro",
-                        "endereco",
-                        "endereco_numero",
-                        "complemento",
-                        "bairro",
-                        "cidade",
-                        "uf",
-                        "cep",
-                        "telefone",
-                        "celular",
-                        "email",
-                        "autorizaContato",
-                        "cpf_dependente",
-                        "debito_folha",
-                        "tipo_logradouro_entrega",
-                        "endereco_entrega",
-                        "endereco_numero_entrega",
-                        "complemento_entrega",
-                        "bairro_entrega",
-                        "cidade_entrega",
-                        "uf_entrega",
-                        "cep_entrega",
-                        "codcli_destino",
-                        "grc_codigo"
-                        );
-
-        foreach($limited_fields as $field){
-
-                $request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
+		$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
                 $request->{$field} = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum ultrices dignissim. Nam dapibus amet.";
                 $response = $this->soapClient->MovimentacaoUsuario($request);
                 $this->assertCodigo($request, $response, FuncionalWs::CAMPO_POSSUI_LIMITE_DE_CARACTERES);
-	}
+	
 
+   }
+
+   public function limiteCaracteresProvider(){
+
+	return array(
+			array("login"),
+                        array("password"),
+                        array("cpf"),
+                        array("numdep"),
+                        array("codcli"),
+                        array("instrucao"),
+                        array("codcartao"),
+                        array("matricula"),
+                        array("nomusu"),
+                        array("sexo"),
+                        array("amuc"),
+                        array("datanasc"),
+                        array("filial"),
+                        array("setor"),
+                        array("limite"),
+                        array("tipo_logradouro"),
+                        array("endereco"),
+                        array("endereco_numero"),
+                        array("complemento"),
+                        array("bairro"),
+                        array("cidade"),
+                        array("uf"),
+                        array("cep"),
+                        array("telefone"),
+                        array("celular"),
+                        array("email"),
+                        array("autorizaContato"),
+                        array("cpf_dependente"),
+                        array("debito_folha"),
+                        array("tipo_logradouro_entrega"),
+                        array("endereco_entrega"),
+                        array("endereco_numero_entrega"),
+                        array("complemento_entrega"),
+                        array("bairro_entrega"),
+                        array("cidade_entrega"),
+                        array("uf_entrega"),
+                        array("cep_entrega"),
+                        array("codcli_destino"),
+                        array("grc_codigo")
+		);
    }
 
 

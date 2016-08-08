@@ -13,7 +13,7 @@
   "datanasc": "07/12/1949",
   "filial": "0001",
   "setor": "CAP",
-  "limite": "2000",
+  "limite": "99999x",
   "tipo_logradouro": "AVENIDA",
   "endereco": "BOTAFOGO",
   "endereco_numero": "0",
