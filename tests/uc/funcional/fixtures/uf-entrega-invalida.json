@@ -4,7 +4,7 @@
   "cpf": "12520028319",
   "numdep": "0",
   "codcli": "1603",
-  "instrucao": "E",
+  "instrucao": "A",
   "codcartao": "000087900",
   "matricula": "0000879",
   "nomusu": "LUIZ ALBERTO DE AZEVEDO",
@@ -34,7 +34,7 @@
   "complemento_entrega": "LOTE 21 QUADRA 137",
   "bairro_entrega": "SETOR PEDRO LUDOVICO",
   "cidade_entrega": "GOIANIA",
-  "uf_entrega": "GO",
+  "uf_entrega": "28",
   "cep_entrega": "74825030",
   "codcli_destino": 0,
   "grc_codigo": 115
