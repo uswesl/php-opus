@@ -43,25 +43,31 @@ abstract class SoapTestCase extends \PHPUnit_Framework_TestCase
     public function assertCodigo($request, $response, $codigo)
     {
         Arguments::notNull($response, 'response');
-
-        $element = implode('.', array_filter(array($this->rootElementName, 'statusExecucao.mensagens.Mensagem[0].codigo')));
-        $value = Walker::traverse($response, $element);
-        if(!$value) {
-            $msg = $this->wrongStructureMsg($request, $response, $element, $value);
-        } else {
-            $msg = $this->notExpectedCodeMsg($request, $response, $element, $value, $codigo);
+        $path = implode('.', array_filter(array($this->rootElementName, 'statusExecucao.mensagens.Mensagem')));
+        $mensagens = Walker::traverse($response, $path);
+        if(!is_array($mensagens)) {
+            $mensagens = [$mensagens];
         }
-        $this->assertEquals($codigo, $value, $msg);
+        $codigos = [];
+        foreach($mensagens as $mensagem) {
+            $codigos[] = $mensagem->codigo;
+        }
+        if(count($codigos) == 0) {
+            $msg = $this->wrongStructureMsg($request, $response, $path, $codigos);
+        } else {
+            $msg = $this->notExpectedCodeMsg($request, $response, $path, $codigos, $codigo);
+        }
+        $this->assertContains($codigo, $codigos, $msg);
     }
 
     /**
      * Mensagem exibida quando o retorno não possui a estrutura esperada para pegar o codigo
      * @see assertCodigo
      */
-    private function wrongStructureMsg($request, $response, $element, $value)
+    private function wrongStructureMsg($request, $response, $path, $value)
     {
         $msg = Console::bold("Estrutura da resposta não corresponde ao esperado") . "\n" ;
-        $msg .= Console::red("Estrutura esperada: ") . $element . "\n";
+        $msg .= Console::red("Estrutura esperada: ") . $path . "\n";
         $msg .= Console::red("Verifique se um dos elementos não existe ou se está com nome incorreto.") . "\n";
         $msg .= "Retorno:" . "\n";
         $msg .= XmlSerializer::toXml($response, true) . "\n";
@@ -72,11 +78,11 @@ abstract class SoapTestCase extends \PHPUnit_Framework_TestCase
      * Mensagem exibida quando o codigo de retorno não é o esperado
      * @see assertCodigo
      */
-    private function notExpectedCodeMsg($request, $response, $element, $value, $codigo)
+    private function notExpectedCodeMsg($request, $response, $path, $codigos, $codigo)
     {
-        $msg = Console::bold(Console::red("Codigo de retorno não corresponde ao esperado")) . "\n";
+        $msg = Console::bold(Console::red("Codigo de retorno não encontrado na(s) mensagen(s) de retorno")) . "\n";
         $msg .= Console::red("Verifique se o codigo da mensagem de retorno está de acordo com o especificado.") . "\n";
-        $msg .= "Esperado: $codigo, retornou: $value" . "\n" ;
+        $msg .= "Esperado: $codigo, retornou: " . implode(",", $codigos) . "\n" ;
         $msg .= Console::red("Requisição:") . "\n";
         $msg .= XmlSerializer::toXml($request, true, 'xml') . "\n";
         $msg .= Console::red("Resposta:") . "\n" ;

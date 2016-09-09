@@ -88,7 +88,7 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CODIGO_DE_CLIENTE_INVALIDO);
 
-	$request->codcli = "x";
+    $request->codcli = "x";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CODIGO_DE_CLIENTE_INVALIDO);
     }
@@ -106,12 +106,12 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CHAVE_CPF_CODCLIENTE_NUMDEP_NAO_ENCONTRADO);
 
-	$request->instrucao="A";
-	$response = $this->soapClient->MovimentacaoUsuario($request);
+        $request->instrucao="A";
+        $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CHAVE_CPF_CODCLIENTE_NUMDEP_NAO_ENCONTRADO);
 
-	$request->instrucao="E";
-	$response = $this->soapClient->MovimentacaoUsuario($request);
+        $request->instrucao="E";
+        $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CHAVE_CPF_CODCLIENTE_NUMDEP_NAO_ENCONTRADO);
     }
 
@@ -158,8 +158,8 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::UF_ENTREGA_INVALIDA);
 
-	$request->uf_entrega = "XU";
-	$response = $this->soapClient->MovimentacaoUsuario($request);
+    $request->uf_entrega = "XU";
+    $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::UF_ENTREGA_INVALIDA);
     }
 
@@ -218,7 +218,7 @@ class FuncionalWsTest extends SoapTestCase
     public function testValoresNegativos($field)
     {
 
-    	$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
+        $request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
         $request->{$field} = -1;
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_MENORES_QUE_ZERO);
@@ -227,8 +227,8 @@ class FuncionalWsTest extends SoapTestCase
 
     public function valoresNegativosProvider(){
 
-	return array(
-			array("cpf"), 
+    return array(
+            array("cpf"), 
                         array("numdep"),
                         array("codcli"),
                         array("codcartao"),
@@ -240,7 +240,7 @@ class FuncionalWsTest extends SoapTestCase
                         array("endereco_numero_entrega"),
                         array("codcli_destino"),
                         array("grc_codigo")
-		);
+        );
 
     }
 
@@ -251,56 +251,56 @@ class FuncionalWsTest extends SoapTestCase
     public function testValoresNulos($field)
     {
 
-	/*$non_nullable_fields = array(
-			"login",
-			"password",
-			"cpf", 
-			"numdep",
-			"codcli",
-			"instrucao",
-  			"codcartao",
-  			"matricula",
-  			"nomusu",
-  			"sexo",
-  			"amuc",
-  			"datanasc",
-  			"filial",
-  			"setor",
-  			"limite",
-  			"tipo_logradouro",
-  			"endereco",
-  			"endereco_numero",
-  			"complemento",
-  			"bairro",
-  			"cidade",
-  			"uf",
-  			"cep",
-  			"telefone",
-  			"celular",
-  			"email",
-  			"autorizaContato",
-  			"cpf_dependente",
-  			"debito_folha",
- 			"tipo_logradouro_entrega",
-  			"endereco_entrega",
-  			"endereco_numero_entrega",
-  			"complemento_entrega",
-  			"bairro_entrega",
-  			"cidade_entrega",
-  			"uf_entrega",
-  			"cep_entrega",
-  			"codcli_destino",
-  			"grc_codigo"
-			);
+    /*$non_nullable_fields = array(
+            "login",
+            "password",
+            "cpf", 
+            "numdep",
+            "codcli",
+            "instrucao",
+            "codcartao",
+            "matricula",
+            "nomusu",
+            "sexo",
+            "amuc",
+            "datanasc",
+            "filial",
+            "setor",
+            "limite",
+            "tipo_logradouro",
+            "endereco",
+            "endereco_numero",
+            "complemento",
+            "bairro",
+            "cidade",
+            "uf",
+            "cep",
+            "telefone",
+            "celular",
+            "email",
+            "autorizaContato",
+            "cpf_dependente",
+            "debito_folha",
+            "tipo_logradouro_entrega",
+            "endereco_entrega",
+            "endereco_numero_entrega",
+            "complemento_entrega",
+            "bairro_entrega",
+            "cidade_entrega",
+            "uf_entrega",
+            "cep_entrega",
+            "codcli_destino",
+            "grc_codigo"
+            );
 
-	foreach($non_nullable_fields as $field){*/
+    foreach($non_nullable_fields as $field){*/
 
-        	$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
-        	$request->{$field} = "";
-        	$response = $this->soapClient->MovimentacaoUsuario($request);
-        	$this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_NULOS);
+            $request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
+            $request->{$field} = "";
+            $response = $this->soapClient->MovimentacaoUsuario($request);
+            $this->assertCodigo($request, $response, FuncionalWs::CAMPO_NAO_PERMITE_VALORES_NULOS);
 
-	//}
+    //}
 
     }
 
@@ -308,7 +308,7 @@ class FuncionalWsTest extends SoapTestCase
     public function valoresNulosProvider(){
 
         return array(
-			array("login"),
+            array("login"),
                         array("password"),
                         array("cpf"),
                         array("numdep"),
@@ -358,18 +358,18 @@ class FuncionalWsTest extends SoapTestCase
     public function testLimiteCaracteres($field)
     {
 
-		$request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
+        $request  = $this->getRequest('beneficiario-atualizado-com-sucesso');
                 $request->{$field} = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum ultrices dignissim. Nam dapibus amet.";
                 $response = $this->soapClient->MovimentacaoUsuario($request);
                 $this->assertCodigo($request, $response, FuncionalWs::CAMPO_POSSUI_LIMITE_DE_CARACTERES);
-	
+    
 
    }
 
    public function limiteCaracteresProvider(){
 
-	return array(
-			array("login"),
+    return array(
+            array("login"),
                         array("password"),
                         array("cpf"),
                         array("numdep"),
@@ -408,7 +408,7 @@ class FuncionalWsTest extends SoapTestCase
                         array("cep_entrega"),
                         array("codcli_destino"),
                         array("grc_codigo")
-		);
+        );
    }
 
 
@@ -416,7 +416,7 @@ class FuncionalWsTest extends SoapTestCase
     public function testValoresForaFaixa()
     {
 
- 	$request  = $this->getRequest('valores-fora-da-faixa');
+    $request  = $this->getRequest('valores-fora-da-faixa');
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CAMPO_VALOR_FORA_DA_FAIXA);
 
@@ -504,7 +504,7 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::NOME_DE_USUARIO_INVALIDO);
 
-	$request->nomusu = "999";
+    $request->nomusu = "999";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::NOME_DE_USUARIO_INVALIDO);
 
@@ -517,8 +517,8 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CPF_INVALIDO);
 
-	$request->cpf="1252002831x";
-	$response = $this->soapClient->MovimentacaoUsuario($request);
+    $request->cpf="1252002831x";
+    $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CPF_INVALIDO);
 
     }
@@ -548,11 +548,11 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::DATA_DE_NASCIMENTO_INVALIDA);
 
-	$request->datanasc = "x";
+    $request->datanasc = "x";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::DATA_DE_NASCIMENTO_INVALIDA);
 
-	$request->datanasc = "12/22/1990";
+    $request->datanasc = "12/22/1990";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::DATA_DE_NASCIMENTO_INVALIDA);
 
@@ -565,7 +565,7 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CEP_INVALIDO);
 
-	$request->cep = "2629834";
+    $request->cep = "2629834";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::CEP_INVALIDO);
 
@@ -582,7 +582,7 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::UF_INVALIDA);
 
-	$request->cep = "28";
+    $request->cep = "28";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::UF_INVALIDA);
 
@@ -595,7 +595,7 @@ class FuncionalWsTest extends SoapTestCase
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::TELEFONE_RESIDENCIAL_INVALIDO);
 
-	$request->telefone = "123";
+    $request->telefone = "123";
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::TELEFONE_RESIDENCIAL_INVALIDO);
 
