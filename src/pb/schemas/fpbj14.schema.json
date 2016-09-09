@@ -36,40 +36,10 @@
                     "required": [
                       "numero"
                     ]
-                  },
-                  "matriculaProtheus": {
-                    "description": "Matricula da pessoa no Protheus-PLS (ADVPL)",
-                    "type": "object",
-                    "minProperties": 1,
-                    "properties": {
-                      "numero": {
-                        "type": "string",
-                        "minLength": 1
-                      }
-                    },
-                    "required": [
-                      "numero"
-                    ]
-                  },
-                  "matriculaTotalPrev": {
-                    "description": "Matricula da pessoa no TotalPrev (Delphi)",
-                    "type": "object",
-                    "minProperties": 1,
-                    "properties": {
-                      "numero": {
-                        "type": "string",
-                        "minLength": 1
-                      }
-                    },
-                    "required": [
-                      "numero"
-                    ]
                   }
                 },
                 "required": [
-                  "matriculaSistemaCentral",
-                  "matriculaProtheus",
-                  "matriculaTotalPrev"
+                  "matriculaSistemaCentral"
                 ]
               },
               "statusBeneficiario": {
