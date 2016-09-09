@@ -1,0 +1,274 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Dados Assistenciais",
+  "type": "object",
+  "properties": {
+    "dadosAssistenciais": {
+      "description": "Conjunto de dados Assistenciais",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "cns": {
+          "description": "Carteira Nacional de Saúde",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "numero": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "planosAssistenciais": {
+          "description": "Histórico de planos assistenciais",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "planoAssistencial": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "descricaoProduto": {
+                    "description": "Nome do produto registrado na ANS",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "statusBeneficiario": {
+                    "description": "Status da pessoa em relação ao plano/produto Capesesp",
+                    "type": "string",
+                    "enum": [
+                      "ATIVO",
+                      "EM_SUSPENSAO",
+                      "SUSPENSO",
+                      "EM_DESLIGAMENTO",
+                      "DESLIGADO"
+                    ]
+                  },
+                  "matricula": {},
+                  "registroAns": {
+                    "description": "Informações de registro do plano/produto na ANS",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "registro": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "segmentacao": {
+                    "type": "string",
+                    "enum": [
+                      "ASSISTENCIAL",
+                      "ODONTOLOGICO"
+                    ]
+                  },
+                  "intervaloVinculo": {
+                    "description": "Define um intervalo de vinculo da pessoa ao plano",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "dataVinculo": {
+                        "description": "Data de vinculo da pessoa ao plano",
+                        "type": "string",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                      },
+                      "dataDesligamento": {
+                        "description": "Data de desligamento da pessoa ao plano. Não retornar para o plano atualmente vigente",
+                        "type": "string",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                      }
+                    },
+                    "required": [
+                      "dataVinculo"
+                    ]
+                  },
+                  "uf": {
+                    "type": "string",
+                    "enum": [
+                      "AC",
+                      "AL",
+                      "AM",
+                      "AP",
+                      "BA",
+                      "CE",
+                      "DF",
+                      "ES",
+                      "GO",
+                      "MA",
+                      "MG",
+                      "MS",
+                      "MT",
+                      "PA",
+                      "PB",
+                      "PE",
+                      "PI",
+                      "PR",
+                      "RJ",
+                      "RN",
+                      "RO",
+                      "RR",
+                      "RS",
+                      "SC",
+                      "SE",
+                      "SP",
+                      "TO"
+                    ]
+                  },
+                  "acomodacao": {
+                    "type": "string",
+                    "enum": [
+                      "ENFERMARIA",
+                      "APARTAMENTO"
+                    ]
+                  },
+                  "contrato": {
+                    "type": "string",
+                    "enum": [
+                      "COLETIVO_EMPRESARIAL"
+                    ]
+                  },
+                  "abrangencia": {
+                    "type": "string",
+                    "enum": [
+                      "NACIONAL",
+                      "GRUPO_DE_ESTADOS"
+                    ]
+                  },
+                  "coberturaAns": {
+                    "description": "Informações de cobertura do plano de acordo com ANS",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "descricao": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "descricao"
+                    ]
+                  },
+                  "patrocinadorOriginal": {
+                    "description": "Informações do patrocinador para planos com caracteristica per capita",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "nome": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "nome"
+                    ]
+                  },
+                  "mensagensCarencia": {
+                    "description": "Informações sobre carência do plano",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "mensagem": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "descricaoProduto",
+                  "statusBeneficiario",
+                  "matricula",
+                  "registroAns",
+                  "segmentacao",
+                  "intervaloVinculo",
+                  "uf",
+                  "acomodacao",
+                  "contrato",
+                  "abrangencia",
+                  "coberturaAns",
+                  "patrocinadorOriginal",
+                  "mensagensCarencia"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "planosAssistenciais"
+      ]
+    },
+    "statusExecucao": {
+      "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "executadoCorretamente": {
+          "description": "'executadoCorretamente' indica se o método executou sem erros ou exceções internas. Não confundir 'executado corretamente' com 'invocado corretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "description": "Conjunto de mensagens de retorno",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mensagem": {
+              "description": "Representa uma mensagem de retorno",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "severidade": {
+                    "type": "string",
+                    "enum": [
+                      "WARN",
+                      "INFO",
+                      "SUCCESS",
+                      "FATAL",
+                      "ERROR"
+                    ]
+                  },
+                  "mensagem": {
+                    "description": "Texto resumido da mensagem (recomendável 60 a 80 caracteres)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detalhes": {
+                    "description": "Mensagem detalhada (quando aplicável)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "codigo": {
+                    "description": "Código de de erro associado à mensagem",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "severidade",
+                  "mensagem",
+                  "codigo"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "executadoCorretamente",
+        "mensagens"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "statusExecucao"
+  ]
+}
