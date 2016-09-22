@@ -1,0 +1,490 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Dados Pessoais",
+  "type": "object",
+  "properties": {
+    "dadosPessoais": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "nomeMae": {
+          "description": "Nome completo da mão para diferenciar homônimos",
+          "type": "string",
+          "minLength": 1
+        },
+        "nomePai": {
+          "description": "Nome completo do pai para diferenciar homônimos",
+          "type": "string",
+          "minLength": 1
+        },
+        "dataNascimento": {
+          "description": "Data de nascimento no padrão ISO 8601",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "dataObito": {
+          "description": "Data de óbito no padrão ISO 8601",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "tipoSanguinio": {
+          "description": "Descrição do tipo sanguinio",
+          "type": "string",
+          "minLength": 1
+        },
+        "sexo": {
+          "description": "Representa sexo",
+          "type": "string",
+          "enum": [
+            "MASCULINO",
+            "FEMININO"
+          ]
+        },
+        "estadoCivil": {
+          "description": "Representa estado civil",
+          "type": "string",
+          "enum": [
+            "CASADO",
+            "SOLTEIRO",
+            "DIVORCIADO",
+            "MARITAL",
+            "DESQUITADO",
+            "VIUVO"
+          ]
+        },
+        "tipoBeneficiario": {
+          "description": "Informa o tipo de beneficiário",
+          "type": "string",
+          "enum": [
+            "TITULAR",
+            "DEPENDENTE",
+            "DEPENDENTE_AGREGADO",
+            "BENEFICIARIO"
+          ]
+        },
+        "relativos": {
+          "description": "Pessoas relativas à pessoa retornada. Quando a pessoa é um titular, o conjunto de relativos contém todas as pessoas incluídas como beneficiários e/ou dependentes",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "relativo": {
+              "description": "Representa uma pessoa 'relativa' à pessoa reotrnada. O relativo pode ser um titular, um dependente, ou um beneficiário",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "matriculas": {
+                    "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "matriculaSistemaCentral": {
+                        "description": "Matricula da pessoa no Sistema Central (Opus/Openbase)",
+                        "type": "object",
+                        "minProperties": 1,
+                        "properties": {
+                          "numero": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "sequencial": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "numero"
+                        ]
+                      },
+                      "matriculaProtheus": {
+                        "description": "Matricula da pessoa no Protheus-PLS (ADVPL)",
+                        "type": "object",
+                        "minProperties": 1,
+                        "properties": {
+                          "numero": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "numero"
+                        ]
+                      },
+                      "matriculaTotalPrev": {
+                        "description": "Matricula da pessoa no TotalPrev (Delphi)",
+                        "type": "object",
+                        "minProperties": 1,
+                        "properties": {
+                          "numero": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "numero"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "matriculaSistemaCentral",
+                      "matriculaProtheus",
+                      "matriculaTotalPrev"
+                    ]
+                  },
+                  "tipoBeneficiario": {
+                    "description": "Informa o tipo de beneficiário",
+                    "type": "string",
+                    "enum": [
+                      "TITULAR",
+                      "DEPENDENTE",
+                      "DEPENDENTE_AGREGADO",
+                      "BENEFICIARIO"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "emails": {
+          "description": "Conjunto de emails da pessoa",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "email": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLentgh": 1
+              }
+            }
+          }
+        },
+        "documentos": {
+          "description": "Conjunto de documentos",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "documento": {
+              "description": "Representa um documento, determinado pelo seu tipo e campos como número, digito verificador, etc. Determinados tipos de documento não possuem todos os elementos (digito verificador e série, por exemplo). A validação de um documento depende da implementação do serviço e não do esquema",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "numero": {
+                    "description": "Número principal do documento",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "dv": {
+                    "description": "Dígito(s) vericador(es). Ocorre por exemplo em CPF e CNPJ",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "serie": {
+                    "description": "Campo 'série' existe em documentos como CTPS",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "orgaoEmissor": {
+                    "description": "Órgão emissor (SSP, Detran, etc.)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "dataExpedicao": {
+                    "description": "Data de quando o documento foi emitido",
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                  },
+                  "tipoDocumento": {
+                    "type": "string",
+                    "enum": [
+                      "IDENTIDADE",
+                      "CPF",
+                      "CR",
+                      "CNPJ",
+                      "PIS",
+                      "CNS",
+                      "DNV"
+                    ]
+                  }
+                },
+                "required": [
+                  "numero"
+                ]
+              }
+            }
+          }
+        },
+        "enderecos": {
+          "description": "Conjunto de endereços",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "endereco": {
+              "description": "Representa um endereço no cadastro",
+              "type": "array",
+              "minItem": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "cep": {
+                    "description": "Código de endereçamento postal brasileiro",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "numero": {
+                        "description": "Somente os dígitos do CEP",
+                        "type": "integer",
+                        "minLength": 1
+                      },
+                      "formato": {
+                        "description": "CEP formatado para NNNNN-NNN expressão regular '^[0-9]{5}-[0-9]{3}$'",
+                        "type": "string",
+                        "pattern": "^[0-9]{5}-[0-9]{3}$"
+                      }
+                    }
+                  },
+                  "logradouro": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "numero": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "complemento": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "bairro": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cidade": {
+                    "description": "Representa uma cidade brasileira",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "codigoMunicipioIbge": {
+                        "description": "Código do município no IBGE",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "nome": {
+                        "description": "Nome do Municipio",
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "codigoMunicipioIbge",
+                      "nome"
+                    ]
+                  },
+                  "tipoEndereco": {
+                    "description": "Tipo de endereço",
+                    "type": "string",
+                    "enum": [
+                      "RESIDENCIAL",
+                      "COMERCIAL",
+                      "COBRANCA"
+                    ]
+                  },
+                  "uf": {
+                    "type": "string",
+                    "enum": [
+                      "AC",
+                      "AL",
+                      "AM",
+                      "AP",
+                      "BA",
+                      "CE",
+                      "DF",
+                      "ES",
+                      "GO",
+                      "MA",
+                      "MG",
+                      "MS",
+                      "MT",
+                      "PA",
+                      "PB",
+                      "PE",
+                      "PI",
+                      "PR",
+                      "RJ",
+                      "RN",
+                      "RO",
+                      "RR",
+                      "RS",
+                      "SC",
+                      "SE",
+                      "SP",
+                      "TO"
+                    ]
+                  }
+                },
+                "required": [
+                  "cep",
+                  "logradouro",
+                  "cidade",
+                  "uf"
+                ]
+              }
+            }
+          }
+        },
+        "telefones": {
+          "description": "Representa um contato telefônico",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "telefone": {
+              "description": "Representa um contato telefônico",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "ddd": {
+                    "description": "DDD do telefone",
+                    "type": "integer",
+                    "minLength": 1
+                  },
+                  "numero": {
+                    "description": "Numero do telefone (somente digítos)",
+                    "type": "integer",
+                    "minLength": 1
+                  },
+                  "tipos": {
+                    "description": "Conjunto de tipos de telefone. Um telefone pode assumir mais de um tipo, exemplo: residencial e trabalho para o mesmo número.",
+                    "type": "object",
+                    "minProperties": 1,
+                    "properties": {
+                      "tipo": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "CELULAR",
+                            "COMERCIAL",
+                            "FAX",
+                            "PARTICULAR",
+                            "RECADO",
+                            "RESIDENCIAL",
+                            "SMS"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "ddd",
+                  "numero"
+                ]
+              }
+            }
+          }
+        },
+        "nacionalidade": {
+          "description": "Representa nacionalidade com código do pais e nome do pais",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "codigo": {
+              "type": "integer",
+              "minLength": 1
+            },
+            "pais": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "codigo",
+            "pais"
+          ]
+        },
+        "ocupacao": {
+          "description": "Representa classificação brasileira de ocupação (CBO)",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "cbo1994": {
+              "type": "string",
+              "minLength": 1
+            },
+            "cbo2002": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "statusExecucao": {
+      "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "executadoCorretamente": {
+          "description": "'executadoCorretamente' indica se o método executou sem erros ou exceções internas. Não confundir 'executado corretamente' com 'invocado corretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "description": "Conjunto de mensagens de retorno",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mensagem": {
+              "description": "Representa uma mensagem de retorno",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "severidade": {
+                    "type": "string",
+                    "enum": [
+                      "WARN",
+                      "INFO",
+                      "SUCCESS",
+                      "FATAL",
+                      "ERROR"
+                    ]
+                  },
+                  "mensagem": {
+                    "description": "Texto resumido da mensagem (recomendável 60 a 80 caracteres)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detalhes": {
+                    "description": "Mensagem detalhada (quando aplicável)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "codigo": {
+                    "description": "Código de de erro associado à mensagem",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "severidade",
+                  "mensagem",
+                  "codigo"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required":["statusExecucao"]
+}

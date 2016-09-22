@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Pesquisa pessoa",
+  "type": "object",
+  "properties": {
+    "pessoas": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "pessoa": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "identificacaoPessoa": {
+              "description": "Identificação única da pessoa a ser procurada",
+              "type": "object",
+              "minProperties": 1,
+              "properties": {
+                "nomePessoa": {
+                  "description": "Contém elementos relativos a identificação da pessoa pelo seu nome",
+                  "type": "object",
+                  "minProperties": 1,
+                  "properties": {
+                    "nomeCompleto": {
+                      "description": "Todos os componentes do nome concatenados por espaço em branco",
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "nomeSocial": {
+                      "description": "Quando existe, é nome como a pessoa prefere ser chamada ou é melhor reconhecida socialmente",
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "nomeCompleto"
+                  ]
+                },
+                "matriculas": {
+                  "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
+                  "type": "object",
+                  "minProperties": 1,
+                  "properties": {
+                    "matriculaSistemaCentral": {
+                      "description": "Matricula da pessoa no Sistema Central (Opus/Openbase)",
+                      "type": "object",
+                      "minProperties": 1,
+                      "properties": {
+                        "numero": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "sequencial": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "numero"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "matriculaSistemaCentral"
+                  ]
+                }
+              },
+              "required": [
+                "nomePessoa",
+                "matriculas"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "statusExecucao": {
+      "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "executadoCorretamente": {
+          "description": "'executadoCorretamente' indica se o método executou sem erros ou exceções internas. Não confundir 'executado corretamente' com 'invocado corretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "description": "Conjunto de mensagens de retorno",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mensagem": {
+              "description": "Representa uma mensagem de retorno",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "severidade": {
+                    "type": "string",
+                    "enum": [
+                      "WARN",
+                      "INFO",
+                      "SUCCESS",
+                      "FATAL",
+                      "ERROR"
+                    ]
+                  },
+                  "mensagem": {
+                    "description": "Texto resumido da mensagem (recomendável 60 a 80 caracteres)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detalhes": {
+                    "description": "Mensagem detalhada (quando aplicável)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "codigo": {
+                    "description": "Código de de erro associado à mensagem",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "severidade",
+                  "mensagem",
+                  "codigo"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "statusExecucao"
+  ]
+}
