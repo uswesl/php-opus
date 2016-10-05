@@ -21,57 +21,7 @@ abstract class Fpbj16
 
     public static function executa($args, $decode = true)
     {
-    //    return OpusJson::executa('fpbj16', $args, $decode);
+        return OpusJson::executa('fpbj16', $args, $decode);
 
-        return json_decode('
-            {
-              "pessoas": {
-                "pessoa": [
-                  {
-                    "identificacaoPessoa": {
-                      "matriculas": {
-                        "matriculaSistemaCentral": {
-                          "numero": "123456",
-                          "seq": "01"
-                        }
-                      },
-                      "nomePessoa": {
-                        "nomeCompleto": "João da Silva",
-                        "nomeSocial": "Mônica Paloma da Silva "
-                      }
-                    }
-                  },{
-                    "identificacaoPessoa": {
-                      "matriculas": {
-                        "matriculaSistemaCentral": {
-                          "numero": "123456",
-                          "seq": "01"
-                        }
-                      },
-                      "nomePessoa": {
-                        "nomeCompleto": "Mauro João da Silva",
-                        "nomeSocial": "Luana da Silva",
-                        "nomeCoincide":"Mauro <b>João</b> da Silva"
-                      }
-                    }
-                  }
-                ]
-              },
-              "statusExecucao": {
-                "executadoCorretamente": true,
-                "mensagens": {
-                  "mensagem": [
-                    {
-                      "codigo": 4,
-                      "severidade": "INFO",
-                      "mensagem": "Dados retornados",
-                      "detalhes": "Dados referente as identificação da Pessoa"
-                    }
-                  ]
-                }
-              }
-            }
-
-        ');
     }
 }

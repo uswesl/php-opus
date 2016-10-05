@@ -21,38 +21,7 @@ abstract class Fpbj11
 
     public static function executa($args, $decode = true)
     {
-    //    return OpusJson::executa('fpbj11', $args, $decode);
+        return OpusJson::executa('fpbj11', $args, $decode);
 
-        return json_decode('
-            {
-              "dadosFuncionais": {
-                "unidadePagadora": {
-                  "codigo": "123456",
-                  "siglaUF": "RJ"
-                },
-                "qualificacao": "SERVIDOR",
-                "matriculaSiape": {
-                  "numero": 123456
-                },
-                "orgao": {
-                  "codigo": "12",
-                  "nome": "Descricao do orgão",
-                  "cnpj": "1234560111"
-                }
-              },
-              "statusExecucao": {
-                "executadoCorretamente": true,
-                "mensagens": {
-                  "mensagem": [
-                    {
-                      "codigo": 4,
-                      "severidade": "INFO",
-                      "mensagem": "Dados retornados",
-                      "detalhes": "Dados referente as identificação da Pessoa"
-                    }
-                  ]
-                }
-              }
-            }');
     }
 }

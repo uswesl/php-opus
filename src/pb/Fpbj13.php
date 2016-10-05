@@ -21,64 +21,7 @@ abstract class Fpbj13
 
     public static function executa($args, $decode = true)
     {
-    //    return OpusJson::executa('fpbj13', $args, $decode);
+        return OpusJson::executa('fpbj13', $args, $decode);
 
-        return json_decode('
-            {
-              "dadosAssistenciais": {
-                "cns": {
-                  "numero": "123456"
-                },
-                "planosAssistenciais": {
-                  "planoAssistencial": [
-                    {
-                      "descricaoProduto": "Basico 1",
-                      "statusBeneficiario": "ATIVO",
-                      "matricula": {},
-                      "registroAns": {
-                        "registro": "123456"
-                      },
-                      "segmentacao": "ASSISTENCIAL",
-                      "intervaloVinculo": {
-                        "dataVinculo": "2016-01-01",
-                        "dataDesligamento": "2016-01-01"
-                      },
-                      "uf": "RJ",
-                      "acomodacao": "ENFERMARIA",
-                      "contrato": "COLETIVO_EMPRESARIAL",
-                      "abrangencia": "NACIONAL",
-                      "coberturaAns": {
-                        "descricao": "XXXXXXXXXXXXXXX"
-                      },
-                      "patrocinadorOriginal": {
-                        "nome": "Funasa"
-                      },
-                      "mensagensCarencia": {
-                        "mensagem": [
-                          "mensagem 1",
-                          "mensagem 2",
-                          "mensagem 3"
-                        ]
-                      }
-                    }
-                  ]
-                }
-              },
-              "statusExecucao": {
-                "executadoCorretamente": true,
-                "mensagens": {
-                  "mensagem": [
-                    {
-                      "codigo": 4,
-                      "severidade": "INFO",
-                      "mensagem": "Dados retornados",
-                      "detalhes": "Dados referente as identificação da Pessoa"
-                    }
-                  ]
-                }
-              }
-            }
-
-');
     }
 }
