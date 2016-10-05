@@ -14,8 +14,7 @@
         },
         "nomePai": {
           "description": "Nome completo do pai para diferenciar homônimos",
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "dataNascimento": {
           "description": "Data de nascimento no padrão ISO 8601",
@@ -29,8 +28,7 @@
         },
         "tipoSanguinio": {
           "description": "Descrição do tipo sanguinio",
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "sexo": {
           "description": "Representa sexo",
@@ -175,28 +173,24 @@
                 "properties": {
                   "numero": {
                     "description": "Número principal do documento",
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "dv": {
                     "description": "Dígito(s) vericador(es). Ocorre por exemplo em CPF e CNPJ",
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "serie": {
                     "description": "Campo 'série' existe em documentos como CTPS",
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "orgaoEmissor": {
                     "description": "Órgão emissor (SSP, Detran, etc.)",
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string"
                   },
                   "dataExpedicao": {
                     "description": "Data de quando o documento foi emitido",
                     "type": "string",
-                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                    "pattern": "^(|[0-9]{4}-[0-9]{2}-[0-9]{2})$"
                   },
                   "tipoDocumento": {
                     "type": "string",

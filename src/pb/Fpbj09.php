@@ -21,34 +21,8 @@ abstract class Fpbj09
 
     public static function executa($args, $decode = true)
     {
-    //    return OpusJson::executa('fpbj09', $args, $decode);
+        return OpusJson::executa('fpbj09', $args, $decode);
 
-        return json_decode('{
-          "identificacaoPessoa": {
-            "matriculas": {
-              "matriculaSistemaCentral": {
-                "numero": "123456",
-                "seq": "01"
-              }
-            },
-            "nomePessoa": {
-              "nomeCompleto": "João da Silva",
-              "nomeSocial": "Mônica Paloma da Silva "
-            }
-          },
-          "statusExecucao": {
-            "executadoCorretamente": true,
-            "mensagens": {
-              "mensagem": [
-                {
-                  "codigo": 5,
-                  "severidade": "INFO",
-                  "mensagem": "Dados retornados",
-                  "detalhes": "Dados referente as identificação da Pessoa"
-                }
-              ]
-            }
-          }
-        }');
+
     }
 }
