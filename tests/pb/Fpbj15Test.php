@@ -56,7 +56,7 @@ class Fpbj15Test extends OpusJsonTestCase
 
     public function testDataInicialObrigatorio()
     {
-        $args = array('', 20161110101010);
+        $args = array();
         $jsonObj = Fpbj15::executa($args);
         $this->assertCodigo($jsonObj, Fpbj15::DATA_INICIAL_OBRIGATORIA, $args);
     }
