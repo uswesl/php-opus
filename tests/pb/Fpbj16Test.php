@@ -56,7 +56,7 @@ class Fpbj16Test extends OpusJsonTestCase
 
     public function testNomeObrigatorio()
     {
-        $args = array('');
+        $args = array();
         $jsonObj = Fpbj16::executa($args);
         $this->assertCodigo($jsonObj, Fpbj16::NOME_OBRIGATORIO, $args);
     }

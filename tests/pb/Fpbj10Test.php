@@ -56,7 +56,7 @@ class Fpbj10Test extends OpusJsonTestCase
 
     public function testMatriculaObrigatorio()
     {
-        $args = array('', 0);
+        $args = array();
         $jsonObj = Fpbj10::executa($args);
         $this->assertCodigo($jsonObj, Fpbj10::MATRICULA_OBRIGATORIO, $args);
     }
