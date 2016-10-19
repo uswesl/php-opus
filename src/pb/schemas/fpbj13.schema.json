@@ -40,13 +40,10 @@
                     "type": "string",
                     "enum": [
                       "ATIVO",
-                      "EM_SUSPENSAO",
                       "SUSPENSO",
-                      "EM_DESLIGAMENTO",
                       "DESLIGADO"
                     ]
                   },
-                  "matricula": {},
                   "registroAns": {
                     "description": "Informações de registro do plano/produto na ANS",
                     "type": "object",
@@ -138,7 +135,7 @@
                     ]
                   },
                   "coberturaAns": {
-                    "description": "Informações de cobertura do plano de acordo com ANS",
+                    "description": "Texto descritivo de cobertura padronizado pela ANS. Exemplo: 'AMBULATORIAL HOSPITALAR COM OBSTETRICIA'",
                     "type": "object",
                     "minProperties": 1,
                     "properties": {
@@ -152,7 +149,7 @@
                     ]
                   },
                   "patrocinadorOriginal": {
-                    "description": "Informações do patrocinador para planos com caracteristica per capita",
+                    "description": "Nome do órgão patrocinador, para planos com característica per capita",
                     "type": "object",
                     "minProperties": 1,
                     "properties": {
