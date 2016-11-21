@@ -39,14 +39,7 @@ class Fpbj16Test extends OpusJsonTestCase
         $jsonObj = Fpbj16::executa($args);
         $this->assertCodigo($jsonObj, Fpbj16::PESSOAS_NAO_ENCONTRADAS, $args);
     }
-
-    public function testNomeInvalido()
-    {
-        $args = array('123456');
-        $jsonObj = Fpbj16::executa($args);
-        $this->assertCodigo($jsonObj, Fpbj16::NOME_INVALIDO, $args);
-    }
-
+ 
     public function testNomeTamanhoMinimoInvalido()
     {
         $args = array('as');
