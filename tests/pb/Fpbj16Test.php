@@ -42,7 +42,7 @@ class Fpbj16Test extends OpusJsonTestCase
 
     public function testNomeInvalido()
     {
-        $args = array('João 123123 & #');
+        $args = array('123456');
         $jsonObj = Fpbj16::executa($args);
         $this->assertCodigo($jsonObj, Fpbj16::NOME_INVALIDO, $args);
     }

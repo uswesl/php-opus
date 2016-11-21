@@ -22,55 +22,17 @@ class Fttj01Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = array(201512, 0, 100, 1);
+        $args = array(250);
         $jsonObj = Fttj01::executa($args);
-        $this->assertSchema($jsonObj, $this->schemaPath, $args);
+        $this->assertSchema($jsonObj, $this->schemaPath);
     }
 
-
-    /*
-    public function testRandomExample(){
-        exec('node jsf.js ./src/tt/schemas/fttj01.schema.json', $result);
-        $jsonObj = json_decode(implode($result));
-        $this->assertSchema($jsonObj);
-    }
-
-    public function testEventosEncontrados()
-    {
-        $args = array('201512', 0, 100, 1);
-        $jsonObj = Fttj01::executa($args);
-        $this->assertCodigo($jsonObj, Fttj01::EVENTOS_ENCONTRADOS, $args);
-    }
     public function testNenhumEventoEncontrado()
     {
-        $args = array('201609', 0, 100, 1);
+        $args = array(1000);
         $jsonObj = Fttj01::executa($args);
         $this->assertCodigo($jsonObj, Fttj01::NENHUM_EVENTO_ENCONTRADO, $args);
     }
 
-    public function testCompetenciaInicialInvalida()
-    {
-        $jsonObj = Fttj01::executa('2016', 0, 100, 1);
-        $this->assertCodigo($jsonObj, Fttj01::COMPETENCIA_INICIAL_INVALIDA);
-    }
-
-    public function testCompetenciaFinalInvalida()
-    {
-        $jsonObj = Fttj01::executa('201601', '-1', 100, 1);
-        $this->assertCodigo($jsonObj, Fttj01::COMPETENCIA_INICIAL_INVALIDA);
-    }
-
-    public function testItensPorPaginaInvalido()
-    {
-        $jsonObj = Fttj01::executa('201601', '201605', -1, 1);
-        $this->assertCodigo($jsonObj, Fttj01::ITENS_POR_PAGINA_INVALIDO);
-    }
-
-    public function testNumeroDePaginaInvalido()
-    {
-        $jsonObj = Fttj01::executa('201601', '201605', 100, -1);
-        $this->assertCodigo($jsonObj, Fttj01::NUMERO_DE_PAGINA_INVALIDO);
-    }
-    */
 }
 ?>
