@@ -75,11 +75,25 @@ class FuncionalWsTest extends SoapTestCase
         $this->assertCodigo($request, $response, FuncionalWs::BENEFICIARIO_BLOQUEADO_COM_SUCESSO);
     }
 
+    public function testBeneficiarioBloqueado()
+    {
+        $request  = $this->getRequest('beneficiario-bloqueado');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::BENEFICIARIO_BLOQUEADO);
+    }
+
     public function testBeneficiarioDesBloqueadoComSucesso()
     {
         $request  = $this->getRequest('beneficiario-desbloqueado-com-sucesso');
         $response = $this->soapClient->MovimentacaoUsuario($request);
         $this->assertCodigo($request, $response, FuncionalWs::BENEFICIARIO_DESBLOQUEADO_COM_SUCESSO);
+    }
+
+    public function testBeneficiarioNaoBloqueado()
+    {
+        $request  = $this->getRequest('beneficiario-nao-bloqueado');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::BENEFICIARIO_NAO_BLOQUEADO);
     }
 
     public function testCodigoClienteInvalido()
@@ -631,6 +645,47 @@ class FuncionalWsTest extends SoapTestCase
         $this->assertCodigo($request, $response, FuncionalWs::CODIGO_DO_CARTAO_DUPLICADO);
 
     }
+     
+    public function testGrupoInvalido()
+    {
 
-    
+        $request  = $this->getRequest('grupo-invalido');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::GRUPO_INVALIDO);
+
+    }
+
+    public function testEnderecoNumeroInvalido()
+    {
+
+        $request  = $this->getRequest('endereco-numero-invalido');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::ENDERECO_NUMERO_INVALIDO);
+
+    }
+
+    public function testCodCartaoSomenteInclusao()
+    {
+
+        $request  = $this->getRequest('cod-cartao-somente-inclusao');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::COD_CARTAO_SOMENTE_INCLUSAO);
+
+    }
+    public function testCpfInexistente()
+    {
+
+        $request  = $this->getRequest('cpf-inexistente');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::CPF_INEXISTENTE);
+
+    }
+    public function testNumDepInexistente()
+    {
+
+        $request  = $this->getRequest('numdep-inexistente');
+        $response = $this->soapClient->MovimentacaoUsuario($request);
+        $this->assertCodigo($request, $response, FuncionalWs::NUMDEP_INEXISTENTE);
+
+    }
 }
