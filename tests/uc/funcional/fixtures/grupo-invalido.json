@@ -6,14 +6,14 @@
   "codcli": "1603",
   "instrucao": "A",
   "codcartao": "",
-  "matricula": "00008790",
+  "matricula": "0000879",
   "nomusu": "LUIZ ALBERTO DE AZEVEDO",
   "sexo": "M",
   "amuc": "S",
   "datanasc": "07/12/1949",
   "filial": "0001",
   "setor": "CAP",
-  "limite": 20000,
+  "limite": 2000,
   "tipo_logradouro": "AVENIDA",
   "endereco": "BOTAFOGO",
   "endereco_numero": "0",
@@ -37,5 +37,5 @@
   "uf_entrega": "GO",
   "cep_entrega": "74825030",
   "codcli_destino": 0,
-  "grc_codigo": 115
+  "grc_codigo": "xx"
 }
