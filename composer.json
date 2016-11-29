@@ -16,7 +16,8 @@
     "robotdance/php-arguments": "~0.0",
     "robotdance/php-console": "~0.0",
     "ext-soap": "*",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "ext-intl": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "4.8.24",
