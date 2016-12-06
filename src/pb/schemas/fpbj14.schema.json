@@ -8,116 +8,105 @@
       "type": "object",
       "minProperties": 1,
       "properties": {
-        "planoPrevidencia": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "minProperties": 1,
-            "properties": {
-              "matriculas": {
-                "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "matriculaSistemaCentral": {
-                    "description": "Matricula da pessoa no Sistema Central (Opus/Openbase)",
+        "dadosPrevidenciais": {
+          "description": "Conjunto de dados previdenciais",
+          "type": "object",
+          "properties": {
+            "planosPrevidenciais": {
+              "description": "Histórico de planos previdenciais",
+              "type": "object",
+              "properties": {
+                "planoPrevidencia": {
+                  "type": "array",
+                  "items": {
                     "type": "object",
                     "minProperties": 1,
                     "properties": {
-                      "numero": {
+                      "statusBeneficiario": {
                         "type": "string",
+                        "enum": [
+                          "ATIVO",
+                          "DESLIGADO"
+                        ]
+                      },
+                      "segmentacao": {
+                        "type": "string",
+                        "enum": [
+                          "PREVIDENCIA_COMPLEMENTAR",
+                          "PECULIO"
+                        ]
+                      },
+                      "numeroInscricao": {
+                        "type": "integer",
                         "minLength": 1
                       },
-                      "sequencial": {
+                      "intervaloVinculo": {
+                        "description": "Define um intervalo de vinculo da pessoa ao plano",
+                        "type": "object",
+                        "minProperties": 1,
+                        "properties": {
+                          "dataVinculo": {
+                            "description": "Data de vinculo da pessoa ao plano",
+                            "type": "string",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                          },
+                          "dataDesligamento": {
+                            "description": "Data de desligamento da pessoa ao plano. Não retornar para o plano atualmente vigente",
+                            "type": "string",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                          }
+                        },
+                        "required": [
+                          "dataVinculo"
+                        ]
+                      },
+                      "beneficio": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": "Auxílio doença",
+                          "status": {
+                            "description": "Status de concessão do benefício",
+                            "type": "string",
+                            "enum": [
+                              "ATIVO", "SUSPENSO", "ENCERRADO", "CANCELADO"
+                            ]
+                          }
+                        }
+                      },
+                      "tiposPeculio": {
+                        "description": "Tipos de pecúlio associados ao benefício",
+                        "type": "object",
+                        "properties": {
+                          "tipo": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": ["O", "A", "B", "C", "D", "E"]
+                            }
+                          }
+                        }
+                      },
+                      "condicaoPeculio": {
                         "type": "string",
-                        "minLength": 1
+                        "enum": [
+                          "INTERNO",
+                          "EXTERNO",
+                          "MANTIDO"
+                        ]
+                      },
+                      "baseSalarialPrevidencia": {
+                        "type": "number",
+                        "minimum": 0
                       }
                     },
                     "required": [
-                      "numero"
+                      "statusBeneficiario",
+                      "dataInscricao"
                     ]
                   }
-                },
-                "required": [
-                  "matriculaSistemaCentral"
-                ]
-              },
-              "statusBeneficiario": {
-                "type": "string",
-                "enum": [
-                  "ATIVO",
-                  "EM_SUSPENSAO",
-                  "SUSPENSO",
-                  "EM_DESLIGAMENTO",
-                  "DESLIGADO"
-                ]
-              },
-              "dataInscricao": {
-                "type": "string",
-                "minLength": 1,
-                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-              },
-              "dataCancelamento": {
-                "type": "string",
-                "minLength": 1,
-                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-              },
-              "dataInscricaoPeculio": {
-                "type": "string",
-                "minLength": 1,
-                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-              },
-              "dataCancelamentoPeculio": {
-                "type": "string",
-                "minLength": 1,
-                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-              },
-              "numeroInscricaoPrevidencia": {
-                "type": "integer",
-                "minLength": 1
-              },
-              "numeroInscricaoPeculio": {
-                "type": "integer",
-                "minLength": 1
-              },
-              "codigoBeneficio": {
-                "type": "integer",
-                "minLength": 1
-              },
-              "situacaoBeneficio": {
-                "type": "integer",
-                "minLength": 1
-              },
-              "tiposPeculio": {
-                "type": "string",
-                "enum": [
-                  "O",
-                  "A",
-                  "B",
-                  "C",
-                  "D",
-                  "E"
-                ]
-              },
-              "condicaoPeculio": {
-                "type": "string",
-                "enum": [
-                  "CANCELADO",
-                  "ATIVO",
-                  "MANTIDO",
-                  "MANTIDO_PARCIAL",
-                  "ASSISTIDO"
-                ]
-              },
-              "baseSalarialPrevidencia": {
-                "type": "number",
-                "minLength": 1
+                }
               }
-            },
-            "required": [
-              "statusBeneficiario",
-              "dataInscricao"
-            ]
+            }
           }
         }
       },

@@ -168,7 +168,7 @@
                               "minLength": 1,
                               "maxLength": 100
                             },
-                            "dataNasc": {
+                            "DataNasc": {
                               "id": "dataNasc",
                               "type": "string",
                               "description": "Data de nascimento",

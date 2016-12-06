@@ -28,8 +28,7 @@
                     },
                     "nomeSocial": {
                       "description": "Quando existe, é nome como a pessoa prefere ser chamada ou é melhor reconhecida socialmente",
-                      "type": "string",
-                      "minLength": 1
+                      "type": "string"
                     }
                   },
                   "required": [

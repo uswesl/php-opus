@@ -28,7 +28,7 @@ class Fpbj13Test extends OpusJsonTestCase
 
     public function testDadosAssistenciaisEncontrados()
     {
-        $args = array(903586,0);
+        $args = array(46,0);
         $jsonObj = Fpbj13::executa($args);
         $this->assertCodigo($jsonObj, Fpbj13::DADOS_ASSISTENCIAIS_ENCONTRADOS, $args);
     }
