@@ -21,14 +21,14 @@ class Fpbj15Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = array(20161101101010,20161110101010);
+        $args = array(20160101101010,20161110101010);
         $jsonObj = Fpbj15::executa($args);
         $this->assertSchema($jsonObj, $this->schemaPath);
     }
 
     public function testDadosPessoaisEncontrados()
     {
-        $args = array(20160101101010,20161110101010);
+        $args = array(20160101101010,20161231101010);
         $jsonObj = Fpbj15::executa($args);
         $this->assertCodigo($jsonObj, Fpbj15::PESSOAS_ENCONTRADAS, $args);
     }
