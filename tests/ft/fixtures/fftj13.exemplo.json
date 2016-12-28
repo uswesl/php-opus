@@ -1,0 +1,44 @@
+{
+    "beneficiario":{
+            "matricula":1234567,
+            "seq":11,
+            "nome":"Esmeralda da Silva"
+     
+        },
+        "procedimentosFaturados":[
+            {
+                "grupoProcedimento":"CONSULTA",
+                "valorTotal":"9.000.00",
+                "procedimentos": [
+                    {
+                        "CNPJ_CPF":"CNPJ ou CPF do Prestador",
+                        "nomeRazaoSocial":"Nome ou razão social do Prestador",
+                        "especialidade":"Nome da especialidade",
+                        "dataRealizacao":"ISO-8601",
+                        "valor":"9.999.999,99"
+                    },
+                    {
+                        "CNPJ_CPF":"CNPJ ou CPF do Prestador",
+                        "nomeRazaoSocial":"Nome ou razão social do Prestador",
+                        "especialidade":"Nome da especialidade",
+                        "dataRealizacao":"ISO-8601",
+                        "valor":"9.999.999,99"
+                    }
+                ]
+            }
+        ],
+        "statusExecucao":{
+            "executadoCorretamente":true,
+            "mensagens":{
+                "mensagem":[
+                    {
+                        "codigo":8,
+                        "severidade":"INFO",
+                        "mensagem":"Texto da mensagem"
+                    }
+                ]
+            }
+        }
+    }
+
+
