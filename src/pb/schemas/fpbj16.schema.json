@@ -31,11 +31,12 @@
                       "type": "string"
                     }
                   },
+                  "additionalProperties":false,
                   "required": [
                     "nomeCompleto"
                   ]
                 },
-                "matriculas": {
+                "matricula": {
                   "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
                   "type": "object",
                   "minProperties": 1,
@@ -59,14 +60,16 @@
                       ]
                     }
                   },
+                  "additionalProperties":false,
                   "required": [
                     "matriculaSistemaCentral"
                   ]
                 }
               },
+              "additionalProperties":false,
               "required": [
                 "nomePessoa",
-                "matriculas"
+                "matricula"
               ]
             }
           }
