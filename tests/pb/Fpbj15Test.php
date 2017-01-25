@@ -21,21 +21,21 @@ class Fpbj15Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = array(20160101101010,20161110101010);
+        $args = array(20160101000000,20160101160000);
         $jsonObj = Fpbj15::executa($args);
         $this->assertSchema($jsonObj, $this->schemaPath);
     }
 
     public function testDadosPessoaisEncontrados()
     {
-        $args = array(20160101101010,20161231101010);
+        $args = array(20160101000000,20160101160000);
         $jsonObj = Fpbj15::executa($args);
         $this->assertCodigo($jsonObj, Fpbj15::PESSOAS_ENCONTRADAS, $args);
     }
 
     public function testPessoaNaoEncontrada()
     {
-        $args = array(20161101101010,20161110101010);
+        $args = array(2016010101000000,20160101110000);
         $jsonObj = Fpbj15::executa($args);
         $this->assertCodigo($jsonObj, Fpbj15::PESSOAS_NAO_ENCONTRADAS, $args);
     }
@@ -66,6 +66,13 @@ class Fpbj15Test extends OpusJsonTestCase
         $args = array(20160101101010, '');
         $jsonObj = Fpbj15::executa($args);
         $this->assertCodigo($jsonObj, Fpbj15::DATA_FINAL_OBRIGATORIA, $args);
+    }
+
+    public function testDataFinalMenorIgualQueInicial()
+    {
+        $args = array(20160101000000, 20160101000000);
+        $jsonObj = Fpbj15::executa($args);
+        $this->assertCodigo($jsonObj, Fpbj15::DATA_FINAL_MENOR_IGUAL_QUE_INICIAL, $args);
     }
 
 }
