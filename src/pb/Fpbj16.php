@@ -10,6 +10,7 @@ use capesesp\json\OpusJson;
 
 abstract class Fpbj16
 {
+    const PESSOAS_ENCONTRADAS_REFINE_SUA_BUSCA = 6;
     const PESSOAS_ENCONTRADAS = 5;
     const PESSOAS_NAO_ENCONTRADAS = 4;
     const NOME_INVALIDO = 3;
