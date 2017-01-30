@@ -1,0 +1,106 @@
+{
+
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "/",
+    "required": true,
+    "properties": {
+        "senhas": {
+            "type": "array",
+            "id": "senhas",
+            "required": true,
+            "items": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "beneficiario": {
+                        "type": "object",
+                        "id": "beneficiario",
+                        "required": true,
+                        "properties": {
+                            "matricula": {
+                                "type": "string",
+                                "id": "matricula",
+                                "required": true,
+				"description": "Matricula do Beneficiario"
+                            },
+                            "nome": {
+                                "type": "string",
+                                "id": "nome",
+                                "required": true,
+				"description": "Nome do Beneficiario"
+                            },
+                            "seq": {
+                                "type": "string",
+                                "id": "seq",
+                                "required": true,
+				"description": "Sequencial do Beneficiario"
+                            }
+                        }
+                    },
+                    "dataLiberacao": {
+                        "type": "string",
+                        "id": "dataLiberacao",
+                        "required": true,
+			"description": "Data de Liberacao da senha"
+                    },
+                    "senha": {
+                        "type": "string",
+                        "id": "senha",
+                        "required": true,
+			"description": "senha"
+                    }
+                }
+            }
+        },
+"statusExecucao": {
+          "id": "statusExecucao",
+          "type": "object",
+          "properties": {
+            "executadoCorretamente": {
+              "id": "executadoCorretamente",
+              "type": "boolean"
+            },
+            "mensagens": {
+              "id": "mensagens",
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "id": "mensagem",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "id": "0",
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "id": "codigo",
+                        "type": "integer",
+                        "enum": [0, 1, 2, 3, 4, 5]
+                      },
+                      "severidade": {
+                        "id": "severidade",
+                        "type": "string",
+                        "enum": ["ERROR", "INFO", "FATAL", "WARN", "SUCCESS"]
+                      },
+                      "mensagem": {
+                        "id": "mensagem",
+                        "type": "string",
+                        "minLength": 15
+                      }
+                    },
+                    "required": ["codigo", "severidade", "mensagem"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["mensagem"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["executadoCorretamente", "mensagens"],
+          "additionalProperties": false
+	 }
+    }
+}
+

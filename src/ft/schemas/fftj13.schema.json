@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "beneficiario": {
+      "description" : "Dados do Beneficiario",
+      "type": "object",
+      "id": "beneficiario",
+      "properties": {
+        "matricula": {
+          "type": "integer",
+          "id": "matricula",
+          "description": "Numero da matricula do beneficiario",
+          "maxLength": 7
+        },
+        "seq": {
+          "type": "integer",
+          "id": "seq",
+          "description": "Numero do sequencial do beneficiario",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "nome": {
+	  "description": "Nome do beneficiario",
+          "type": "string",
+          "id": "nome",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "matricula",
+        "seq",
+        "nome"
+      ]
+    },
+    "procedimentosFaturados": {
+      "id": "procedimentosFaturados",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "grupoProcedimento": {
+            "type": "string",
+            "id": "grupoProcedimento"
+          },
+          "valorTotal": {
+            "type": "number",
+            "id": "valorTotal",
+	    "minLength": 1,
+            "maxLength": 22
+          },
+          "procedimentos": {
+	    "id" : "procedimentos",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "CNPJ_CPF": {
+                  "type": "string",
+                  "id": "CNPJ_CPF",
+		  "description" : "CNPJ ou CPF do Prestador",
+		  "minLength": 11,
+ 		  "maxLength": 14
+                },
+		"tipoPessoa": {
+		  "type": "string",
+		  "id": "tipoPessoa",
+		  "description" : "Pessoa fisica ou juridica",
+		  "enum" : ["F", "J"]
+		},
+                "nomeRazaoSocial": {
+                  "type": "string",
+                  "id": "nomeRazaoSocial",
+		  "description" : "Nome ou razão social do Prestador",
+	          "minLength": 1,
+        	  "maxLength": 100
+                },
+                "especialidade": {
+                  "type": "string",
+                  "id": "especialidade",
+		  "description" : "Nome da especialidade"
+                },
+                "dataRealizacao": {
+                  "type": "string",
+                  "id": "dataRealizacao",
+		  "description": "Data de realizacao",
+                  "pattern": "^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$"
+                },
+                "valor": {
+                  "type": "number",
+                  "id": "valor",
+		  "minLength": 1,
+	          "maxLength": 22
+                }
+              },
+              "required": [
+                "CNPJ_CPF",
+                "nomeRazaoSocial",
+                "especialidade",
+                "dataRealizacao",
+                "valor"
+              ]
+            }
+          }
+        },
+        "required": [
+          "grupoProcedimento",
+          "valorTotal",
+          "procedimentos"
+        ]
+      }
+    },
+    "statusExecucao": {
+          "id": "statusExecucao",
+          "type": "object",
+          "properties": {
+            "executadoCorretamente": {
+              "id": "executadoCorretamente",
+              "type": "boolean"
+            },
+            "mensagens": {
+              "id": "mensagens",
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "id": "mensagem",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "id": "0",
+                    "type": "object",
+                    "properties": {
+                      "codigo": {
+                        "id": "codigo",
+                        "type": "integer",
+                        "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                      },
+                      "severidade": {
+                        "id": "severidade",
+                        "type": "string", 
+                        "enum": ["ERROR", "INFO", "FATAL", "WARN", "SUCCESS"]
+                      },
+                      "mensagem": {
+                        "id": "mensagem",
+                        "type": "string",
+                        "minLength": 15
+                      }
+                    },
+                    "required": ["codigo", "severidade", "mensagem"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["mensagem"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["executadoCorretamente", "mensagens"],
+          "additionalProperties": false
+        }
+  },
+  "required": [
+    "beneficiario",
+    "procedimentosFaturados",
+    "statusExecucao"
+  ]
+}
