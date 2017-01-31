@@ -1,0 +1,76 @@
+{
+	"type":"object",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "http://jsonschema.net",
+	"required":true,
+	"properties":{
+		"ate": {
+			"type":"string",
+			"id": "http://jsonschema.net/ate",
+			"required":true
+		},
+		"de": {
+			"type":"string",
+			"id": "http://jsonschema.net/de",
+			"required":true
+		},
+		"dtcred": {
+			"type":"string",
+			"id": "http://jsonschema.net/dtcred",
+			"required":true
+		},
+		"situac": {
+			"type":"string",
+			"id": "http://jsonschema.net/situac",
+			"required":true
+		},
+		"statusExecucao": {
+			"type":"object",
+			"id": "http://jsonschema.net/statusExecucao",
+			"required":true,
+			"properties":{
+				"executadoCorretamente": {
+					"type":"boolean",
+					"id": "http://jsonschema.net/statusExecucao/executadoCorretamente",
+					"required":true
+				},
+				"mensagens": {
+					"type":"object",
+					"id": "http://jsonschema.net/statusExecucao/mensagens",
+					"required":true,
+					"properties":{
+						"mensagem": {
+							"type":"array",
+							"id": "http://jsonschema.net/statusExecucao/mensagens/mensagem",
+							"required":true,
+							"items":{
+								"type":"object",
+								"id": "http://jsonschema.net/statusExecucao/mensagens/mensagem/0",
+								"required":true,
+								"properties":{
+									"codigo": {
+										"type":"number",
+										"id": "http://jsonschema.net/statusExecucao/mensagens/mensagem/0/codigo",
+										"required":true
+									},
+									"mensagem": {
+										"type":"string",
+										"id": "http://jsonschema.net/statusExecucao/mensagens/mensagem/0/mensagem",
+										"required":true
+									},
+									"severidade": {
+										"type":"string",
+										"id": "http://jsonschema.net/statusExecucao/mensagens/mensagem/0/severidade",
+										"required":true
+									}
+								}
+							}
+							
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
