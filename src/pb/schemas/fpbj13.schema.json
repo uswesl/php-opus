@@ -115,7 +115,7 @@
                     ]
                   },
                   "acomodacao": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "enum": [
                       "ENFERMARIA",
                       "APARTAMENTO"
@@ -128,7 +128,7 @@
                     ]
                   },
                   "abrangencia": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "enum": [
                       "NACIONAL",
                       "GRUPO_DE_ESTADOS"
@@ -180,7 +180,6 @@
                 "required": [
                   "descricaoProduto",
                   "statusBeneficiario",
-                  "matricula",
                   "registroAns",
                   "segmentacao",
                   "intervaloVinculo",

@@ -35,7 +35,7 @@ class Fpbj14Test extends OpusJsonTestCase
 
     public function testDadosPrevidenciaisNaoEncontrados()
     {
-        $args = array(903586,14);
+        $args = array(903626,14);
         $jsonObj = Fpbj14::executa($args);
         $this->assertCodigo($jsonObj, Fpbj14::DADOS_PREVIDENCIAIS_NAO_ENCONTRADOS, $args);
     }

@@ -23,7 +23,7 @@
         },
         "dataObito": {
           "description": "Data de óbito no padrão ISO 8601",
-          "type": "string",
+          "type": ["string", "null"],
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         "tipoSanguinio": {
@@ -173,27 +173,28 @@
                 "properties": {
                   "numero": {
                     "description": "Número principal do documento",
-                    "type": "string"
+                    "type": ["string", "null"]
                   },
                   "dv": {
                     "description": "Dígito(s) vericador(es). Ocorre por exemplo em CPF e CNPJ",
-                    "type": "string"
+                    "type": ["string", "null"]
                   },
                   "serie": {
                     "description": "Campo 'série' existe em documentos como CTPS",
-                    "type": "string"
+                    "type": ["string", "null"]
                   },
                   "orgaoEmissor": {
                     "description": "Órgão emissor (SSP, Detran, etc.)",
-                    "type": "string"
+                    "type": ["string", "null"]
                   },
                   "dataExpedicao": {
                     "description": "Data de quando o documento foi emitido",
                     "type": "string",
+                    "type": ["string", "null"],
                     "pattern": "^(|[0-9]{4}-[0-9]{2}-[0-9]{2})$"
                   },
                   "tipoDocumento": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "enum": [
                       "IDENTIDADE",
                       "CPF",
@@ -370,6 +371,7 @@
                             "PARTICULAR",
                             "RECADO",
                             "RESIDENCIAL",
+                            "TRABALHO",
                             "SMS"
                           ]
                         }

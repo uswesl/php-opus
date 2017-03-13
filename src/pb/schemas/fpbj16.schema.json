@@ -37,7 +37,7 @@
                   ]
                 },
                 "matricula": {
-                  "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
+                  "description": "Matricula do beneficiario, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
                   "type": "object",
                   "minProperties": 1,
                   "properties": {

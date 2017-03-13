@@ -26,7 +26,7 @@ class Fpbj15Test extends OpusJsonTestCase
         $this->assertSchema($jsonObj, $this->schemaPath);
     }
 
-    public function testDadosPessoaisEncontrados()
+    public function testPessoasEncontradas()
     {
         $args = array(20160101000000,20160101160000);
         $jsonObj = Fpbj15::executa($args);
