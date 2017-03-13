@@ -283,11 +283,7 @@
                   "tipoEndereco": {
                     "description": "Tipo de endereço",
                     "type": "string",
-                    "enum": [
-                      "RESIDENCIAL",
-                      "COMERCIAL",
-                      "COBRANCA"
-                    ]
+                    "enum": [ "RESIDENCIA", "TRABALHO", "COBRANCA" ]
                   },
                   "uf": {
                     "type": "string",
@@ -364,16 +360,7 @@
                         "minItems": 1,
                         "items": {
                           "type": "string",
-                          "enum": [
-                            "CELULAR",
-                            "COMERCIAL",
-                            "FAX",
-                            "PARTICULAR",
-                            "RECADO",
-                            "RESIDENCIAL",
-                            "TRABALHO",
-                            "SMS"
-                          ]
+                          "enum": [ "CELULAR", "FAX", "PARTICULAR", "RECADO", "RESIDENCIA", "TRABALHO", "SMS" ]
                         }
                       }
                     }
