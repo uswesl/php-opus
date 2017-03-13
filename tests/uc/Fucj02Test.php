@@ -22,8 +22,9 @@ class Fucj02Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = [1, 903626, 0, 'RJ', 1, 'Nome do medico', '20160101', 20, 2];
+        $args = [1, 46, 0, 'RJ', 11111, 'Nome do medico', '20160101', 20, 2];
         $jsonObj = Fucj02::executa($args);
+        print_r($jsonObj);
         $this->assertSchema($jsonObj, $this->schemaPath, $args);
     }
 }

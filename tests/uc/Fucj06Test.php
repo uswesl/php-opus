@@ -16,7 +16,7 @@ class Fucj06Test extends OpusJsonTestCase
 {
     public function setUp()
     {
-        parent::setup();
+        parent::setUp();
         $this->schemaPath = './src/uc/schemas/fucj06.schema.json';
     }
 
@@ -39,6 +39,20 @@ class Fucj06Test extends OpusJsonTestCase
         $args = [903626, 0];
         $jsonObj = Fucj06::executa($args);
         $this->assertCodigo($jsonObj, Fucj06::NAO_FORAM_ENCONTRADOS_DADOS, $args);
+    }
+    
+    public function testSequencialInvalido()
+    {
+        $args = [903626, 'aa'];
+        $jsonObj = Fucj06::executa($args);
+        $this->assertCodigo($jsonObj, Fucj06::SEQUENCIAL_INVALIDO, $args);
+    }
+
+    public function testMatriculaInvalida()
+    {
+        $args = ['9s0a3626', 0];
+        $jsonObj = Fucj06::executa($args);
+        $this->assertCodigo($jsonObj, Fucj06::SEQUENCIAL_INVALIDO, $args);
     }
 }
 ?>

@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Pesquisa pessoa",
+  "type": "object",
+  "properties": {
+    "matriculas" : {
+      "type": "object",
+      "description": "Conjunto de matriculas",
+      "properties": {
+        "matricula": {
+          "type": "array",
+          "description": "Agrupador de matricula",
+          "items": {
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "matriculaSistemaCentral": {
+                "type": "object",
+                "description": "Matricula do associado no sistema central",
+                "properties": {
+                    "numero": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9999999
+                    },
+                    "sequencial": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 99
+                    }
+                },
+                "required": ["numero"]
+              },
+              "m": {
+                "type": "object",
+                "description": "Matricula do associado no sistema central",
+                "properties": {
+                  "n": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9999999
+                  },
+                  "s": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 99
+                  }
+                },
+                "required": ["n"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "statusExecucao": {
+      "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "executadoCorretamente": {
+          "description": "'executadoCorretamente' indica se o método executou sem erros ou exceções internas. Não confundir 'executado corretamente' com 'invocado corretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "description": "Conjunto de mensagens de retorno",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mensagem": {
+              "description": "Representa uma mensagem de retorno",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "severidade": {
+                    "type": "string",
+                    "enum": [
+                      "WARN",
+                      "INFO",
+                      "SUCCESS",
+                      "FATAL",
+                      "ERROR"
+                    ]
+                  },
+                  "mensagem": {
+                    "description": "Texto resumido da mensagem (recomendável 60 a 80 caracteres)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detalhes": {
+                    "description": "Mensagem detalhada (quando aplicável)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "codigo": {
+                    "description": "Código de de erro associado à mensagem",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "severidade",
+                  "mensagem",
+                  "codigo"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "statusExecucao"
+  ]
+}

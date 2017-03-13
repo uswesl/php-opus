@@ -31,6 +31,7 @@
                       "type": "string"
                     }
                   },
+                  "additionalProperties":false,
                   "required": [
                     "nomeCompleto"
                   ]
@@ -59,11 +60,13 @@
                       ]
                     }
                   },
+                  "additionalProperties":false,
                   "required": [
                     "matriculaSistemaCentral"
                   ]
                 }
               },
+              "additionalProperties":false,
               "required": [
                 "nomePessoa",
                 "matricula"

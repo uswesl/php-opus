@@ -26,11 +26,18 @@ class Fpbj16Test extends OpusJsonTestCase
         $this->assertSchema($jsonObj, $this->schemaPath);
     }
 
-    public function testPessoasEncontradasRefineBusca()
+    public function testDadosPessoaisEncontradosRefineSuaBusca()
     {
         $args = array('Max');
         $jsonObj = Fpbj16::executa($args);
-        $this->assertCodigo($jsonObj, Fpbj16::PESSOAS_ENCONTRADAS_REFINE_BUSCA, $args);
+        $this->assertCodigo($jsonObj, Fpbj16::PESSOAS_ENCONTRADAS_REFINE_SUA_BUSCA, $args);
+    }
+
+    public function testDadosPessoaisEncontrados()
+    {
+        $args = array('juno');
+        $jsonObj = Fpbj16::executa($args);
+        $this->assertCodigo($jsonObj, Fpbj16::PESSOAS_ENCONTRADAS, $args);
     }
 
     public function testPessoaNaoEncontrada()
