@@ -61,10 +61,15 @@
                   "numero": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "dv": {
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 2
                   }
                 },
                 "required": [
-                  "numero"
+                  "numero", "dv"
                 ]
               },
               "tipoDadoBancario": {
