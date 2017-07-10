@@ -54,5 +54,6 @@ class Fucj06Test extends OpusJsonTestCase
         $jsonObj = Fucj06::executa($args);
         $this->assertCodigo($jsonObj, Fucj06::MATRICULA_INVALIDA, $args);
     }
+
 }
 ?>
