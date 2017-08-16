@@ -8,62 +8,40 @@
       "type": "object",
       "minProperties": 1,
       "properties": {
+        "dataAdmissao": {
+          "description": "Data de admissão do associado",
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "dataDemissao": {
+          "description": "Data de demissão do associado",
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
         "unidadePagadora": {
           "type": "object",
           "minProperties": 1,
           "properties": {
-            "codigo": {
-              "type": "string",
+            "codigoSiape": {
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 1
             },
             "siglaUF": {
-              "type": "string",
-              "enum": [
-                "AC",
-                "AL",
-                "AM",
-                "AP",
-                "BA",
-                "CE",
-                "DF",
-                "ES",
-                "GO",
-                "MA",
-                "MG",
-                "MS",
-                "MT",
-                "PA",
-                "PB",
-                "PE",
-                "PI",
-                "PR",
-                "RJ",
-                "RN",
-                "RO",
-                "RR",
-                "RS",
-                "SC",
-                "SE",
-                "SP",
-                "TO"
+              "type": [
+                "string",
+                "null"
               ]
             }
-          },
-          "required": [
-            "codigo",
-            "siglaUF"
-          ]
-        },
-        "statusFinanceiro": {
-          "description": "Status da pessoa física no mérito financeiro em relação à Capesesp",
-          "type": "string",
-          "enum": [
-            "ATIVO",
-            "EM_SUSPENSAO",
-            "SUSPENSO",
-            "EM_DESLIGAMENTO",
-            "DESLIGADO"
-          ]
+          }
         },
         "qualificacao": {
           "description": "Qualificação da pessoa (SIAPEnet ou Capesesp)",
@@ -79,17 +57,57 @@
           "minProperties": 1,
           "properties": {
             "numero": {
-              "type": "integer",
+              "type": [
+                "integer",
+                null
+              ],
               "minLength": 1
             }
           }
         },
-        "orgao": {
+        "patrocinadorOriginal": {
           "type": "object",
           "minProperties": 1,
           "properties": {
             "codigo": {
               "type": "string",
+              "minLength": 1
+            },
+            "codigoSiape": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1
+            },
+            "nome": {
+              "type": "string",
+              "minLength": 1
+            },
+            "cnpj": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "codigo",
+            "nome",
+            "cnpj"
+          ]
+        },
+        "patrocinadorAtual": {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "codigo": {
+              "type": "string",
+              "minLength": 1
+            },
+            "codigoSiape": {
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 1
             },
             "nome": {
@@ -107,7 +125,8 @@
             "cnpj"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
@@ -166,8 +185,9 @@
           }
         }
       },
-      "required":[
-      	"executadoCorretamente","mensagens"
+      "required": [
+        "executadoCorretamente",
+        "mensagens"
       ]
     }
   },

@@ -13,26 +13,16 @@
           "type": "object",
           "properties": {
             "numero": {
-              "type": "integer"
-            },
-            "sequencial": {
-              "type": "integer"
-            }
-          }
-        },
-        "situacaoBeneficiario": {
-          "type": "object",
-          "properties": {
-            "statusBeneficiario": {
-              "type": "string",
-              "enum": [
-                "ATIVO",
-                "DESLIGADO"
+              "type": [
+                "integer",
+                "null"
               ]
             },
-            "textToSpeech": {
-              "type": "string",
-              "minLength": 1
+            "sequencial": {
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         },
@@ -48,8 +38,18 @@
                     "type": "string",
                     "minLength": 1
                   },
+                  "detalhes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  },
                   "dataTerminoCarencia": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                   }
                 },
@@ -60,11 +60,30 @@
               }
             }
           }
+        },
+        "resumo": {
+          "type": "object",
+          "properties": {
+            "statusBeneficiario": {
+              "type": "string",
+              "enum": [
+                "ATIVO",
+                "CANCELADO"
+              ]
+            },
+            "textToSpeech": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1
+            }
+          }
         }
       },
       "addionalProperties": false,
       "required": [
-        "situacaoBeneficiario",
+        "resumo",
         "carencias"
       ]
     },

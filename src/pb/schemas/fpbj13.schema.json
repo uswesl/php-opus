@@ -35,14 +35,23 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "statusBeneficiario": {
-                    "description": "Status da pessoa em relação ao plano/produto Capesesp",
+                  "segmentacao": {
                     "type": "string",
                     "enum": [
-                      "ATIVO",
-                      "SUSPENSO",
-                      "DESLIGADO"
+                      "ASSISTENCIAL",
+                      "ODONTOLOGICO"
                     ]
+                  },
+                  "statusProduto": {
+                    "type": "string",
+                    "enum": [
+                      "SUSPENSO",
+                      "ATIVO",
+                      "CANCELADO"
+                    ]
+                  },
+                  "opcao": {
+                    "type": "integer"
                   },
                   "registroAns": {
                     "description": "Informações de registro do plano/produto na ANS",
@@ -55,11 +64,13 @@
                       }
                     }
                   },
-                  "segmentacao": {
+                  "statusBeneficiario": {
+                    "description": "Status da pessoa em relação ao plano/produto Capesesp",
                     "type": "string",
                     "enum": [
-                      "ASSISTENCIAL",
-                      "ODONTOLOGICO"
+                      "ATIVO",
+                      "SUSPENSO",
+                      "DESLIGADO"
                     ]
                   },
                   "intervaloVinculo": {
@@ -74,7 +85,10 @@
                       },
                       "dataDesligamento": {
                         "description": "Data de desligamento da pessoa ao plano. Não retornar para o plano atualmente vigente",
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                       }
                     },
@@ -115,10 +129,14 @@
                     ]
                   },
                   "acomodacao": {
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "enum": [
                       "ENFERMARIA",
-                      "APARTAMENTO"
+                      "APARTAMENTO",
+                      null
                     ]
                   },
                   "contrato": {
@@ -128,7 +146,7 @@
                     ]
                   },
                   "abrangencia": {
-                    "type": ["string", "null"],
+                    "type": "string",
                     "enum": [
                       "NACIONAL",
                       "GRUPO_DE_ESTADOS"
@@ -148,35 +166,146 @@
                       "descricao"
                     ]
                   },
-                  "patrocinadorOriginal": {
-                    "description": "Nome do órgão patrocinador, para planos com característica per capita",
+                  "carencias": {
                     "type": "object",
-                    "minProperties": 1,
                     "properties": {
-                      "nome": {
-                        "type": "string",
-                        "minLength": 1
-                      }
-                    },
-                    "required": [
-                      "nome"
-                    ]
-                  },
-                  "mensagensCarencia": {
-                    "description": "Informações sobre carência do plano",
-                    "type": "object",
-                    "minProperties": 1,
-                    "properties": {
-                      "mensagem": {
+                      "carencia": {
                         "type": "array",
                         "items": {
-                          "type": "string",
-                          "minLength": 1
+                          "type": "object",
+                          "properties": {
+                            "descricao": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "detalhes": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dataTerminoCarencia": {
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                            }
+                          },
+                          "required": [
+                            "descricao",
+                            "dataTerminoCarencia"
+                          ]
                         }
                       }
                     }
+                  },
+                  "beneficios": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "beneficio": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "AMUC",
+                            "AUXILIO_FUNERAL",
+                            "REEMBOLSO_MEDICAMENTO",
+                            "DESCONTO_EM_MEDICAMENTO",
+                            "ANTINEOPLASICO",
+                            "CAPEPROTESE",
+                            "OXIGENOTERAPIA",
+                            "REEMBOLSO_LIVRE_ESCOLHA",
+                            "INTERNACAO_DOMICILIAR"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "programas": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "programa": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "descricao": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dataVinculo": {
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "descricao",
+                            "dataVinculo"
+                          ]
+                        }
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "programa"
+                    ]
+                  },
+                  "servicosComplementares": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "servicoComplementar": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "descricao": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "dataVinculo": {
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                            },
+                            "dataDesligamento": {
+                              "type": "string",
+                              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "descricao",
+                            "dataVinculo"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "rescisao_contrato":{
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "dataEntregaDocumento": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "pattern": "^(|[0-9]{4}-[0-9]{2}-[0-9]{2})$"
+                      }
+                    }
+                  },
+                  "agregadoInstituidorFalecido": {
+                    "type": "boolean"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "descricaoProduto",
                   "statusBeneficiario",
@@ -184,18 +313,22 @@
                   "segmentacao",
                   "intervaloVinculo",
                   "uf",
-                  "acomodacao",
                   "contrato",
                   "abrangencia",
                   "coberturaAns",
-                  "patrocinadorOriginal",
-                  "mensagensCarencia"
+                  "beneficios",
+                  "agregadoInstituidorFalecido"
                 ]
               }
             }
-          }
+          },
+          "additionalProperties": false,
+          "required": [
+            "planoAssistencial"
+          ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "planosAssistenciais"
       ]

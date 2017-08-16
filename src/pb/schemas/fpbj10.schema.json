@@ -8,31 +8,49 @@
       "minProperties": 1,
       "properties": {
         "nomeMae": {
-          "description": "Nome completo da mão para diferenciar homônimos",
-          "type": "string",
+          "description": "Nome completo da mãe para diferenciar homônimos",
+          "type": [
+            "string",
+            "null"
+          ],
           "minLength": 1
         },
         "nomePai": {
           "description": "Nome completo do pai para diferenciar homônimos",
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "dataNascimento": {
           "description": "Data de nascimento no padrão ISO 8601",
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         "dataObito": {
           "description": "Data de óbito no padrão ISO 8601",
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         "tipoSanguinio": {
           "description": "Descrição do tipo sanguinio",
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "sexo": {
           "description": "Representa sexo",
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "MASCULINO",
             "FEMININO"
@@ -40,7 +58,10 @@
         },
         "estadoCivil": {
           "description": "Representa estado civil",
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "CASADO",
             "SOLTEIRO",
@@ -50,9 +71,20 @@
             "VIUVO"
           ]
         },
+        "grauParentescoTitular": {
+          "description": "Grau de parentesco que o dependente tem com o titular",
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
         "tipoBeneficiario": {
           "description": "Informa o tipo de beneficiário",
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             "TITULAR",
             "DEPENDENTE",
@@ -72,7 +104,7 @@
                 "type": "object",
                 "minProperties": 1,
                 "properties": {
-                  "matriculas": {
+                  "matricula": {
                     "description": "Matriculas da pessoa, de acordo com o sistema de origem. <b>Nota:</b> A versão 1.0 trabalha somente com 'matriculaSistemaCentral'",
                     "type": "object",
                     "minProperties": 1,
@@ -83,52 +115,24 @@
                         "minProperties": 1,
                         "properties": {
                           "numero": {
-                            "type": "string",
-                            "minLength": 1
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           },
                           "sequencial": {
-                            "type": "string",
-                            "minLength": 1
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
-                          "numero"
-                        ]
-                      },
-                      "matriculaProtheus": {
-                        "description": "Matricula da pessoa no Protheus-PLS (ADVPL)",
-                        "type": "object",
-                        "minProperties": 1,
-                        "properties": {
-                          "numero": {
-                            "type": "string",
-                            "minLength": 1
-                          }
-                        },
-                        "required": [
-                          "numero"
-                        ]
-                      },
-                      "matriculaTotalPrev": {
-                        "description": "Matricula da pessoa no TotalPrev (Delphi)",
-                        "type": "object",
-                        "minProperties": 1,
-                        "properties": {
-                          "numero": {
-                            "type": "string",
-                            "minLength": 1
-                          }
-                        },
-                        "required": [
-                          "numero"
+                          "numero",
+                          "sequencial"
                         ]
                       }
-                    },
-                    "required": [
-                      "matriculaSistemaCentral",
-                      "matriculaProtheus",
-                      "matriculaTotalPrev"
-                    ]
+                    }
                   },
                   "tipoBeneficiario": {
                     "description": "Informa o tipo de beneficiário",
@@ -140,14 +144,24 @@
                       "BENEFICIARIO"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "matricula"
+                ]
               }
             }
-          }
+          },
+          "additionalProperties": false,
+          "required": [
+            "relativo"
+          ]
         },
         "emails": {
           "description": "Conjunto de emails da pessoa",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "minProperties": 1,
           "properties": {
             "email": {
@@ -173,28 +187,46 @@
                 "properties": {
                   "numero": {
                     "description": "Número principal do documento",
-                    "type": ["string", "null"]
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "dv": {
                     "description": "Dígito(s) vericador(es). Ocorre por exemplo em CPF e CNPJ",
-                    "type": ["string", "null"]
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "serie": {
                     "description": "Campo 'série' existe em documentos como CTPS",
-                    "type": ["string", "null"]
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "orgaoEmissor": {
                     "description": "Órgão emissor (SSP, Detran, etc.)",
-                    "type": ["string", "null"]
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "dataExpedicao": {
                     "description": "Data de quando o documento foi emitido",
                     "type": "string",
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "pattern": "^(|[0-9]{4}-[0-9]{2}-[0-9]{2})$"
                   },
                   "tipoDocumento": {
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "enum": [
                       "IDENTIDADE",
                       "CPF",
@@ -220,7 +252,10 @@
           "properties": {
             "endereco": {
               "description": "Representa um endereço no cadastro",
-              "type": "array",
+              "type": [
+                "array",
+                "null"
+              ],
               "minItem": 1,
               "items": {
                 "type": "object",
@@ -233,30 +268,48 @@
                     "properties": {
                       "numero": {
                         "description": "Somente os dígitos do CEP",
-                        "type": "integer",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
                         "minLength": 1
                       },
-                      "formato": {
+                      "formatado": {
                         "description": "CEP formatado para NNNNN-NNN expressão regular '^[0-9]{5}-[0-9]{3}$'",
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "pattern": "^[0-9]{5}-[0-9]{3}$"
                       }
                     }
                   },
                   "logradouro": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "numero": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "complemento": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "bairro": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "cidade": {
@@ -266,12 +319,18 @@
                     "properties": {
                       "codigoMunicipioIbge": {
                         "description": "Código do município no IBGE",
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "minLength": 1
                       },
                       "nome": {
                         "description": "Nome do Municipio",
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "minLength": 1
                       }
                     },
@@ -280,17 +339,11 @@
                       "nome"
                     ]
                   },
-                  "tipoEndereco": {
-                    "description": "Tipo de endereço",
-                    "type": "string",
-                    "enum": [
-                      "RESIDENCIAL",
-                      "COMERCIAL",
-                      "COBRANCA"
-                    ]
-                  },
                   "uf": {
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "enum": [
                       "AC",
                       "AL",
@@ -346,12 +399,18 @@
                 "properties": {
                   "ddd": {
                     "description": "DDD do telefone",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "numero": {
                     "description": "Numero do telefone (somente digítos)",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "tipos": {
@@ -360,7 +419,10 @@
                     "minProperties": 1,
                     "properties": {
                       "tipo": {
-                        "type": "array",
+                        "type": [
+                          "array",
+                          "null"
+                        ],
                         "minItems": 1,
                         "items": {
                           "type": "string",
@@ -370,7 +432,7 @@
                             "FAX",
                             "PARTICULAR",
                             "RECADO",
-                            "RESIDENCIAL",
+                            "RESIDENCIA",
                             "TRABALHO",
                             "SMS"
                           ]
@@ -393,11 +455,17 @@
           "minProperties": 1,
           "properties": {
             "codigo": {
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "minLength": 1
             },
             "pais": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 1
             }
           },
@@ -406,22 +474,61 @@
             "pais"
           ]
         },
+        "naturalidade": {
+          "description": "Representa o codigo e descricao do IBGE referente ao estado de nascimento",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "codigoMunicipioIbge": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLenght": 1
+            },
+            "nome": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLenght": 1
+            }
+          },
+          "required": [
+            "codigoMunicipioIbge",
+            "nome"
+          ]
+        },
         "ocupacao": {
           "description": "Representa classificação brasileira de ocupação (CBO)",
           "type": "object",
           "minProperties": 1,
           "properties": {
             "cbo1994": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 1
             },
             "cbo2002": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "minLength": 1
             }
           }
+        },
+        "universitario": {
+          "description": "Representa se o beneficiario é universitário",
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
-      }
+      },
+      "additionalPropertires": false
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
@@ -462,7 +569,10 @@
                   },
                   "detalhes": {
                     "description": "Mensagem detalhada (quando aplicável)",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "codigo": {
@@ -482,5 +592,9 @@
       }
     }
   },
-  "required":["statusExecucao"]
+  "additionalProperties": false,
+  "required": [
+    "statusExecucao"
+  ]
 }
+
