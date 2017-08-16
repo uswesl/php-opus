@@ -22,7 +22,7 @@ class Fucj02Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = [mt_rand(0,9999999), 46, 0, "RJ", 11111, "Nome", "20160101", 20, 2];
+        $args = [mt_rand(0,9999999), 46, 0, "RJ", 222222222, "Nome", "20160101", 20, 2];
         $jsonObj = Fucj02::executa($args);
         $this->assertSchema($jsonObj, $this->schemaPath, $args);
     }
@@ -109,7 +109,7 @@ class Fucj02Test extends OpusJsonTestCase
 
     public function testProcessoAtualizado()
     {
-        $args = [mt_rand(0,9999999), 46, 0, 'RJ', 11111, 'Nome', '20160101', 20, 2];
+        $args = [mt_rand(0,9999999), 46, 0, 'RJ', 3333333, 'Nome', '20160101', 20, 2];
         $jsonObj = Fucj02::executa($args);
         $this->assertCodigo($jsonObj,Fucj02::PROCESSO_ATUALIZADO_SUCESSO,$args);
 

@@ -21,7 +21,7 @@ class Fpbj11Test extends OpusJsonTestCase
 
     public function testSchema()
     {
-        $args = array(46,0);
+        $args = array(903586,0);
         $jsonObj = Fpbj11::executa($args);
         $this->assertSchema($jsonObj, $this->schemaPath);
     }
