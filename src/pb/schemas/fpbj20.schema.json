@@ -1,88 +1,91 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "dadosBancarios",
-  "description": "O cadastro de uma pessoa",
+  "title": "Informações da situação do beneficiário em relação ao plano assitencial.",
   "type": "object",
   "properties": {
-    "dadosBancarios": {
+    "beneficiario": {
+      "description": "Informações do beneficiário",
       "type": "object",
       "minProperties": 1,
       "properties": {
-        "dadoBancario": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "banco": {
-                "description": "Representa um contato bancário para operações financeiras",
+        "matricula": {
+          "description": "matricula do beneficiário",
+          "type": "object",
+          "properties": {
+            "numero": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "sequencial": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "carencias": {
+          "type": "object",
+          "properties": {
+            "carencia": {
+              "type": "array",
+              "items": {
                 "type": "object",
-                "minProperties": 1,
                 "properties": {
-                  "codigo": {
-                    "description": "Código do banco na FEBRABAN",
+                  "descricao": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "nome": {
-                    "description": "Nome do banco",
-                    "type": "string",
-                    "minLenth": 1
-                  }
-                },
-                "required": [
-                  "codigo",
-                  "nome"
-                ]
-              },
-              "agencia": {
-                "description": "Representa agência bancária",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "codigo": {
-                    "type": "string",
+                  "detalhes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
-                  "dv": {
-                    "type": ["string","null"],
-                    "minLength": 1
+                  "dataTerminoCarencia": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                   }
                 },
                 "required": [
-                  "codigo"
-                ]
-              },
-              "conta": {
-                "description": "Representa conta corrente",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "numero": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "numero"
-                ]
-              },
-              "tipoDadoBancario": {
-                "type": "string",
-                "enum": [
-                  "CONTA_CORRENTE_SIAPE",
-                  "CONTA_CORRENTE_PAGAMENTO"
+                  "descricao",
+                  "dataTerminoCarencia"
                 ]
               }
+            }
+          }
+        },
+        "resumo": {
+          "type": "object",
+          "properties": {
+            "statusBeneficiario": {
+              "type": "string",
+              "enum": [
+                "ATIVO",
+                "CANCELADO"
+              ]
             },
-            "required": [
-              "banco",
-              "agencia",
-              "conta",
-              "tipoDadoBancario"
-            ]
+            "textToSpeech": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1
+            }
           }
         }
-      }
+      },
+      "addionalProperties": false,
+      "required": [
+        "resumo",
+        "carencias"
+      ]
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
@@ -141,6 +144,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "executadoCorretamente",
         "mensagens"
@@ -149,6 +153,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "statusExecucao"
+    "statusExecucao",
+    "beneficiario"
   ]
 }

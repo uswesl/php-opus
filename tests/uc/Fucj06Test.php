@@ -52,7 +52,8 @@ class Fucj06Test extends OpusJsonTestCase
     {
         $args = ['9s0a3626', 0];
         $jsonObj = Fucj06::executa($args);
-        $this->assertCodigo($jsonObj, Fucj06::SEQUENCIAL_INVALIDO, $args);
+        $this->assertCodigo($jsonObj, Fucj06::MATRICULA_INVALIDA, $args);
     }
+
 }
 ?>

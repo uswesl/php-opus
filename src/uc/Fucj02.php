@@ -11,8 +11,19 @@ use capesesp\json\OpusJson;
  */
 abstract class Fucj02
 {
+    const PROCESSO_ATUALIZADO_SUCESSO = 11;
+    const BENEFICARIO_NAO_ENCONTRADO = 10;
+    const PROCESSO_INVALIDO = 9;
+    const MATRICULA_INVALIDA = 8;
+    const SEQUENCIAL_INVALIDO = 7;
+    const UFCRM_INVALIDO = 6;
+    const CRM_INVALIDO = 5;
+    const NOME_MEDICO_OBRIGATORIO = 4;
+    const DATA_RECEITA_INVALIDA = 3;
+    const COD_DEFERIMENTO_INVALIDO = 2;
+    const VERSAO_INVALIDA = 1;
     const CORRIGIR_FUCJ02 = 0;
-
+    
     /**
      * Atualização de processos AMUC no sistema central
      * @see http://wiki.capesesp.net/doku.php?id=dsi:erp:sistema_central:uc:fucj02

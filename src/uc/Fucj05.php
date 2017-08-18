@@ -10,9 +10,10 @@ use capesesp\json\OpusJson;
  */
 abstract class Fucj05
 {
-    const DADOS_GRAVADOS_COM_SUCESSO = 7;
-    const NAO_FOI_POSSIVEL_GRAVAR_DADOS_PARA_ASSOCIADO = 6;
-    const ASSOCIADO_NAO_ENCONTRADO = 5;
+    const DADOS_GRAVADOS_COM_SUCESSO = 8;
+    const NAO_FOI_POSSIVEL_GRAVAR_DADOS_PARA_ASSOCIADO = 7;
+    const ASSOCIADO_NAO_ENCONTRADO = 6;
+    const MENSAGEM_NAO_IDENTIFICADA = 5;
     const HORA_INVALIDA = 4;
     const DATA_INVALIDA = 3;
     const SEQUENCIAL_INVALIDO = 2;
@@ -24,8 +25,8 @@ abstract class Fucj05
      * @param $args Array de argumentos:
      * - $matricula
      * - $sequencial
-     * - $data String YYYYMMDD
-     * - $hora String hhmmss, padrao 24h
+     * - $dataHora YYYYMMDDhhmmss, padrao 24h
+     * - $codigoFuncional 000
      * @return JSON
      */
     public static function executa($args, $decode = true)

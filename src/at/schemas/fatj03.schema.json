@@ -1,132 +1,99 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Dados Funcionais",
+  "title": "Identificação de telefone",
   "type": "object",
   "properties": {
-    "dadosFuncionais": {
-      "description": "Dados Funcionais provenientes do arquivo",
+    "solicitante": {
+      "description": "Dados de identificação telefônica",
       "type": "object",
       "minProperties": 1,
       "properties": {
-        "dataAdmissao": {
-          "description": "Data de admissão do associado",
-          "type": [
-            "string",
-            "null"
-          ],
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-        },
-        "dataDemissao": {
-          "description": "Data de demissão do associado",
-          "type": [
-            "string",
-            "null"
-          ],
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-        },
-        "unidadePagadora": {
-          "type": "object",
-          "minProperties": 1,
-          "properties": {
-            "codigoSiape": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "minLength": 1
-            },
-            "siglaUF": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          }
-        },
-        "qualificacao": {
-          "description": "Qualificação da pessoa (SIAPEnet ou Capesesp)",
+        "tipo": {
+          "description": "Identifica a ligação de acordo com uma das arvores de atendimento da URA",
           "type": "string",
           "enum": [
-            "PENSIONISTA",
-            "SERVIDOR",
-            "FUNCIONARIO"
+            "BENEFICIARIO",
+            "CREDENCIADO",
+            "ESCRITORIO_REGIONAL",
+            "NAO_IDENTIFICADO"
           ]
         },
-        "matriculaSiape": {
+        "identiticacao": {
+          "descricao": "Dados de identificação do solicitante",
           "type": "object",
           "minProperties": 1,
           "properties": {
             "numero": {
+              "description": "Numero de identificação",
               "type": [
-                "integer",
-                null
-              ],
-              "minLength": 1
-            }
-          }
-        },
-        "patrocinadorOriginal": {
-          "type": "object",
-          "minProperties": 1,
-          "properties": {
-            "codigo": {
-              "type": "string",
-              "minLength": 1
+                "string",
+                "null"
+              ]
             },
-            "codigoSiape": {
+            "tipo": {
+              "description": "Tipo de identificação",
               "type": [
                 "string",
                 "null"
               ],
-              "minLength": 1
+              "enum": [
+                "MATRICULA_CAPESESP",
+                "MATRICULA_PROTHEUS",
+                "CPF",
+                "CNPJ"
+              ]
             },
-            "nome": {
-              "type": "string",
-              "minLength": 1
+            "telefone": {
+              "type": "object",
+              "properties": {
+                "ddd": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "numero": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
             },
-            "cnpj": {
-              "type": "string",
-              "minLength": 1
+            "melhorNome": {
+              "description": "Nome retornado pela identificação telefônica",
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tipoNome": {
+                  "description": "Tipo de nome retornado",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "PRIMEIRO_NOME",
+                    "NOME_COMPLETO",
+                    "RAZAO_SOCIAL",
+                    "NOME_FANTASIA"
+                  ]
+                }
+              }
             }
           },
-          "required": [
-            "codigo",
-            "nome",
-            "cnpj"
-          ]
-        },
-        "patrocinadorAtual": {
-          "type": "object",
-          "minProperties": 1,
-          "properties": {
-            "codigo": {
-              "type": "string",
-              "minLength": 1
-            },
-            "codigoSiape": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "minLength": 1
-            },
-            "nome": {
-              "type": "string",
-              "minLength": 1
-            },
-            "cnpj": {
-              "type": "string",
-              "minLength": 1
-            }
-          },
-          "required": [
-            "codigo",
-            "nome",
-            "cnpj"
-          ]
+          "additionalProperties": false
         }
       },
-      "additionalProperties": false
+      "addionalProperties": false,
+      "required": [
+        "identificacao",
+        "tipo"
+      ]
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
@@ -167,7 +134,10 @@
                   },
                   "detalhes": {
                     "description": "Mensagem detalhada (quando aplicável)",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "minLength": 1
                   },
                   "codigo": {
@@ -185,6 +155,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "executadoCorretamente",
         "mensagens"
@@ -193,6 +164,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "statusExecucao"
+    "statusExecucao",
+    "solicitante"
   ]
 }

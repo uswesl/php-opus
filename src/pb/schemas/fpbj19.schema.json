@@ -1,88 +1,45 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "dadosBancarios",
-  "description": "O cadastro de uma pessoa",
+  "title": "Historico de transacoes",
   "type": "object",
   "properties": {
-    "dadosBancarios": {
+    "transacoes": {
       "type": "object",
       "minProperties": 1,
       "properties": {
-        "dadoBancario": {
+        "transacao": {
+          "description": "Representa uma transacao ocorrida para um beneficiario",
           "type": "array",
           "items": {
             "type": "object",
+            "minProperties": 1,
             "properties": {
-              "banco": {
-                "description": "Representa um contato bancário para operações financeiras",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "codigo": {
-                    "description": "Código do banco na FEBRABAN",
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "nome": {
-                    "description": "Nome do banco",
-                    "type": "string",
-                    "minLenth": 1
-                  }
-                },
-                "required": [
-                  "codigo",
-                  "nome"
-                ]
-              },
-              "agencia": {
-                "description": "Representa agência bancária",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "codigo": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "dv": {
-                    "type": ["string","null"],
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "codigo"
-                ]
-              },
-              "conta": {
-                "description": "Representa conta corrente",
-                "type": "object",
-                "minProperties": 1,
-                "properties": {
-                  "numero": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "numero"
-                ]
-              },
-              "tipoDadoBancario": {
+              "dataHora": {
+                "description": "Data e hora da ocorrencia da transacao",
                 "type": "string",
-                "enum": [
-                  "CONTA_CORRENTE_SIAPE",
-                  "CONTA_CORRENTE_PAGAMENTO"
-                ]
+                "pattern": "^(|[0-9]{4}-[0-9]{2}-[0-9]{2})T[0-9]{2}:[0-9]{2}:[0-9]{2}$"
+              },
+              "codigo": {
+                "description": "Codigo da transacao",
+                "type": "string"
+              },
+              "descricao": {
+                "description": "Descricao da transacao",
+                "type": "string"
               }
             },
             "required": [
-              "banco",
-              "agencia",
-              "conta",
-              "tipoDadoBancario"
+              "dataHora",
+              "codigo",
+              "descricao"
             ]
           }
         }
-      }
+      },
+      "additionalProperties": false,
+      "required": [
+        "transacao"
+      ]
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
@@ -140,14 +97,9 @@
             }
           }
         }
-      },
-      "required": [
-        "executadoCorretamente",
-        "mensagens"
-      ]
+      }
     }
   },
-  "additionalProperties": false,
   "required": [
     "statusExecucao"
   ]
