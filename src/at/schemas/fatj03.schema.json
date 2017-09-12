@@ -89,7 +89,7 @@
           "additionalProperties": false
         }
       },
-      "addionalProperties": false,
+      "additionalProperties": false,
       "required": [
         "identificacao",
         "tipo"
