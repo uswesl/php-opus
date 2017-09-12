@@ -5,14 +5,20 @@
   "properties": {
     "solicitacaoCancelamento": {
       "description": "Informações necessárias para solicitação de cancelamento de plano",
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "minProperties": 1,
       "properties": {
         "necessarioDocumento": {
           "type": "boolean"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required":[
+        "necessarioDocumento"
+      ]
     },
     "statusExecucao": {
       "description": "Representa dados associados à execução de um método e seus possíveis retornos.",
