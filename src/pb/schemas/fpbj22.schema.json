@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Retornar as solicitaÃ§Ãµes de cancelamento de plano de um associado",
+  "type": "object",
+  "properties": {
+    "solicitacoesCancelamento": {
+      "description": "Lista de solicitaÃ§Ãµes de cancelamento de plano",
+      "type": [
+        "array",
+        "null"
+      ],
+      "minItens": 1,
+      "Itens": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "minProperties": 1,
+        "properties": {
+          "data": {
+            "type": "string",
+            "pattern": ""
+          },
+          "protocolo": {
+            "type": "string"
+          },
+          "associados": {
+            "description": "Associados com pedido de cancelamento referente ao protocolo",
+            "type": [
+              "array",
+              "null"
+            ],
+            "minItens": 1,
+            "Itens": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "minProperties": 1,
+              "properties": {
+                "matricula": {
+                  "type": "string"
+                },
+                "sequencial": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "statusExecucao": {
+      "description": "Representa dados associados Ã  execuÃ§Ã£o de um mÃ©todo e seus possÃ­veis retornos.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "executadoCorretamente": {
+          "description": "'executadoCorretamente' indica se o mÃ©todo executou sem erros ou exceÃ§Ãµes internas. NÃ£o confundir 'executado corretamente' com 'invocado corretamente",
+          "type": "boolean"
+        },
+        "mensagens": {
+          "description": "Conjunto de mensagens de retorno",
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mensagem": {
+              "description": "Representa uma mensagem de retorno",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "severidade": {
+                    "type": "string",
+                    "enum": [
+                      "WARN",
+                      "INFO",
+                      "SUCCESS",
+                      "FATAL",
+                      "ERROR"
+                    ]
+                  },
+                  "mensagem": {
+                    "description": "Texto resumido da mensagem (recomendÃ¡vel 60 a 80 caracteres)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "detalhes": {
+                    "description": "Mensagem detalhada (quando aplicÃ¡vel)",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "codigo": {
+                    "description": "CÃ³digo de de erro associado Ã  mensagem",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "severidade",
+                  "mensagem",
+                  "codigo"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "executadoCorretamente",
+        "mensagens"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "statusExecucao"
+  ]
+}
